@@ -1,4 +1,7 @@
-@import "tailwindcss";
+@layer theme, base, components, utilities;
+@import "tailwindcss/utilities" layer(utilities);
+
+@import "@repo/tailwind-config/theme.css";
 
 :root {
   --foreground-rgb: 0, 0, 0;

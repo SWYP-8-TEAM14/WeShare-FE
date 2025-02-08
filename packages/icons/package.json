@@ -1,0 +1,29 @@
+{
+  "name": "@repo/icons",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "generate": "npx @svgr/cli --typescript --icon 24px --out-dir src/icons assets",
+    "modify": "npx tsx scripts/modify.ts",
+    "generate-and-modify": "npm run generate && npm run modify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@svgr/cli": "^8.1.0",
+    "@types/node": "^22.10.7",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "react": "^19",
+    "react-dom": "^19.0.0",
+    "svgo": "^3.3.2",
+    "tsup": "^8.3.6",
+    "tsx": "^4.19.2",
+    "typescript": "5.7.3"
+  }
+}

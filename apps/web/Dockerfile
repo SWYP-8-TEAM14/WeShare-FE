@@ -1,7 +1,7 @@
 FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install -g pnpm@8.15.6
+RUN npm install -g pnpm@10.2.1
 # This Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
 # Make sure you update both files!
 

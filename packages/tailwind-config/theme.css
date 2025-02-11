@@ -1,4 +1,112 @@
 @theme inline {
+    --font-sans: "Pretendard Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --color-*: initial;
-    --color-primary: #32a860;
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-warning: #EF2B2A;
+    --color-positive: #067DFD;
+    --color-informative: #5C3BF3;
+    --color-primary-100: #DED8FD;
+    --color-primary-200: #BEB1FA;
+    --color-primary-300: #9D89F8;
+    --color-primary-400: #7D62F5;
+    --color-primary-500: #5C3BF3;
+    --color-primary-600: #4A2FC2;
+    --color-primary-700: #372392;
+    --color-primary-800: #251861;
+    --color-primary-900: #120C31;
+    --color-gray-100: #F5F5F5;
+    --color-gray-200: #EEEEEE;
+    --color-gray-300: #E0E0E0;
+    --color-gray-400: #DBDBDB;
+    --color-gray-500: #9E9E9E;
+    --color-gray-600: #757575;
+    --color-gray-700: #696969;
+    --color-gray-800: #343434;
+    --color-gray-900: #121212;
+
+
+    --text-*: initial;
+    --text-tiny: 0.625rem;
+    --text-xxs: 0.75rem;
+    --text-xs: 0.8125rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+
+    --font-weight-*: initial;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+
+
+    --text-heading-1: var(--ui-text-xl);
+    --text-heading-1--line-height: 1.4;
+    --text-heading-1--letter-spacing: 0;
+    --text-heading-1--font-weight: var(--ui-font-weight-bold); 
+    --text-heading-2: var(--ui-text-lg);
+    --text-heading-2--line-height: 1.4;
+    --text-heading-2--letter-spacing: 0;
+    --text-heading-2--font-weight: var(--ui-font-weight-semibold);
+    --text-heading-3: var(--ui-text-base);
+    --text-heading-3--line-height: 1.4;
+    --text-heading-3--letter-spacing: 0;
+    --text-heading-3--font-weight: var(--ui-font-weight-bold); 
+    --text-heading-4: var(--ui-text-base);
+    --text-heading-4--line-height: 1.4;
+    --text-heading-4--letter-spacing: 0;
+    --text-heading-4--font-weight: var(--ui-font-weight-semibold);
+    --text-heading-2: var(--ui-text-sm);
+    --text-heading-2--line-height: 1.4;
+    --text-heading-2--letter-spacing: 0;
+    --text-heading-2--font-weight: var(--ui-font-weight-semibold);
+
+    --text-body-1: var(--ui-text-base);
+    --text-body-1--line-height: 1.4;
+    --text-body-1--letter-spacing: 0;
+    --text-body-1--font-weight: var(--ui-font-weight-semibold); 
+    --text-body-2: var(--ui-text-base);
+    --text-body-2--line-height: 1.4;
+    --text-body-2--letter-spacing: 0;
+    --text-body-2--font-weight: var(--ui-font-weight-medium);
+    --text-body-3: var(--ui-text-sm);
+    --text-body-3--line-height: 1.4;
+    --text-body-3--letter-spacing: 0;
+    --text-body-3--font-weight: var(--ui-font-weight-semibold); 
+    --text-body-4: var(--ui-text-sm);
+    --text-body-4--line-height: 1.4;
+    --text-body-4--letter-spacing: 0;
+    --text-body-4--font-weight: var(--ui-font-weight-medium);
+    --text-body-5: var(--ui-text-sm);
+    --text-body-5--line-height: 1.4;
+    --text-body-5--letter-spacing: 0;
+    --text-body-5--font-weight: var(--ui-font-weight-regular);  
+    --text-body-6: var(--ui-text-xs);
+    --text-body-6--line-height: 1.4;
+    --text-body-6--letter-spacing: 0;
+    --text-body-6--font-weight: var(--ui-font-weight-medium); 
+
+
+    --text-detail-1: var(--ui-text-xxs);
+    --text-detail-1--line-height: 1.4;
+    --text-detail-1--letter-spacing: 0;
+    --text-detail-1--font-weight: var(--ui-font-weight-semibold); 
+    --text-detail-2: var(--ui-text-xxs);
+    --text-detail-2--line-height: 1.4;
+    --text-detail-2--letter-spacing: 0;
+    --text-detail-2--font-weight: var(--ui-font-weight-medium); 
+    --text-detail-3: var(--ui-text-tiny);
+    --text-detail-3--line-height: 1.4;
+    --text-detail-3--letter-spacing: 0;
+    --text-detail-3--font-weight: var(--ui-font-weight-medium); 
+
+
+    --radius-*: initial;
+    --radius-xs: 0.125rem;
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1.25rem;
 }

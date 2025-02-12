@@ -15,7 +15,8 @@
     "./search": "./src/search.tsx",
     "./label": "./src/label.tsx",
     "./input": "./src/input.tsx",
-    "./form": "./src/form.tsx"
+    "./form": "./src/form.tsx",
+    "./segmented-control": "./src/segmented-control.tsx"
   },
   "license": "MIT",
   "scripts": {

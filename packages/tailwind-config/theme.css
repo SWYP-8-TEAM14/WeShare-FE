@@ -3,9 +3,9 @@
     --color-*: initial;
     --color-white: #FFFFFF;
     --color-black: #000000;
-    --color-warning: #EF2B2A;
-    --color-positive: #067DFD;
-    --color-informative: #5C3BF3;
+    --color-semantic-warning: #EF2B2A;
+    --color-semantic-positive: #067DFD;
+    --color-semantic-informative: #5C3BF3;
     --color-primary-100: #DED8FD;
     --color-primary-200: #BEB1FA;
     --color-primary-300: #9D89F8;
@@ -59,10 +59,10 @@
     --text-heading-4--line-height: 1.4;
     --text-heading-4--letter-spacing: 0;
     --text-heading-4--font-weight: var(--ui-font-weight-semibold);
-    --text-heading-2: var(--ui-text-sm);
-    --text-heading-2--line-height: 1.4;
-    --text-heading-2--letter-spacing: 0;
-    --text-heading-2--font-weight: var(--ui-font-weight-semibold);
+    --text-heading-5: var(--ui-text-sm);
+    --text-heading-5--line-height: 1.4;
+    --text-heading-5--letter-spacing: 0;
+    --text-heading-5--font-weight: var(--ui-font-weight-semibold);
 
     --text-body-1: var(--ui-text-base);
     --text-body-1--line-height: 1.4;
@@ -109,4 +109,6 @@
     --radius-sm: 0.5rem;
     --radius-md: 0.75rem;
     --radius-lg: 1.25rem;
+
+    --inset-shadow-border: 'inset 0 0 0 2px #000'
 }

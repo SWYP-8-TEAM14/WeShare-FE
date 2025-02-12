@@ -9,7 +9,13 @@
   ],
   "exports": {
     "./styles.css": "./dist/index.css",
-    "./card": "./src/card.tsx"
+    "./tabs": "./src/tabs.tsx",
+    "./top-navigation": "./src/top-navigation.tsx",
+    "./bottom-navigation": "./src/bottom-navigation.tsx",
+    "./search": "./src/search.tsx",
+    "./label": "./src/label.tsx",
+    "./input": "./src/input.tsx",
+    "./form": "./src/form.tsx"
   },
   "license": "MIT",
   "scripts": {

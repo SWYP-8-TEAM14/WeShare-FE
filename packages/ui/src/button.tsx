@@ -10,7 +10,7 @@ export const buttonStyles = tv({
   variants: {
     variant: {
       primary: "ui:bg-primary-400 ui:text-white",
-      secondary: "ui:bg-[#29282f] ui:text-white",
+      secondary: "ui:bg-primary-900 ui:text-white",
       tertiary:
         "ui:bg-white ui:shadow-[inset_0_0_0_1px_var(--ui-color-gray-200)] ui:text-gray-700",
     },

@@ -90,7 +90,7 @@ export const NonDismissible: Story = {
   render: (args) => <NonDismissibleRender />,
 };
 
-export const ScrollableContentRender = () => {
+const ScrollableContentRender = () => {
   const [open, setOpen] = useState(false);
   return (
     <BottomSheet open={open} onOpenChange={setOpen} dismissible={false}>

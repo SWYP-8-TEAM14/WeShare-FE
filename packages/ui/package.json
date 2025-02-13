@@ -18,7 +18,8 @@
     "./form": "./src/form.tsx",
     "./segmented-control": "./src/segmented-control.tsx",
     "./bottom-sheet": "./src/bottom-sheet.tsx",
-    "./button": "./src/button.tsx"
+    "./button": "./src/button.tsx",
+    "./textarea": "./src/textarea.tsx"
   },
   "license": "MIT",
   "scripts": {

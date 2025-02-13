@@ -17,7 +17,8 @@
     "./input": "./src/input.tsx",
     "./form": "./src/form.tsx",
     "./segmented-control": "./src/segmented-control.tsx",
-    "./bottom-sheet": "./src/bottom-sheet.tsx"
+    "./bottom-sheet": "./src/bottom-sheet.tsx",
+    "./button": "./src/button.tsx"
   },
   "license": "MIT",
   "scripts": {

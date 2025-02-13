@@ -14,7 +14,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@repo/typescript-config": "0.0.0",
+    "@repo/typescript-config": "workspace:*",
     "@svgr/cli": "^8.1.0",
     "@types/node": "^22.10.7",
     "@types/react": "^19.0.7",

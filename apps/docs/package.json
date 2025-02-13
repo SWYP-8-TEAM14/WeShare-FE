@@ -11,14 +11,14 @@
     "lint": "eslint ./stories/*.stories.tsx --max-warnings 0"
   },
   "dependencies": {
-    "@repo/ui": "0.0.0",
+    "@repo/ui": "workspace:*",
     "react": "^19",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "3.2.4",
-    "@repo/eslint-config": "0.0.0",
-    "@repo/typescript-config": "0.0.0",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@storybook/addon-a11y": "^8.5.3",
     "@storybook/addon-essentials": "8.5.1",
     "@storybook/addon-interactions": "8.5.1",

@@ -1,4 +1,4 @@
-@theme inline {
+@theme {
     --font-sans: "Pretendard Variable", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --color-*: initial;
     --color-white: #FFFFFF;

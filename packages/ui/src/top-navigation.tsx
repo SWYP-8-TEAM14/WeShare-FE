@@ -8,7 +8,7 @@ export const TopNavigation = React.forwardRef<
   <nav
     ref={ref}
     className={cn(
-      "ui:relative ui:flex ui:h-11 ui:py-2 ui:px-4.5 ui:shadow-[0_1px_0_var(--ui-color-gray-200)]",
+      "ui:relative ui:flex ui:h-12.5 ui:py-2 ui:px-4.5 ui:shadow-[0_1px_0_var(--ui-color-gray-200)]",
       className
     )}
     {...props}
@@ -22,7 +22,7 @@ export const TopNavigationTitle = React.forwardRef<
   <span
     ref={ref}
     className={cn(
-      "ui:text-heading-4 ui:absolute ui:left-1/2 ui:-translate-x-1/2 ui:top-1/2 ui:-translate-y-1/2 ui:whitespace-nowrap",
+      "ui:text-heading-4 ui:text-gray-800 ui:absolute ui:left-1/2 ui:-translate-x-1/2 ui:top-1/2 ui:-translate-y-1/2 ui:whitespace-nowrap",
       className
     )}
     {...props}

@@ -30,8 +30,8 @@ export const BottomNavigationItem = React.forwardRef<
   <a
     ref={ref}
     className={cn(
-      "ui:flex ui:flex-1 ui:flex-col ui:gap-1 ui:items-center ui:justify-center ui:w-1/5 ui:h-full",
-      selected ? "ui:text-gray-900" : "ui:text-gray-500",
+      "ui:flex ui:flex-1 ui:flex-col ui:gap-1 ui:items-center ui:justify-center ui:w-1/5 ui:h-full ui:text-gray-700",
+      selected ? "ui:font-semibold" : "ui:font-medium",
       className
     )}
     {...props}
@@ -53,5 +53,9 @@ export const BottomNavigationItemTitle = React.forwardRef<
   React.ComponentRef<"span">,
   React.ComponentPropsWithoutRef<"span">
 >(({ className, ...props }, ref) => (
-  <span ref={ref} className={cn("ui:text-body-3", className)} {...props} />
+  <span
+    ref={ref}
+    className={cn("ui:text-[11px] ui:leading-[1.4]", className)}
+    {...props}
+  />
 ));

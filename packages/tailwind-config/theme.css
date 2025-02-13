@@ -110,5 +110,7 @@
     --radius-md: 0.75rem;
     --radius-lg: 1.25rem;
 
-    --inset-shadow-border: 'inset 0 0 0 2px #000'
+    --inset-shadow-border: 'inset 0 0 0 2px #000';
+
+    --spacing: 0.25rem;
 }

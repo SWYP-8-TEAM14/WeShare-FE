@@ -9,6 +9,6 @@
 @layer base {
     html {
         font-family: var(--ui-font-sans);
-        color: var(--ui-color-gray-900)
+        color: var(--ui-color-gray-800)
     }
 }

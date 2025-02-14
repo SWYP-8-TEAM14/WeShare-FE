@@ -19,7 +19,8 @@
     "./segmented-control": "./src/segmented-control.tsx",
     "./bottom-sheet": "./src/bottom-sheet.tsx",
     "./button": "./src/button.tsx",
-    "./textarea": "./src/textarea.tsx"
+    "./textarea": "./src/textarea.tsx",
+    "./list-header": "./src/list-header.tsx"
   },
   "license": "MIT",
   "scripts": {

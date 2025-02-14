@@ -29,7 +29,7 @@ const SegmentedControlTrigger = React.forwardRef<
   <TabsPrimitive.Trigger
     ref={ref}
     className={cn(
-      "ui:text-body-1 ui:py-2.5 ui:h-10.5 ui:box-border  ui:px-2.5 ui:bg-gray-100 ui:text-gray-600 ui:data-[state=active]:text-gray-800 ui:data-[state=active]:bg-white  ui:flex-1 ui:whitespace-nowrap ui:data-[state=active]:shadow-[0_0_8px_0_rgba(0,0,0,0.08)] ui:rounded-[4px]",
+      "ui:text-body-1 ui:py-2.5 ui:h-10.5 ui:box-border  ui:px-2.5 ui:bg-gray-100 ui:text-gray-600 ui:data-[state=active]:text-gray-800 ui:data-[state=active]:bg-white  ui:flex-1 ui:whitespace-nowrap ui:data-[state=active]:shadow-[0_0_8px_0_rgba(0,0,0,0.08)] ui:rounded-xs",
       className
     )}
     {...props}

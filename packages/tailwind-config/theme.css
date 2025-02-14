@@ -28,6 +28,7 @@
 
     --text-*: initial;
     --text-tiny: 0.625rem;
+    --text-3xs: 0.6875rem;
     --text-xxs: 0.75rem;
     --text-xs: 0.8125rem;
     --text-sm: 0.875rem;
@@ -88,7 +89,10 @@
     --text-body-6--line-height: 1.4;
     --text-body-6--letter-spacing: 0;
     --text-body-6--font-weight: var(--ui-font-weight-medium); 
-
+    --text-body-7: var(--ui-text-3xs);
+    --text-body-7--line-height: 1.4;
+    --text-body-7--letter-spacing: 0;
+    --text-body-7--font-weight: var(--ui-font-weight-medium); 
 
     --text-detail-1: var(--ui-text-xxs);
     --text-detail-1--line-height: 1.4;
@@ -105,7 +109,8 @@
 
 
     --radius-*: initial;
-    --radius-xs: 0.125rem;
+    --radius-xxs: 0.125rem;
+    --radius-xs: 0.25rem;
     --radius-sm: 0.5rem;
     --radius-md: 0.75rem;
     --radius-lg: 1.25rem;

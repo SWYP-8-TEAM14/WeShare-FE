@@ -55,7 +55,7 @@ export const BottomNavigationItemTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <span
     ref={ref}
-    className={cn("ui:text-[11px] ui:leading-[1.4]", className)}
+    className={cn("ui:text-body-7 ui:leading-[1.4]", className)}
     {...props}
   />
 ));

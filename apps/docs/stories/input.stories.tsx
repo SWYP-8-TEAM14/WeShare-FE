@@ -1,6 +1,5 @@
 import { Description, ErrorMessage, InputLength } from "@repo/ui/form";
 import { Input } from "@repo/ui/input";
-import { Label } from "@repo/ui/label";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
@@ -54,7 +53,9 @@ export const WithLabel: Story = {
           gap: "0.5rem",
         }}
       >
-        <Label htmlFor="input">라벨</Label>
+        <label className="text-heading-5" htmlFor="input">
+          라벨
+        </label>
         <InputLength maxLength={100} currentLength={0} />
       </div>
       <Input {...args} id="input" />
@@ -81,7 +82,9 @@ export const WithError: Story = {
           gap: "0.5rem",
         }}
       >
-        <Label htmlFor="input">라벨</Label>
+        <label className="text-heading-5" htmlFor="input">
+          라벨
+        </label>
         <InputLength maxLength={50} currentLength={4} />
       </div>
       <Input id="input" type="email" value="abcd" />

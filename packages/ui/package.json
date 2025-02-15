@@ -20,7 +20,8 @@
     "./bottom-sheet": "./src/bottom-sheet.tsx",
     "./button": "./src/button.tsx",
     "./textarea": "./src/textarea.tsx",
-    "./list-header": "./src/list-header.tsx"
+    "./list-header": "./src/list-header.tsx",
+    "./radio-group": "./src/radio-group.tsx"
   },
   "license": "MIT",
   "scripts": {
@@ -45,6 +46,7 @@
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.2",
+    "@radix-ui/react-radio-group": "^1.2.3",
     "@radix-ui/react-slot": "^1.1.2",
     "@radix-ui/react-tabs": "^1.1.3",
     "clsx": "^2.1.1",

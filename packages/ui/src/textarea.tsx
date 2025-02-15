@@ -5,7 +5,7 @@ import { focusVisibleRing } from "./rings";
 
 export const textareaStyles = tv({
   extend: focusVisibleRing,
-  base: "ui:flex ui:min-h-13.5 ui:w-full ui:py-4 ui:px-4.5 ui:rounded-sm ui:text-body-2 ui:placeholder:text-gray-500 ui:bg-gray-100",
+  base: "ui:flex ui:min-h-24 ui:w-full ui:py-4 ui:px-4.5 ui:rounded-sm ui:text-body-2 ui:placeholder:text-gray-500 ui:bg-gray-100",
   variants: {
     resize: {
       true: "",

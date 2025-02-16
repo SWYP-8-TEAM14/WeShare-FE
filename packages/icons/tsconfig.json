@@ -1,5 +1,12 @@
 {
   "extends": "@repo/typescript-config/react-library.json",
+  "compilerOptions": {
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "module": "ESNext",
+    "declarationDir": "dist/types",
+    "outDir": "dist"
+  },
   "include": ["src/**/*", "scripts/*", "index.ts"],
   "exclude": ["assets"]
 }

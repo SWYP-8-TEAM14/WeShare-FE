@@ -3,11 +3,18 @@
   "version": "0.0.0",
   "type": "module",
   "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "tsup",
     "generate": "npx @svgr/cli --typescript --icon 24px --out-dir src/icons assets",
     "modify": "npx tsx scripts/modify.ts",
-    "generate-and-modify": "npm run generate && npm run modify"
+    "generate-index": "npx tsx scripts/generate-index.ts",
+    "generate-and-modify": "npm run generate && npm run modify && npm run generate-index"
   },
   "keywords": [],
   "author": "",

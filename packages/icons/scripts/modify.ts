@@ -31,11 +31,17 @@ const changeStrokeColor = (content: string, color: string) => {
   return content.replace(strokeRegex, `stroke="${color}"`);
 };
 
+const changeFillColor = (content: string, color: string) => {
+  const fillRegex = /fill="#000000"|fill="#000"/g;
+  return content.replace(fillRegex, `fill="${color}"`);
+};
+
 const modifyIcon = (filePath: string) => {
   let content = fs.readFileSync(filePath, "utf-8");
 
   content = changeSize(content);
   content = changeStrokeColor(content, ICON_COLOR);
+  content = changeFillColor(content, ICON_COLOR);
 
   fs.writeFileSync(filePath, content, "utf-8");
 };

@@ -27,7 +27,8 @@
     "./toast": "./src/toast.tsx",
     "./toaster": "./src/toaster.tsx",
     "./use-toast": "./src/use-toast.ts",
-    "./image-carousel": "./src/image-carousel.tsx"
+    "./image-carousel": "./src/image-carousel.tsx",
+    "./full-screen-dialog": "./src/full-screen-dialog.tsx"
   },
   "license": "MIT",
   "scripts": {
@@ -52,6 +53,7 @@
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.4",
+    "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-radio-group": "^1.2.3",
     "@radix-ui/react-slot": "^1.1.2",

@@ -118,4 +118,9 @@
     --inset-shadow-border: 'inset 0 0 0 2px #000';
 
     --spacing: 0.25rem;
+
+    --breakpoint-*: initial;
+    --breakpoint-sm: 37.5rem;
+
+    --container-sm: 37.5rem;
 }

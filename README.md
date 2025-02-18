@@ -32,6 +32,34 @@ This Turborepo includes the following packages/apps:
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 - `@repo/tailwind-config`: `theme.css` used throughout the monorepo
 
+### 페이지 구조
+
+```mermaid
+---
+config:
+  theme: base
+  look: neo
+---
+flowchart TB
+    Landing("랜딩 페이지: /") -- Login --> App("대시보드: /app")
+    Invitation("초대 페이지: /invite") -- Login --> App
+    App --> Groups("그룹 목록: /app/groups") & Items("물품 목록: /app/items") & ItemReservation("물품 예약: /app/reserve") & ItemReservationComplete("물품 예약 완료: /app/reservation-complete?id=[reservationId]") & Profile("마이 페이지: /app/profile")
+    Groups --> GroupDetails("그룹 상세: /app/groups/[groupId]") & GroupCreation(["그룹 생성"])
+    GroupDetails --> GroupManage("그룹 관리: /app/groups/[groupId]/manage")
+    GroupManage --> EditGroupInformation("그룹 정보 수정: /app/groups/[groupId]/manage/info") & GroupMemberManagement("그룹 멤버 관리: /app/groups/[groupId]/manage/members") & GroupItemManagement("그룹 물품 관리: /app/groups/[groupId]/manage/items")
+    GroupItemManagement --> AddGroupItem(["그룹 물품 추가"])
+    Items --> ItemDetails("물품 상세: /app/items/[itemId]")
+    Profile --> EditProfile(["프로필 수정"]) & ReservationHistory("예약 내역: /app/profile/reservations")
+    ReservationHistory --> ReservationHistoryDetail("예약 내역 상세: /app/reservations/[reservationId]")
+    style App stroke:#000000,fill:#F6ACD8
+    style Groups stroke:#000000,fill:#E1F0D4 
+    style Items stroke:#000000,fill:#C3EFE0 
+    style ItemReservation stroke:#000000,fill:#DBCDF8
+    style ItemReservationComplete stroke:#000000,fill:#f7c0c0
+    style Profile stroke:#000000,fill:#F2F7D2
+
+```
+
 ### 주요 엔티티
 
 - User: 서비스를 이용하는 사용자이다

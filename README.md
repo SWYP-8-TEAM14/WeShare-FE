@@ -60,18 +60,6 @@ flowchart TB
 
 ```
 
-### 주요 엔티티
-
-- User: 서비스를 이용하는 사용자이다
-- Group: 공용 물건을 관리하는 그룹이다
-- GroupMember: 그룹에 속한 사용자이다
-- GroupBoard: 그룹 내에서 게시글을 작성하는 것이다(그룹 게시판)
-- Item: 그룹 내에서 관리되는 공용 물건이다
-- RentalRequest: 사용자가 물건을 빌리기 위해 요청하는 것이다(대여 요청)
-- RentalRecord: 물건을 빌려준 기록이다(대여 내역)
-- WishList: 사용자가 물건을 빌리고 싶어하는 것이다(찜 목록)
-- Reservation: 사용자가 물건을 빌리기 위해 예약하는 것이다(예약)
-
 ### 페이지 라우팅
 
 | Title                    | Path                         | Description                               |

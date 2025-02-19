@@ -11,7 +11,7 @@ console.log(`Found ${files.length} icons in ${iconsDir}.`);
 const exportStatements = files
   .map((file) => {
     const componentName = basename(file, ".tsx");
-    return `export { default as ${componentName} } from './src/icons/${componentName}';`;
+    return `export { default as ${componentName}Icon } from './src/icons/${componentName}';`;
   })
   .join("\n");
 

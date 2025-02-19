@@ -8,7 +8,7 @@ export const TopNavigation = React.forwardRef<
   <nav
     ref={ref}
     className={cn(
-      "ui:relative ui:flex ui:h-12.5 ui:py-2 ui:px-4.5 ui:shadow-[0_1px_0_var(--ui-color-gray-200)]",
+      "ui:relative ui:flex ui:h-12.5 ui:py-2 ui:px-4.5 ui:shadow-[0_1px_0_var(--ui-color-gray-200)] ui:bg-white",
       className
     )}
     {...props}

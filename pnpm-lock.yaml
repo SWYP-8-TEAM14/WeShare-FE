@@ -99,6 +99,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@repo/icons':
+        specifier: workspace:*
+        version: link:../../packages/icons
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui

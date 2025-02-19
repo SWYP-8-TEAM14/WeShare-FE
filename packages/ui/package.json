@@ -30,6 +30,7 @@
     "./image-carousel": "./src/image-carousel.tsx",
     "./full-screen-dialog": "./src/full-screen-dialog.tsx",
     "./alert-dialog": "./src/alert-dialog.tsx",
+    "./fixed-bottom": "./src/fixed-bottom.tsx",
     "./utils": "./src/utils.ts"
   },
   "license": "MIT",

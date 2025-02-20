@@ -13,11 +13,24 @@ const FullScreenDialogPortal = DialogPrimitive.Portal;
 
 const FullScreenDialogClose = DialogPrimitive.Close;
 
+const FullScreenDialogOverlay = React.forwardRef<
+  React.ComponentRef<typeof DialogPrimitive.Overlay>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Overlay
+    ref={ref}
+    className={cn("ui:fixed ui:inset-0 ui:z-50", className)}
+    {...props}
+  />
+));
+FullScreenDialogOverlay.displayName = "FullScreenDialogOverlay";
+
 const FullScreenDialogContent = React.forwardRef<
   React.ComponentRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, onInteractOutside, ...props }, ref) => (
   <FullScreenDialogPortal>
+    <FullScreenDialogOverlay />
     <DialogPrimitive.Content
       ref={ref}
       onInteractOutside={(e) => {
@@ -35,7 +48,7 @@ const FullScreenDialogContent = React.forwardRef<
     </DialogPrimitive.Content>
   </FullScreenDialogPortal>
 ));
-FullScreenDialogContent.displayName = DialogPrimitive.Content.displayName;
+FullScreenDialogContent.displayName = "FullScreenDialogContent";
 
 const FullScreenDialogTitle = React.forwardRef<
   React.ComponentRef<typeof DialogPrimitive.Title>,
@@ -47,7 +60,7 @@ const FullScreenDialogTitle = React.forwardRef<
     {...props}
   />
 ));
-FullScreenDialogTitle.displayName = DialogPrimitive.Title.displayName;
+FullScreenDialogTitle.displayName = "FullScreenDialogTitle";
 
 export {
   FullScreenDialog,

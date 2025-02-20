@@ -1,5 +1,5 @@
+"use client";
 import * as React from "react";
-
 import { tv, VariantProps } from "tailwind-variants";
 import { Description, ErrorMessage, InputLength } from "./form";
 import { focusVisibleRing } from "./rings";

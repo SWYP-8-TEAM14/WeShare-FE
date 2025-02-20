@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import { Description, ErrorMessage, InputLength } from "./form";
 import { Input } from "./input";
@@ -6,6 +7,7 @@ type TextFieldProps = React.ComponentPropsWithoutRef<"input"> & {
   label: string;
   description?: string;
   errorMessage?: string;
+  endContent?: React.ReactNode;
 };
 
 export const TextField = React.forwardRef<
@@ -13,7 +15,15 @@ export const TextField = React.forwardRef<
   TextFieldProps
 >(
   (
-    { className, maxLength, label, description, errorMessage, ...props },
+    {
+      className,
+      maxLength,
+      label,
+      endContent,
+      description,
+      errorMessage,
+      ...props
+    },
     ref
   ) => {
     const id = React.useId();
@@ -31,13 +41,16 @@ export const TextField = React.forwardRef<
             <InputLength maxLength={maxLength} currentLength={valueLength} />
           )}
         </div>
-        <Input
-          id={"input-" + id}
-          ref={ref}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          {...props}
-        />
+        <div className="ui:flex ui:items-center ui:gap-2.5">
+          <Input
+            id={"input-" + id}
+            ref={ref}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            {...props}
+          />
+          {endContent}
+        </div>
         {errorMessage ? (
           <ErrorMessage>{errorMessage}</ErrorMessage>
         ) : description ? (

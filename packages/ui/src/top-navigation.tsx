@@ -8,7 +8,7 @@ export const TopNavigation = React.forwardRef<
   <nav
     ref={ref}
     className={cn(
-      "ui:relative ui:flex ui:h-12.5 ui:py-2 ui:px-4.5 ui:shadow-[0_1px_0_var(--ui-color-gray-200)] ui:bg-white",
+      "ui:relative ui:flex ui:h-12.5 ui:py-2 ui:px-4.5 ui:shadow-[0_1px_0_var(--ui-color-gray-200)] ui:bg-white ui:items-center",
       className
     )}
     {...props}
@@ -38,7 +38,7 @@ export const TopNavigationLeft = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "ui:absolute ui:left-4.5 ui:top-1/2 ui:-translate-y-1/2",
+      "ui:absolute ui:left-4.5 ui:top-1/2 ui:-translate-y-1/2 flex items-center",
       className
     )}
     {...props}
@@ -54,7 +54,7 @@ export const TopNavigationRight = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "ui:absolute ui:right-4.5 ui:top-1/2 ui:-translate-y-1/2",
+      "ui:absolute ui:right-4.5 ui:top-1/2 ui:-translate-y-1/2 flex items-center",
       className
     )}
     {...props}

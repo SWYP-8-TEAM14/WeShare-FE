@@ -1,4 +1,5 @@
 import { Button } from "@repo/ui/button";
+import { FixedBottomActions } from "@repo/ui/fixed-bottom";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
@@ -51,4 +52,24 @@ export const Disabled: Story = {
   args: {
     disabled: true,
   },
+};
+
+export const BottomCTA: Story = {
+  render: () => (
+    <div className="p-4 bg-gray-300 flex flex-col gap-8">
+      <FixedBottomActions>
+        <Button variant="primary" fullWidth size="large">
+          Button
+        </Button>
+      </FixedBottomActions>
+      <FixedBottomActions columns="2">
+        <Button variant="tertiary" fullWidth size="large">
+          Button
+        </Button>
+        <Button variant="primary" fullWidth size="large" className="col-span-2">
+          Button
+        </Button>
+      </FixedBottomActions>
+    </div>
+  ),
 };

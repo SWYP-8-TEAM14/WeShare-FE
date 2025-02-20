@@ -6,7 +6,7 @@ import { RadixUISlot } from "./types";
 import { tv } from "./utils";
 export const buttonStyles = tv({
   extend: focusVisibleRing,
-  base: "ui:whitespace-nowrap ui:disabled:bg-gray-200 ui:disabled:text-gray-500 ui:rounded-sm",
+  base: "ui:whitespace-nowrap ui:disabled:bg-gray-200 ui:disabled:text-gray-500 ui:rounded-sm ui:text-center",
   variants: {
     variant: {
       primary: "ui:bg-primary-400 ui:text-white",
@@ -15,9 +15,9 @@ export const buttonStyles = tv({
         "ui:bg-white ui:shadow-[inset_0_0_0_1px_var(--ui-color-gray-200)] ui:text-gray-700",
     },
     size: {
-      small: "ui:px-3 ui:py-2 ui:text-body-6",
-      medium: "ui:px-4.5 ui:py-2.5 ui:text-body-4",
-      large: "ui:px-4.5 ui:py-3.5 ui:text-body-1",
+      small: "ui:px-3 ui:py-2 ui:text-body-6 ui:h-8.5",
+      medium: "ui:px-4.5 ui:py-2.5 ui:text-body-4 ui:h-10",
+      large: "ui:px-4.5 ui:py-3.5 ui:text-body-1 ui:h-13.5",
     },
     fullWidth: {
       true: "ui:w-full",

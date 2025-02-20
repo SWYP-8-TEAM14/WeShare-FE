@@ -31,6 +31,8 @@
     "./full-screen-dialog": "./src/full-screen-dialog.tsx",
     "./alert-dialog": "./src/alert-dialog.tsx",
     "./fixed-bottom": "./src/fixed-bottom.tsx",
+    "./icon-button": "./src/icon-button.tsx",
+    "./text-field": "./src/text-field.tsx",
     "./utils": "./src/utils.ts"
   },
   "license": "MIT",

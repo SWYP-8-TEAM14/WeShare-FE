@@ -49,8 +49,8 @@ flowchart TB
     GroupManage --> EditGroupInformation("그룹 정보 수정: /app/groups/[groupId]/manage/info") & GroupMemberManagement("그룹 멤버 관리: /app/groups/[groupId]/manage/members") & GroupItemManagement("그룹 물품 관리: /app/groups/[groupId]/manage/items")
     GroupItemManagement --> AddGroupItem(["그룹 물품 추가"])
     Items --> ItemDetails("물품 상세: /app/items/[itemId]")
-    Profile --> EditProfile(["프로필 수정"]) & ReservationHistory("예약 내역: /app/profile/reservations")
-    ReservationHistory --> ReservationHistoryDetail("예약 내역 상세: /app/reservations/[reservationId]")
+    Profile --> EditProfile("프로필 수정: /app/profile/edit") & ReservationHistory("예약 내역: /app/profile/reservations")
+    ReservationHistory --> ReservationHistoryDetail("예약 내역 상세: /app/profile/reservations/[reservationId]")
     style App stroke:#000000,fill:#F6ACD8
     style Groups stroke:#000000,fill:#E1F0D4 
     style Items stroke:#000000,fill:#C3EFE0 

@@ -4,11 +4,12 @@
 @import "../../tailwind-config/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css" layer(utilities);
+@import "../../tailwind-config/animate.css";
 @source "../src";
 
 @layer base {
-    html {
-        font-family: var(--ui-font-sans);
-        color: var(--ui-color-gray-900)
-    }
+  html {
+    font-family: var(--ui-font-sans);
+    color: var(--ui-color-gray-900);
+  }
 }

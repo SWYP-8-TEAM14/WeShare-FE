@@ -24,3 +24,18 @@ export const membersData = [
     role: "guest",
   },
 ];
+
+export const groupsData = [
+  {
+    id: 1,
+    groupName: "🎾테린이들의 테니스 모임🎾",
+  },
+  {
+    id: 2,
+    groupName: "도보마포",
+  },
+  {
+    id: 3,
+    groupName: "마포 스크린골프 동호회 (모집중)",
+  },
+];

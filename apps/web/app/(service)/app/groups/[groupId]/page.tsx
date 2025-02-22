@@ -1,7 +1,8 @@
 import Page from "@/components/page";
+import RouterBackButton from "@/components/router-back-button";
 import ItemList from "@/items/components/item-list";
 import { groupItems } from "@/items/data";
-import { BackChevronIcon, RightChevronIcon } from "@repo/icons";
+import { RightChevronIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { IconButton } from "@repo/ui/icon-button";
 import {
@@ -36,7 +37,7 @@ export default function GroupDetailPage() {
     <Page>
       <TopNavigation>
         <TopNavigationLeft>
-          <BackChevronIcon />
+          <RouterBackButton />
         </TopNavigationLeft>
         <TopNavigationTitle>그룹 상세</TopNavigationTitle>
       </TopNavigation>

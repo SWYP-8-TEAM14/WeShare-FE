@@ -1,11 +1,12 @@
 import Page from "@/components/page";
+import RouterBackButton from "@/components/router-back-button";
 import GroupInfoEditDialog from "@/groups/components/group-info-edit-dialog";
 import GroupItemsManageDialog from "@/groups/components/group-items-manage-dialog";
 import GroupMembersManageDialog from "@/groups/components/group-members-manage-dialog";
 import { membersData } from "@/groups/data";
 import ItemList from "@/items/components/item-list";
 import { groupItems } from "@/items/data";
-import { BackChevronIcon, RightChevronIcon } from "@repo/icons";
+import { RightChevronIcon } from "@repo/icons";
 import { IconButton } from "@repo/ui/icon-button";
 import {
   ListHeader,
@@ -38,7 +39,7 @@ export default function GroupManagePage() {
     <Page>
       <TopNavigation>
         <TopNavigationLeft>
-          <BackChevronIcon />
+          <RouterBackButton />
         </TopNavigationLeft>
         <TopNavigationTitle>그룹 상세</TopNavigationTitle>
       </TopNavigation>

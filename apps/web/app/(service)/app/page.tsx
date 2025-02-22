@@ -19,12 +19,12 @@ export default function AppPage() {
 export function Headers() {
   return (
     <div>
-      <div className="px-4.5 py-2 h-12.5 flex items-center justify-between">
+      <div className="px-4.5 h-12.5 flex items-center justify-between">
         <Image
           unoptimized
           src="/logo_small.svg"
-          width={124}
-          height={44}
+          width={80}
+          height={31}
           alt="weshare"
         />
       </div>
@@ -89,7 +89,7 @@ export function MainBanners() {
 export function BookableItems() {
   return (
     <div className="rounded-t-lg bg-white pt-7.5 shadow-[0_-3px_12px_0px_rgba(0,0,0,0.05)] flex-1 flex flex-col">
-      <h2 className="text-heading-4 mx-4.5">예약 가능한 물품</h2>
+      <h2 className="text-heading-4 mx-4.5 text-gray-800">예약 가능한 물품</h2>
       <div className="mt-2.5">
         <ItemList items={bookableItems} />
       </div>

@@ -27,7 +27,7 @@ export default function ItemsPage() {
             전체
           </Chip>
           {groupsData.map((group) => (
-            <Chip key={group.id} variant="tertiary">
+            <Chip key={group.id} variant="tertiary" className="text-body-4">
               {group.groupName}
             </Chip>
           ))}

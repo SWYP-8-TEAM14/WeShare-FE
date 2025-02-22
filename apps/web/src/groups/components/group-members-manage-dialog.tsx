@@ -39,7 +39,7 @@ export default function GroupMembersManageDialog({
           </TopNavigationTitle>
         </TopNavigation>
         <div className="flex-1">
-          <div className="py-6.5 flex flex-col px-4.5">
+          <div className="pt-6.5 flex flex-col px-4.5">
             <div className="flex justify-between items-center">
               <span className="text-heading-5 text-gray-800">그룹 멤버 10</span>
               <button className="text-gray-700 text-body-6">전체 선택</button>

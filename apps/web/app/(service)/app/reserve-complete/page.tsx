@@ -18,7 +18,7 @@ export default function ReserveCompletePage() {
         <TopNavigationLeft>
           <RouterBackButton />
         </TopNavigationLeft>
-        <TopNavigationTitle>예약 완료</TopNavigationTitle>
+        <TopNavigationTitle>예약완료</TopNavigationTitle>
       </TopNavigation>
 
       <div className="py-9 px-4.5 bg-white">

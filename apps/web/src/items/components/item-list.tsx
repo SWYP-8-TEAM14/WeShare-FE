@@ -34,11 +34,12 @@ export default function ItemList({ items }: ItemListProps) {
             className="rounded-sm"
           />
           <div className="flex-1 mt-3">
-            <div className="flex">
+            <div className="flex items-center">
               <span className="text-gray-600 text-body-6 line-clamp-1">
                 {item.groupName}
               </span>
-              <span className="text-primary text-body-6 ml-1.5 font-semibold">
+              <span className="w-px h-2 bg-gray-200 mx-1.5" />
+              <span className="text-primary text-body-6 font-semibold">
                 {item.itemStatus}
               </span>
             </div>

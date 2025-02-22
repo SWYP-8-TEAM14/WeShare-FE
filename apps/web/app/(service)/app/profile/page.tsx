@@ -27,8 +27,8 @@ export default function ProfilePage() {
           <p className="text-heading-3">{profile.nickname}</p>
           <p className="text-body-4 text-gray-600 mt-1.5">{profile.fullName}</p>
         </div>
-        <Button size="small" variant="tertiary">
-          편집
+        <Button size="small" variant="tertiary" asChild>
+          <Link href="/app/profile/edit">편집</Link>
         </Button>
       </div>
       <div className="mt-2 bg-white divide-gray-200 divide-y">
@@ -38,29 +38,21 @@ export default function ProfilePage() {
         >
           <p className="text-heading-4 text-gray-800">
             대여 내역
-            <span className="text-primary-500">
-              {profile.totalReservations}
+            <span className="text-primary-500 ml-1.5">
+              {profile.totalReservations}개
             </span>
           </p>
           <RightChevronIcon className="size-4 text-gray-700" />
         </Link>
         <Link
-          href="/app/profile/reservations"
+          href="/app/profile/likes"
           className="flex items-center justify-between p-5 h-15.5"
         >
           <p className="text-heading-4 text-gray-800">
             찜한 물품
-            <span className="text-primary-500">{profile.totalLikedItems}</span>
-          </p>
-          <RightChevronIcon className="size-4 text-gray-700" />
-        </Link>
-        <Link
-          href="/app/profile/reservations"
-          className="flex items-center justify-between p-5 h-15.5"
-        >
-          <p className="text-heading-4 text-gray-800">
-            그룹 리스트
-            <span className="text-primary-500">{profile.totalGroups}</span>
+            <span className="text-primary-500 ml-1.5">
+              {profile.totalLikedItems}개
+            </span>
           </p>
           <RightChevronIcon className="size-4 text-gray-700" />
         </Link>

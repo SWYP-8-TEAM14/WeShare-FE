@@ -55,7 +55,7 @@ export default function GroupInfoEditDialog() {
               <input type="file" className="hidden" accept="image/*" />
             </label>
             <p className="mt-3 text-heading-2">그룹 이름</p>
-            <p className="text-body-4 text-gray-600 mt-1.5">멤버수 10명</p>
+            <p className="text-body-4 text-gray-600 mt-1.5">멤버수 10</p>
           </div>
           {/* 그룹 정보 입력 */}
           <div className="py-6.5 px-4.5 flex flex-col gap-7.5">

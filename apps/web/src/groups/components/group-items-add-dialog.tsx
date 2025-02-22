@@ -58,7 +58,7 @@ export default function GroupItemsAddDialog({
             </div>
 
             {/* 정보 입력 */}
-            <div className="px-2.5 pt-8.5 flex flex-col gap-7.5">
+            <div className="pt-8.5 flex flex-col gap-7.5">
               <TextField
                 label="물품 이름"
                 placeholder="물품 이름을 작성해 주세요."

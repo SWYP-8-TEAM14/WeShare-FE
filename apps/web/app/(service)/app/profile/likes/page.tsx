@@ -1,17 +1,24 @@
-import BottomNavigation from "@/components/bottom-navigation";
 import Page from "@/components/page";
+import RouterBackButton from "@/components/router-back-button";
 import { groupsData } from "@/groups/data";
 import ItemList from "@/items/components/item-list";
 import { groupItems } from "@/items/data";
 import { DownChevronIcon } from "@repo/icons";
 import { Chip } from "@repo/ui/chip";
 import { Search } from "@repo/ui/search";
-import { TopNavigation, TopNavigationTitle } from "@repo/ui/top-navigation";
+import {
+  TopNavigation,
+  TopNavigationLeft,
+  TopNavigationTitle,
+} from "@repo/ui/top-navigation";
 
 export default function LikedItemsPage() {
   return (
     <Page>
       <TopNavigation>
+        <TopNavigationLeft>
+          <RouterBackButton />
+        </TopNavigationLeft>
         <TopNavigationTitle>찜한 물품</TopNavigationTitle>
       </TopNavigation>
       <div className="bg-white">
@@ -54,7 +61,6 @@ export default function LikedItemsPage() {
           <ItemList items={groupItems} />
         </div>
       </section>
-      <BottomNavigation currentTab="items" />
     </Page>
   );
 }

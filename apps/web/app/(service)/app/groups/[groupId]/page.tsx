@@ -78,7 +78,7 @@ export default function GroupDetailPage() {
       </section>
       <section className="mt-2 pt-6.5 bg-white flex-1">
         <ListHeader>
-          <ListHeaderTitle>공용물품 리스트</ListHeaderTitle>
+          <ListHeaderTitle size="large">공용물품 리스트</ListHeaderTitle>
           <ListHeaderAction>
             <IconButton>
               <RightChevronIcon />

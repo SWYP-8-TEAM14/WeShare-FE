@@ -11,6 +11,7 @@ import {
   TopNavigationTitle,
 } from "@repo/ui/top-navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ItemReservePage() {
   return (
@@ -102,11 +103,9 @@ export default function ItemReservePage() {
       </div>
       <FixedBottom>
         <FixedBottomActions>
-          <SelectReservationTimeDialog>
-            <Button size="large" variant="primary">
-              예약하기
-            </Button>
-          </SelectReservationTimeDialog>
+          <Button size="large" variant="primary" asChild>
+            <Link href={`/app/reserve-complete`}>예약하기</Link>
+          </Button>
         </FixedBottomActions>
       </FixedBottom>
     </Page>

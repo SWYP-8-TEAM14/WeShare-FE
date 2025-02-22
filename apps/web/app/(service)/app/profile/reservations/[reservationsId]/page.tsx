@@ -15,7 +15,7 @@ export default function ReservationDetailsPage() {
         <TopNavigationLeft>
           <RouterBackButton />
         </TopNavigationLeft>
-        <TopNavigationTitle>예약 상세</TopNavigationTitle>
+        <TopNavigationTitle>내역 상세</TopNavigationTitle>
       </TopNavigation>
       <div className="bg-white px-4.5 py-6.5 flex items-center gap-3">
         <Image

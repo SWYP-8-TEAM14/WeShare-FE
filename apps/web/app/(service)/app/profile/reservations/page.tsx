@@ -10,6 +10,7 @@ import {
   TopNavigationTitle,
 } from "@repo/ui/top-navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function UserReservationsPage() {
   return (
@@ -59,7 +60,10 @@ export default function UserReservationsPage() {
                     {reservation.pickupTime}
                   </span>
                 </div>
-                <div className="mt-2 flex items-center gap-3">
+                <Link
+                  className="mt-2 flex items-center gap-3"
+                  href={`/app/profile/reservations/${reservation.id}`}
+                >
                   <Image
                     unoptimized
                     src={reservation.itemDetail.images[0]!}
@@ -76,7 +80,7 @@ export default function UserReservationsPage() {
                       {reservation.itemDetail.itemName}
                     </span>
                   </div>
-                </div>
+                </Link>
 
                 <div className="mt-3 px-4 py-3.5 bg-gray-100 rounded-sm flex justify-between items-center">
                   <div className="flex-1 flex flex-col gap-0.5">
@@ -105,9 +109,9 @@ export default function UserReservationsPage() {
 
 function FilterChip({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-1.5 bg-white rounded-full px-3 py-2 text-body-6 text-gray-700 border border-gray-200">
+    <div className="flex items-center gap-0.5 bg-white rounded-full px-3 py-2 text-body-6 text-gray-700 border border-gray-200">
       {children}
-      <DownChevronIcon className="ml-0.5 size-4 text-gray-700" />
+      <DownChevronIcon className="size-4 text-gray-700" />
     </div>
   );
 }

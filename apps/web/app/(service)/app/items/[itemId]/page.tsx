@@ -34,17 +34,18 @@ export default function ItemDetailPage() {
           alt: itemDetail.itemName,
         }))}
       />
-      <div className="bg-white p-4.5 flex items-center justify-between">
-        <div>
-          <p className="text-body-6 text-gray-600">{itemDetail.group.name}</p>
-          <p className="text-heading-2 mt-1.5">{itemDetail.itemName}</p>
-        </div>
-        <div className="flex flex-col justify-center items-center bg-gray-100 px-5 rounded-sm h-17.5">
-          <span className="text-detail-2 text-gray-700">수량</span>
-          <span className="text-body-1 mt-1.5">{itemDetail.quantity}개</span>
+      <div className="bg-white">
+        <div className="py-4.5 mx-4.5 flex items-center justify-between border-b border-gray-200">
+          <div>
+            <p className="text-body-6 text-gray-600">{itemDetail.group.name}</p>
+            <p className="text-heading-2 mt-1.5">{itemDetail.itemName}</p>
+          </div>
+          <div className="flex flex-col justify-center items-center bg-gray-100 px-5 rounded-sm h-17.5">
+            <span className="text-detail-2 text-gray-700">수량</span>
+            <span className="text-body-1 mt-1.5">{itemDetail.quantity}개</span>
+          </div>
         </div>
       </div>
-      <hr className="h-px bg-gray-200 mx-4.5 border-none" />
       <div className="p-4.5 bg-white">
         <div>
           <h3 className="text-heading-5 text-gray-800">상세내용</h3>

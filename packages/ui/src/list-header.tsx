@@ -4,7 +4,8 @@
  */
 
 import * as React from "react";
-import { cn } from "./utils";
+import { VariantProps } from "tailwind-variants";
+import { cn, tv } from "./utils";
 
 export const ListHeader = React.forwardRef<
   React.ComponentRef<"div">,
@@ -23,12 +24,29 @@ export const ListHeader = React.forwardRef<
 });
 ListHeader.displayName = "ListHeader";
 
+const listHeaderTitleStyles = tv({
+  variants: {
+    size: {
+      medium: "ui:text-heading-5",
+      large: "ui:text-heading-3",
+    },
+  },
+  defaultVariants: {
+    size: "medium",
+  },
+});
+
 export const ListHeaderTitle = React.forwardRef<
   React.ComponentRef<"div">,
-  React.ComponentPropsWithoutRef<"div">
->(function ListHeaderTitle({ className, ...props }, ref) {
+  React.ComponentPropsWithoutRef<"div"> &
+    VariantProps<typeof listHeaderTitleStyles>
+>(function ListHeaderTitle({ className, size, ...props }, ref) {
   return (
-    <div ref={ref} className={cn("ui:text-heading-3", className)} {...props} />
+    <div
+      ref={ref}
+      className={cn(listHeaderTitleStyles({ className, size }))}
+      {...props}
+    />
   );
 });
 ListHeaderTitle.displayName = "ListHeaderTitle";

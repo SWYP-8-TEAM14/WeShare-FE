@@ -19,7 +19,7 @@ export const FloatingButton = React.forwardRef<
 >(({ className, asChild, children, ...props }, ref) => {
   const Component = asChild ? Slot : "button";
   return (
-    <div className="ui:pb-5 ui:flex ui:justify-center">
+    <div className="ui:absolute ui:-top-5 ui:-translate-y-full ui:left-1/2 ui:-translate-x-1/2  ui:flex ui:justify-center">
       <Component
         ref={ref}
         className={floatingButtonStyles({ className })}

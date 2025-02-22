@@ -39,7 +39,7 @@ const FullScreenDialogContent = React.forwardRef<
         onInteractOutside?.(e);
       }}
       className={cn(
-        "ui:fixed ui:left-1/2 ui:top-0 ui:h-full ui:z-50  ui:w-full ui:max-w-sm  ui:-translate-x-1/2 ui:bg-white",
+        "ui:fixed ui:left-1/2 ui:top-0 ui:h-full ui:z-50  ui:w-full ui:max-w-sm  ui:-translate-x-1/2 ui:bg-white ui:duration-200 ui:data-[state=open]:animate-in ui:data-[state=closed]:animate-out ui:data-[state=closed]:slide-out-to-bottom-[5%] ui:data-[state=open]:slide-in-from-bottom-[5%] ui:ease-out  ui:data-[state=closed]:fade-out-0",
         className
       )}
       {...props}

@@ -1,3 +1,4 @@
+"use client";
 import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import * as React from "react";
@@ -6,7 +7,7 @@ import { cn } from "./utils";
 type ImageCarouselProps = {
   slides: Array<{
     src: string;
-    alt: string;
+    alt?: string;
   }>;
   showDots?: boolean;
   options?: EmblaOptionsType;
@@ -41,14 +42,14 @@ export const ImageCarousel = ({
         </div>
       </div>
       {showDots && (
-        <div className="ui:absolute ui:flex ui:justify-center ui:bottom-2 ui:left-1/2 ui:transform ui:-translate-x-1/2 ui:space-x-1.5">
+        <div className="ui:absolute ui:flex ui:justify-center ui:bottom-4 ui:left-1/2 ui:transform ui:-translate-x-1/2 ui:space-x-1.5">
           {scrollSnaps.map((_, index) => (
             <DotButton
               key={index}
               onClick={() => onDotButtonClick(index)}
               className={cn(
                 "ui:w-[7px] ui:h-[7px] ui:rounded-full",
-                index === selectedIndex ? "ui:bg-gray-900" : "ui:bg-gray-400"
+                index === selectedIndex ? "ui:bg-gray-800" : "ui:bg-gray-400"
               )}
             />
           ))}

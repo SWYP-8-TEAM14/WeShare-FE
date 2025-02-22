@@ -6,7 +6,7 @@ import { RadixUISlot } from "./types";
 import { tv } from "./utils";
 export const buttonStyles = tv({
   extend: focusVisibleRing,
-  base: "ui:whitespace-nowrap ui:disabled:bg-gray-200 ui:disabled:text-gray-500 ui:rounded-sm ui:text-center",
+  base: "ui:whitespace-nowrap ui:disabled:bg-gray-200 ui:disabled:text-gray-500 ui:rounded-sm ui:text-center ui:flex ui:items-center ui:justify-center",
   variants: {
     variant: {
       primary: "ui:bg-primary-400 ui:text-white",

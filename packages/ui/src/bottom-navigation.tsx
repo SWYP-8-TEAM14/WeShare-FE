@@ -9,7 +9,7 @@ export const BottomNavigation = React.forwardRef<
   <nav
     ref={ref}
     className={cn(
-      "ui:relative ui:flex ui:h-[74px] ui:pt-2 ui:pb-2.5 ui:px-4.5 ui:shadow-[0_-1px_0_var(--ui-color-gray-200)] ui:bg-white ui:max-w-sm ui:mx-auto",
+      "ui:relative ui:flex ui:h-[74px] ui:pt-2 ui:pb-2.5 ui:shadow-[0_-1px_0_var(--ui-color-gray-200)] ui:bg-white ui:max-w-sm ui:mx-auto",
       className
     )}
     {...props}

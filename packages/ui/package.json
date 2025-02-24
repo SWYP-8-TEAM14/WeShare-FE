@@ -34,6 +34,7 @@
     "./icon-button": "./src/icon-button.tsx",
     "./text-field": "./src/text-field.tsx",
     "./chip": "./src/chip.tsx",
+    "./dropdown-menu": "./src/dropdown-menu.tsx",
     "./utils": "./src/utils.ts"
   },
   "license": "MIT",
@@ -61,6 +62,7 @@
     "@radix-ui/react-alert-dialog": "^1.1.6",
     "@radix-ui/react-checkbox": "^1.1.4",
     "@radix-ui/react-dialog": "^1.1.6",
+    "@radix-ui/react-dropdown-menu": "^2.1.6",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-radio-group": "^1.2.3",
     "@radix-ui/react-slot": "^1.1.2",

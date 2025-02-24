@@ -32,12 +32,12 @@ export default function InvitePage() {
           />
           <div>
             <p className="text-heading-3">{groupData.name}</p>
-            <p className="text-body-5 text-gray-800">
+            <p className="text-body-5 text-gray-800 mt-1 line-clamp-2">
               {groupData.introduction}
             </p>
-            <span className="text-detail-2 text-gray-600">
+            <p className="text-detail-2 text-gray-600 mt-1.5">
               멤버수 {groupData.members}
-            </span>
+            </p>
           </div>
         </div>
       </div>

@@ -25,12 +25,13 @@ This Turborepo includes the following packages/apps:
 
 ### 리포지토리 구조
 
-- `docs`: a [Vite](https://nextjs.org/) app with Storybook
-- `web`: [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-- `@repo/tailwind-config`: `theme.css` used throughout the monorepo
+- `apps/docs`: a [Vite](https://nextjs.org/) app with Storybook
+- `apps/web`: [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
+- `packages/ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
+- `packages/icons`: a react icon library by svgr
+- `apps/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `apps/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `apps/tailwind-config`: `theme.css` used throughout the monorepo
 
 ### 페이지 구조
 
@@ -60,26 +61,10 @@ flowchart TB
 
 ```
 
-### 페이지 라우팅
-
-| Title                    | Path                         | Description                               |
-| ------------------------ | ---------------------------- | ----------------------------------------- |
-| 홈                       | `/`                          | 홈 페이지입니다.                          |
-| 로그인                   | `/login`                     | 로그인 페이지입니다.                      |
-| 그룹 목록                | `/groups`                    | 그룹 목록 페이지입니다.                   |
-| 그룹 상세                | `/groups/:groupId`           | 그룹 상세 페이지입니다.                   |
-| 그룹 설정                | `/groups/:groupId/settings`  | 그룹 설정 페이지입니다.                   |
-| 그룹 생성                | `/groups/create`             | 그룹 생성 페이지입니다.                   |
-| 물품 리스트              | `/items`                     | 물품 리스트 페이지입니다.                 |
-| 물품 상세                | `/items/:itemId`             | 물품 상세 페이지입니다.                   |
-| 물품 예약                | `/items/:itemId/reservation` | 물품 예약 페이지입니다.                   |
-| 예약/대여 내역           | `/records`                   | 마이페이지의 예약/대여 내역 페이지입니다. |
-| 마이페이지               | `/profile`                   | 마이페이지입니다.                         |
-| 마이페이지 - 프로필 수정 | `/profile/edit`              | 마이페이지의 프로필 수정 페이지입니다.    |
-
 ## 문제
 
-### 1. tailwindcss 적용 시 클래스 중복 문제
+<details>
+<summary>tailwindcss 적용 시 클래스 중복 문제</summary>
 
 `ui:text-detail-3 ui:text-positive`를 적용하면 뒤에 오는 클래스만 적용되는 문제
 `ui:text-positive` -> `ui:text-semantic-positive`으로 변경해보았지만 동일한 문제 발생
@@ -115,7 +100,10 @@ const twMergeConfig = {
 };
 ```
 
-### 2. 타입스크립트 문제
+</details>
+
+<details>
+<summary>타입스클비트 형식 주석 문제</summary>
 
 ```plaintext
 'BottomSheetContent'의 유추된 형식 이름을 지정하려면 '.pnpm/@radix-ui+react-dialog@1.1._79c1088916460d1027207019201b4fa5/node_modules/@radix-ui/react-dialog'에 대한 참조가 있어야 합니다. 이식하지 못할 수 있습니다. 형식 주석이 필요합니다.ts(2742)
@@ -131,3 +119,122 @@ const twMergeConfig = {
   },
 }
 ```
+
+</details>
+
+## 서버 세팅
+
+<details>
+<summary>1. Node.js 설치</summary>
+
+<https://nodejs.org/ko/download>
+
+```bash
+# nvm 설치
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+# 터미널 재시작
+
+## Node.js 설치
+nvm install 22
+
+
+# Node.js 버전 확인:
+node -v
+nvm current
+npm -v
+```
+
+</details>
+
+<details>
+<summary>2. Nginx 설치</summary>
+
+1. Nginx 설치
+
+```bash
+sudo apt update
+sudo apt install nginx
+```
+
+2. Nginx 방화벽 설정
+
+```bash
+sudo systemctl stop nginx
+sudo ufw allow 'Nginx Full'
+sudo ufw allow 'OpenSSH'
+sudo ufw enable
+```
+
+3. Nginx 설정
+
+```bash
+sudo cat /etc/nginx/sites-available/default
+```
+
+```plaintext
+server {
+  listen 80;
+  server_name _;
+  location / {
+    proxy_pass http://localhost:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade \$http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host \$host;
+    proxy_cache_bypass \$http_upgrade;
+  }
+}
+```
+
+4. Nginx 파일 링크 및 서비스 재시작
+
+```bash
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo systemctl enable nginx
+sudo systemctl restart nginx
+```
+
+</details>
+
+<details>
+<summary>3. Docker 설치</summary>
+
+<https://docs.docker.com/engine/install/ubuntu/>
+
+```bash
+# 1. 충돌 가능성이 있는 기존의 패키지들을 삭제
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+# 2. apt 리포지토리 셋업
+## 2.1 Add Docker's official GPG key:
+sudo apt update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+## 2.2 Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+# 3. Docker 설치
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+</details>
+
+<details>
+<summary>4. Docker 실행</summary>
+
+```
+sudo docker pull ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+sudo docker stop ${{ vars.IMAGE_NAME }} || true
+sudo docker rm ${{ vars.IMAGE_NAME }} || true
+sudo docker run -d -p 3000:3000 --name ${{ vars.IMAGE_NAME }} ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.IMAGE_NAME }}:latest
+```
+
+</details>

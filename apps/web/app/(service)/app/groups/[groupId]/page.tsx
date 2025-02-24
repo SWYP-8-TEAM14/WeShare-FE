@@ -1,5 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
+import { groupData } from "@/groups/data";
 import ItemList from "@/items/components/item-list";
 import { groupItems } from "@/items/data";
 import { RightChevronIcon } from "@repo/icons";
@@ -17,20 +18,6 @@ import {
 } from "@repo/ui/top-navigation";
 import Image from "next/image";
 import Link from "next/link";
-
-const groupData = {
-  id: 1,
-  name: "🎾테린이들의 테니스 모임🎾",
-  image: "https://placehold.co/200",
-  introduction:
-    "안녕하세요 클럽들어가기도 어렵고 함께 칠 사람도 없어서 만들게 되었습니다 즐겁게 테니스치실분들 환영해요👏👏 서로 코트예약 성공하면 같이 나",
-  members: 38,
-  user: {
-    isOwner: true,
-  },
-  notice:
-    "즐겁게 테니스치실분들 환영해요👏👏 서로 코트예약 성공하면 같이 나가서 테니스치실분들 모집합니당",
-};
 
 export default function GroupDetailPage() {
   return (

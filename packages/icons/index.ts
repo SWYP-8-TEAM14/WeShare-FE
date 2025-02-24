@@ -6,6 +6,7 @@ export { default as CloseIcon } from './src/icons/Close';
 export { default as DeletePhotoslotIcon } from './src/icons/DeletePhotoslot';
 export { default as DownChevronIcon } from './src/icons/DownChevron';
 export { default as EditIcon } from './src/icons/Edit';
+export { default as EtcIcon } from './src/icons/Etc';
 export { default as GroupActiveIcon } from './src/icons/GroupActive';
 export { default as GroupInactiveIcon } from './src/icons/GroupInactive';
 export { default as HomeActiveIcon } from './src/icons/HomeActive';

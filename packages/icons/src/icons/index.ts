@@ -6,6 +6,7 @@ export { default as Close } from "./Close";
 export { default as DeletePhotoslot } from "./DeletePhotoslot";
 export { default as DownChevron } from "./DownChevron";
 export { default as Edit } from "./Edit";
+export { default as Etc } from "./Etc";
 export { default as GroupActive } from "./GroupActive";
 export { default as GroupInactive } from "./GroupInactive";
 export { default as HomeActive } from "./HomeActive";

@@ -66,12 +66,12 @@ export default function MainBanners({
             건
           </p>
         </div>
-        <div className="ml-auto mr-[17px] my-[17px]">
+        <div className="ml-auto">
           <Image
             unoptimized
             src="/images/banner-3.png"
-            width={55}
-            height={49}
+            width={83}
+            height={83}
             alt="return"
           />
         </div>

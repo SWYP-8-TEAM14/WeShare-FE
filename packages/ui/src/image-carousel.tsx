@@ -1,63 +1,100 @@
 "use client";
-import { EmblaCarouselType, EmblaOptionsType } from "embla-carousel";
-import useEmblaCarousel from "embla-carousel-react";
+import { EmblaCarouselType } from "embla-carousel";
+import useEmblaCarousel, { UseEmblaCarouselType } from "embla-carousel-react";
 import * as React from "react";
 import { cn } from "./utils";
 
-type ImageCarouselProps = {
-  slides: Array<{
-    src: string;
-    alt?: string;
-  }>;
-  showDots?: boolean;
-  options?: EmblaOptionsType;
+export type CarouselApi = UseEmblaCarouselType[1];
+export type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
+export type CarouselOptions = UseCarouselParameters[0];
+export type CarouselPlugin = UseCarouselParameters[1];
+
+export type CarouselProps = {
+  options?: CarouselOptions;
+  plugins?: CarouselPlugin;
+  setApi?: (api: CarouselApi) => void;
 };
 
-export const ImageCarousel = ({
-  slides,
-  options,
-  showDots = true,
-}: ImageCarouselProps) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+export type CarouselContextProps = {
+  carouselRef: ReturnType<typeof useEmblaCarousel>[0];
+  api: ReturnType<typeof useEmblaCarousel>[1];
+} & CarouselProps;
 
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
+export const CarouselContext = React.createContext<CarouselContextProps | null>(
+  null
+);
+
+function useCarousel() {
+  const context = React.useContext(CarouselContext);
+
+  if (!context) {
+    throw new Error("useCarousel must be used within a <ImageCarousel />");
+  }
+
+  return context;
+}
+
+export const ImageCarousel = React.forwardRef<
+  React.ComponentRef<"div">,
+  React.ComponentPropsWithRef<"div"> & CarouselProps
+>(({ setApi, className, children, ...props }, ref) => {
+  const [emblaRef, api] = useEmblaCarousel(props.options);
+
+  React.useEffect(() => {
+    if (!api || !setApi) {
+      return;
+    }
+
+    setApi(api);
+  }, [api, setApi]);
+  return (
+    <CarouselContext.Provider
+      value={{
+        carouselRef: emblaRef,
+        api,
+        ...props,
+      }}
+    >
+      <div
+        className={cn("ui:relative", className)}
+        ref={ref}
+        role="region"
+        aria-roledescription="carousel"
+      >
+        {children}
+      </div>
+    </CarouselContext.Provider>
+  );
+});
+ImageCarousel.displayName = "ImageCarousel";
+
+export const ImageCarouselContent = React.forwardRef<
+  React.ComponentRef<"div">,
+  React.ComponentPropsWithRef<"div">
+>(({ className, ...props }, ref) => {
+  const { carouselRef } = useCarousel();
 
   return (
-    <section className="ui:relative">
-      <div ref={emblaRef} className="ui:overflow-hidden ui:w-full">
-        <div className="ui:flex">
-          {slides.map((slide, index) => (
-            <div
-              className="ui:grow-0 ui:shrink-0 ui:basis-full  ui:aspect-square"
-              key={index}
-            >
-              <img
-                src={slide.src}
-                alt={slide.alt}
-                className="ui:w-full ui:h-full ui:object-cover"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      {showDots && (
-        <div className="ui:absolute ui:flex ui:justify-center ui:bottom-4 ui:left-1/2 ui:transform ui:-translate-x-1/2 ui:space-x-1.5">
-          {scrollSnaps.map((_, index) => (
-            <DotButton
-              key={index}
-              onClick={() => onDotButtonClick(index)}
-              className={cn(
-                "ui:w-[7px] ui:h-[7px] ui:rounded-full",
-                index === selectedIndex ? "ui:bg-gray-800" : "ui:bg-gray-400"
-              )}
-            />
-          ))}
-        </div>
-      )}
-    </section>
+    <div ref={carouselRef} className="ui:overflow-hidden ui:w-full">
+      <div className={cn("ui:flex", className)} {...props}></div>
+    </div>
   );
-};
+});
+
+export const ImageCarouselSlide = React.forwardRef<
+  React.ComponentRef<"div">,
+  React.ComponentPropsWithRef<"div">
+>(({ className, ...props }, ref) => {
+  return (
+    <div
+      className={cn("ui:grow-0 ui:shrink-0 ui:basis-full", className)}
+      ref={ref}
+      role="group"
+      aria-roledescription="slide"
+      {...props}
+    />
+  );
+});
 
 type UseDotButtonType = {
   selectedIndex: number;
@@ -104,12 +141,35 @@ export const useDotButton = (
 
 type PropType = React.ComponentPropsWithRef<"button">;
 
-export const DotButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props;
-
+export const DotButton: React.FC<PropType> = ({ children, ...props }) => {
   return (
-    <button type="button" {...restProps}>
+    <button type="button" {...props}>
       {children}
     </button>
   );
 };
+
+export const ImageCarouselDots = React.forwardRef<
+  React.ComponentRef<"div">,
+  React.ComponentPropsWithRef<"div">
+>(({ className, ...props }, ref) => {
+  const { api } = useCarousel();
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
+  return (
+    <div
+      className={cn("ui:flex ui:justify-center ui:space-x-1.5", className)}
+      {...props}
+    >
+      {scrollSnaps.map((_, index) => (
+        <DotButton
+          key={index}
+          onClick={() => onDotButtonClick(index)}
+          className={cn(
+            "ui:w-[7px] ui:h-[7px] ui:rounded-full",
+            index === selectedIndex ? "ui:bg-gray-800" : "ui:bg-gray-400"
+          )}
+        />
+      ))}
+    </div>
+  );
+});

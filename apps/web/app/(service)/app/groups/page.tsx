@@ -1,13 +1,10 @@
 import BottomNavigation from "@/components/bottom-navigation";
 import Page from "@/components/page";
-import GroupCreateDialog from "@/groups/components/group-create-dialog";
-import { DownChevronIcon } from "@repo/icons";
-import { Checkbox } from "@repo/ui/checkbox";
 import { FixedBottom } from "@repo/ui/fixed-bottom";
-import { Label } from "@repo/ui/label";
+import { FloatingButton } from "@repo/ui/floating-button";
 import { TopNavigation, TopNavigationTitle } from "@repo/ui/top-navigation";
-import Image from "next/image";
 import Link from "next/link";
+import MyGroups from "./_components/my-groups";
 
 type GroupData = {
   id: number;
@@ -62,76 +59,28 @@ export default function GroupsPage() {
       <TopNavigation>
         <TopNavigationTitle>내 그룹</TopNavigationTitle>
       </TopNavigation>
-      <div className="flex-1 flex flex-col items-center justify-center">
-        {groupsData.length === 0 ? (
-          <div className="flex flex-col items-center">
-            <h3 className="text-heading-4 text-center">
-              아직 내 그룹이 없어요!
-            </h3>
-            <p className="text-body-5 text-gray-800 text-center  mt-2">
-              그룹을 만들어 멤버들과 함께 공용 물품을 관리해보세요!
-            </p>
-            <button className="mt-8 rounded-full px-2.5 py-[13px] border border-black/10 bg-white w-[130px] text-body-3 text-gray-700">
-              그룹 생성하기
-            </button>
-          </div>
-        ) : (
-          <>
-            <div className="h-15 flex items-center justify-between w-full">
-              <Label
-                className="text-gray-700 flex items-center gap-2 ml-4.5"
-                size="sm"
-              >
-                <Checkbox size="sm" />
-                내가 만든 그룹만 보기
-              </Label>
-              <div className="mr-2.5">
-                <label htmlFor="group-sort" className="relative"></label>
-                <div className="relative">
-                  <select
-                    name="group-sort"
-                    id="group-sort"
-                    className="appearance-none text-body-6 font-semibold text-gray-700 text-right px-8 py-4"
-                  >
-                    <option value="default">기본순</option>
-                    <option value="most_member">멤버 많은 순</option>
-                  </select>
-                  <DownChevronIcon className="size-4 text-gray-700 absolute top-1/2 right-3 -translate-y-1/2 pointer-events-none" />
-                </div>
-              </div>
-            </div>
-            <div className="w-full flex-1 bg-white pt-3">
-              {groupsData.map((group, index) => (
-                <Link
-                  key={group.id}
-                  href={`/app/groups/${group.id}`}
-                  className="flex gap-2 justify-between px-4.5 py-2"
-                >
-                  <Image
-                    unoptimized
-                    src={group.image}
-                    width={74}
-                    height={74}
-                    alt="group"
-                    className="rounded-sm"
-                  />
-                  <div className="flex-1">
-                    <p className="text-heading-3 line-clamp-1">{group.name}</p>
-                    <p className="text-body-5 text-gray-800 line-clamp-1 mt-1">
-                      {group.introduction}
-                    </p>
-                    <span className="text-detail-2 text-gray-600 mt-1.5">
-                      멤버수 {group.members}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+      <MyGroups groups={groupsData} />
       <FixedBottom>
-        <GroupCreateDialog />
+        <FloatingButton asChild>
+          <Link href={`/app/groups/new`}>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="icn/plus">
+                <path
+                  id="Union"
+                  d="M7 1.75C6.59729 1.75 6.27083 2.07646 6.27083 2.47917V6.27079L2.47917 6.27079C2.07646 6.27079 1.75 6.59725 1.75 6.99996C1.75 7.40267 2.07646 7.72913 2.47917 7.72913H6.27083V11.5208C6.27083 11.9235 6.59729 12.25 7 12.25C7.40271 12.25 7.72917 11.9235 7.72917 11.5208V7.72913H11.5208C11.9235 7.72913 12.25 7.40267 12.25 6.99996C12.25 6.59725 11.9235 6.27079 11.5208 6.27079H7.72917V2.47917C7.72917 2.07646 7.40271 1.75 7 1.75Z"
+                  fill="currentColor"
+                />
+              </g>
+            </svg>
+            그룹 추가하기
+          </Link>
+        </FloatingButton>
         <BottomNavigation currentTab="groups" />
       </FixedBottom>
     </Page>

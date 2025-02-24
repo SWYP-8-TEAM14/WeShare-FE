@@ -1,5 +1,5 @@
 import { availableReservationTimeSlots } from "@/reservations/data";
-import { BackChevronIcon } from "@repo/icons";
+import { CloseIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
 import {
@@ -14,6 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/tabs";
 import {
   TopNavigation,
   TopNavigationLeft,
+  TopNavigationRight,
   TopNavigationTitle,
 } from "@repo/ui/top-navigation";
 import React from "react";
@@ -28,16 +29,17 @@ export default function SelectReservationTimeDialog({
       <FullScreenDialogTrigger asChild>{children}</FullScreenDialogTrigger>
       <FullScreenDialogContent>
         <TopNavigation>
-          <TopNavigationLeft>
-            <FullScreenDialogClose asChild>
-              <IconButton>
-                <BackChevronIcon />
-              </IconButton>
-            </FullScreenDialogClose>
-          </TopNavigationLeft>
+          <TopNavigationLeft></TopNavigationLeft>
           <TopNavigationTitle>
             <FullScreenDialogTitle>대여/반납 시각</FullScreenDialogTitle>
           </TopNavigationTitle>
+          <TopNavigationRight>
+            <FullScreenDialogClose asChild>
+              <IconButton>
+                <CloseIcon />
+              </IconButton>
+            </FullScreenDialogClose>
+          </TopNavigationRight>
         </TopNavigation>
         <Tabs defaultValue="start-time">
           <TabsList>

@@ -28,7 +28,7 @@ export default function ProfilePage() {
           <p className="text-body-4 text-gray-600 mt-1.5">{profile.fullName}</p>
         </div>
         <Button size="small" variant="tertiary" asChild>
-          <Link href="/app/profile/edit">편집</Link>
+          <Link href="/app/profile/info">편집</Link>
         </Button>
       </div>
       <div className="mt-2 bg-white divide-gray-200 divide-y">

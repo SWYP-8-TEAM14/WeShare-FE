@@ -11,18 +11,18 @@ import {
   TopNavigationTitle,
 } from "@repo/ui/top-navigation";
 
-export default function GroupInfoManagePage() {
+export default function GroupCreatePage() {
   return (
     <Page>
       <TopNavigation>
         <TopNavigationLeft>
           <RouterBackButton />
         </TopNavigationLeft>
-        <TopNavigationTitle>그룹 정보 수정</TopNavigationTitle>
+        <TopNavigationTitle>그룹 생성</TopNavigationTitle>
       </TopNavigation>
       <div className="flex-1 bg-white">
         {/* 그룹 이미지 입력 */}
-        <div className="py-6.5 flex flex-col items-center">
+        <div className="py-6.5 flex justify-center">
           <label className="relative inline-flex">
             <span className="sr-only">그룹 이미지</span>
             <img
@@ -35,8 +35,6 @@ export default function GroupInfoManagePage() {
             </div>
             <input type="file" className="hidden" accept="image/*" />
           </label>
-          <p className="mt-3 text-heading-2">그룹 이름</p>
-          <p className="text-body-4 text-gray-600 mt-1.5">멤버수 10</p>
         </div>
         {/* 그룹 정보 입력 */}
         <div className="py-6.5 px-4.5 flex flex-col gap-7.5">
@@ -51,7 +49,7 @@ export default function GroupInfoManagePage() {
       <FixedBottom>
         <FixedBottomActions>
           <Button fullWidth size="large" variant="secondary">
-            저장하기
+            그룹 생성하기
           </Button>
         </FixedBottomActions>
       </FixedBottom>

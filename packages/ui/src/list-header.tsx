@@ -37,12 +37,12 @@ const listHeaderTitleStyles = tv({
 });
 
 export const ListHeaderTitle = React.forwardRef<
-  React.ComponentRef<"div">,
-  React.ComponentPropsWithoutRef<"div"> &
+  React.ComponentRef<"h2">,
+  React.ComponentPropsWithoutRef<"h2"> &
     VariantProps<typeof listHeaderTitleStyles>
 >(function ListHeaderTitle({ className, size, ...props }, ref) {
   return (
-    <div
+    <h2
       ref={ref}
       className={cn(listHeaderTitleStyles({ className, size }))}
       {...props}

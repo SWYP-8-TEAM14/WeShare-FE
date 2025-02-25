@@ -22,14 +22,22 @@ export const TextField = React.forwardRef<
       endContent,
       description,
       errorMessage,
+      onChange,
       ...props
     },
     ref
   ) => {
     const id = React.useId();
-    const [value, setValue] = React.useState(props.value || "");
+    const innerRef = React.useRef<HTMLInputElement>(null);
+    const [length, setLength] = React.useState(0);
 
-    const valueLength = typeof value === "string" ? value.length : 0;
+    React.useImperativeHandle(ref, () => innerRef.current!);
+
+    React.useEffect(() => {
+      if (innerRef.current?.value) {
+        setLength(innerRef.current.value.length);
+      }
+    });
 
     return (
       <div className="ui:flex ui:flex-col ui:gap-2 ui:w-full">
@@ -38,15 +46,17 @@ export const TextField = React.forwardRef<
             {label}
           </label>
           {maxLength && (
-            <InputLength maxLength={maxLength} currentLength={valueLength} />
+            <InputLength maxLength={maxLength} currentLength={length} />
           )}
         </div>
         <div className="ui:flex ui:items-center ui:gap-2.5">
           <Input
             id={"input-" + id}
-            ref={ref}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
+            ref={innerRef}
+            onChange={(e) => {
+              onChange?.(e);
+              setLength(e.target.value.length);
+            }}
             {...props}
           />
           {endContent}

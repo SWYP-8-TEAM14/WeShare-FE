@@ -38,13 +38,23 @@ export const Textarea = React.forwardRef<
       description,
       errorMessage,
       maxLength,
+      onChange,
       ...props
     },
     ref
   ) => {
     const id = React.useId();
-    const [value, setValue] = React.useState(props.value || "");
-    const valueLength = typeof value === "string" ? value.length : 0;
+    const innerRef = React.useRef<HTMLTextAreaElement>(null);
+    const [length, setLength] = React.useState(0);
+
+    React.useImperativeHandle(ref, () => innerRef.current!);
+
+    React.useEffect(() => {
+      if (innerRef.current?.value) {
+        setLength(innerRef.current.value.length);
+      }
+    });
+
     return (
       <div className="ui:flex ui:flex-col ui:gap-2 ui:w-full">
         <div className="ui:flex ui:flex-row ui:justify-between ui:gap-2">
@@ -52,14 +62,16 @@ export const Textarea = React.forwardRef<
             {label}
           </label>
           {maxLength && (
-            <InputLength maxLength={maxLength} currentLength={valueLength} />
+            <InputLength maxLength={maxLength} currentLength={length} />
           )}
         </div>
         <textarea
           id={"textarea-" + id}
           ref={ref}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => {
+            onChange?.(e);
+            setLength(e.target.value.length);
+          }}
           className={cn(textareaStyles({ className, resize }))}
           {...props}
         />

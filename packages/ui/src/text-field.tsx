@@ -53,6 +53,7 @@ export const TextField = React.forwardRef<
           <Input
             id={"input-" + id}
             ref={innerRef}
+            className={className}
             onChange={(e) => {
               onChange?.(e);
               setLength(e.target.value.length);

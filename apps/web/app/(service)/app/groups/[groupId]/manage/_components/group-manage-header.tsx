@@ -12,7 +12,6 @@ interface GroupManageHeaderProps {
     user: {
       isOwner: boolean;
     };
-    notice: string;
   };
 }
 

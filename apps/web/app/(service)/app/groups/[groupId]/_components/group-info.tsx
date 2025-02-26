@@ -9,7 +9,6 @@ interface GroupInfoProps {
     image: string;
     introduction: string;
     members: number;
-    notice: string;
   };
   viewerIsOwner?: boolean;
 }
@@ -42,10 +41,6 @@ export default function GroupInfo({
       <hr className="my-3.5 h-px bg-gray-200 border-none" />
 
       <p className="text-body-2 text-gray-800">{group.introduction}</p>
-      <div className="mt-4 text-gray-800 rounded-sm bg-gray-100 py-4 px-4.5">
-        <p className="text-heading-5">대여시 주의사항</p>
-        <p className="mt-2 text-body-5">{group.notice}</p>
-      </div>
       {viewerIsOwner && (
         <div className="mt-5 flex gap-2">
           <Button variant="tertiary" fullWidth>

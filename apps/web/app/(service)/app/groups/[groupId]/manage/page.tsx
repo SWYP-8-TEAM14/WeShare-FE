@@ -30,8 +30,6 @@ const groupManageData = {
   user: {
     isOwner: true,
   },
-  notice:
-    "즐겁게 테니스치실분들 환영해요👏👏 서로 코트예약 성공하면 같이 나가서 테니스치실분들 모집합니당",
 };
 
 export default function GroupManagePage() {

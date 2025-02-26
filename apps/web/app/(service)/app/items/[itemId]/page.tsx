@@ -1,16 +1,15 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
 import { itemDetail } from "@/domains/item/mocks";
-import { RightChevronIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
-import { IconButton } from "@repo/ui/icon-button";
-import { ImageCarousel } from "@repo/ui/image-carousel";
 import {
-  ListHeader,
-  ListHeaderAction,
-  ListHeaderTitle,
-} from "@repo/ui/list-header";
+  ImageCarousel,
+  ImageCarouselContent,
+  ImageCarouselDots,
+  ImageCarouselSlide,
+} from "@repo/ui/image-carousel";
+import { ListHeader, ListHeaderTitle } from "@repo/ui/list-header";
 import {
   TopNavigation,
   TopNavigationLeft,
@@ -28,12 +27,16 @@ export default function ItemDetailPage() {
         </TopNavigationLeft>
         <TopNavigationTitle>뽀로로 코딩 컴퓨터</TopNavigationTitle>
       </TopNavigation>
-      <ImageCarousel
-        slides={itemDetail.images.map((image) => ({
-          src: image,
-          alt: itemDetail.itemName,
-        }))}
-      />
+      <ImageCarousel className=" aspect-square">
+        <ImageCarouselContent>
+          {itemDetail.images.map((image, index) => (
+            <ImageCarouselSlide key={index}>
+              <img src={image} width={600} height={600} />
+            </ImageCarouselSlide>
+          ))}
+        </ImageCarouselContent>
+        <ImageCarouselDots className="absolute bottom-4 left-1/2 transform -translate-x-1/2" />
+      </ImageCarousel>
       <div className="bg-white">
         <div className="py-4.5 mx-4.5 flex items-center justify-between border-b border-gray-200">
           <div>
@@ -57,7 +60,7 @@ export default function ItemDetailPage() {
         </div>
       </div>
       <div className="px-4.5 pb-7 bg-white">
-        <div className="p-4 rounded-sm bg-gray-100 grid grid-cols-2 gap-2">
+        <div className="p-4 rounded-sm bg-gray-100 flex flex-col gap-2">
           <div>
             <span className="text-body-6 text-gray-600">픽업 장소</span>
             <p className="text-heading-2 mt-1.5">{itemDetail.pickupLocation}</p>
@@ -71,11 +74,6 @@ export default function ItemDetailPage() {
       <section className="mt-2 pt-7 bg-white">
         <ListHeader>
           <ListHeaderTitle>이전 대여 멤버</ListHeaderTitle>
-          <ListHeaderAction>
-            <IconButton>
-              <RightChevronIcon />
-            </IconButton>
-          </ListHeaderAction>
         </ListHeader>
 
         <div className="mt-3">

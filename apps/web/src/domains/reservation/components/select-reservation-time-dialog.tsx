@@ -41,13 +41,14 @@ export default function SelectReservationTimeDialog({
             </FullScreenDialogClose>
           </TopNavigationRight>
         </TopNavigation>
-        <Tabs defaultValue="start-time">
+        <Tabs defaultValue="start-time" className="flex-1 flex flex-col">
           <TabsList>
             <TabsTrigger value="start-time">대여</TabsTrigger>
             <TabsTrigger value="end-time">반납</TabsTrigger>
           </TabsList>
-          <TabsContent value="start-time">
-            <div className="mt-6.5 flex flex-col gap-6.5">
+          <TabsContent value="start-time" className="overflow-y-auto flex-1">
+            <div className="h-0">
+              <div className="flex flex-col gap-6.5 py-6.5">
               {/* 날짜 선택 */}
               <div>
                 <span className="text-heading-5 mx-4.5">날짜</span>

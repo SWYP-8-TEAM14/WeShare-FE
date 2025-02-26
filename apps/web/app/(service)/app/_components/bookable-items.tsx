@@ -1,5 +1,5 @@
-import ItemList from "@/items/components/item-list";
-import { bookableItems } from "@/items/data";
+import ItemList from "@/domains/item/components/item-list";
+import { bookableItems } from "@/domains/item/mocks";
 
 interface BookableItemsProps {
   items: {

@@ -1,4 +1,4 @@
-import ItemList from "@/items/components/item-list";
+import ItemList from "@/domains/item/components/item-list";
 
 interface GroupItemsPreviewProps {
   groupItems: {

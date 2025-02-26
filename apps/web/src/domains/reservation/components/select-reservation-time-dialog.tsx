@@ -1,4 +1,4 @@
-import { availableReservationTimeSlots } from "@/reservations/data";
+import { availableReservationTimeSlots } from "@/domains/reservation/mocks";
 import { CloseIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";

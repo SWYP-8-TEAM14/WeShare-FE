@@ -1,6 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { profile } from "@/users/data";
+import { profile } from "@/domains/user/data";
 import { EditIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";

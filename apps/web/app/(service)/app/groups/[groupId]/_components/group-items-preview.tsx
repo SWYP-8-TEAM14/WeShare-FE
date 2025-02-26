@@ -1,4 +1,4 @@
-import ItemList from "@/items/components/item-list";
+import ItemList from "@/domains/item/components/item-list";
 import { RightChevronIcon } from "@repo/icons";
 import { IconButton } from "@repo/ui/icon-button";
 import {

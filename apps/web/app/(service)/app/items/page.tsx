@@ -1,8 +1,8 @@
 import BottomNavigation from "@/components/bottom-navigation";
 import Page from "@/components/page";
-import { groupsData } from "@/groups/data";
-import ItemList from "@/items/components/item-list";
-import { groupItems } from "@/items/data";
+import { groupsData } from "@/domains/group/mocks";
+import ItemList from "@/domains/item/components/item-list";
+import { groupItems } from "@/domains/item/mocks";
 import { DownChevronIcon } from "@repo/icons";
 import { Chip } from "@repo/ui/chip";
 import { Search } from "@repo/ui/search";

@@ -1,7 +1,7 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { itemDetail } from "@/items/data";
-import SelectReservationTimeDialog from "@/reservations/components/select-reservation-time-dialog";
+import { itemDetail } from "@/domains/item/mocks";
+import SelectReservationTimeDialog from "@/domains/reservation/components/select-reservation-time-dialog";
 import { RightChevronIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";

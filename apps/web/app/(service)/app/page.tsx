@@ -1,6 +1,6 @@
 import BottomNavigation from "@/components/bottom-navigation";
 import Page from "@/components/page";
-import { bookableItems } from "@/items/data";
+import { bookableItems } from "@/domains/item/mocks";
 import BookableItems from "./_components/bookable-items";
 import Header from "./_components/header";
 import MainBanners from "./_components/main-banners";

@@ -1,6 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { groupData } from "@/groups/data";
+import { groupData } from "@/domains/group/mocks";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
 import {

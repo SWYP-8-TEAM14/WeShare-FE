@@ -1,6 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { itemsOfGroup } from "@/items/data";
+import { itemsOfGroup } from "@/domains/item/mocks";
 import { Checkbox } from "@repo/ui/checkbox";
 import { FixedBottom } from "@repo/ui/fixed-bottom";
 import { FloatingButton } from "@repo/ui/floating-button";

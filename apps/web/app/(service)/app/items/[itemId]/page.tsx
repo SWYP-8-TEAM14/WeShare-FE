@@ -1,6 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { itemDetail } from "@/items/data";
+import { itemDetail } from "@/domains/item/mocks";
 import { RightChevronIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";

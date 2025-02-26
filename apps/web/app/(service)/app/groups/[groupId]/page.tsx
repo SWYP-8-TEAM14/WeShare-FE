@@ -1,7 +1,7 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { groupData } from "@/groups/data";
-import { groupItems } from "@/items/data";
+import { groupData } from "@/domains/group/mocks";
+import { groupItems } from "@/domains/item/mocks";
 import { EtcIcon } from "@repo/icons";
 import { IconButton } from "@repo/ui/icon-button";
 import {

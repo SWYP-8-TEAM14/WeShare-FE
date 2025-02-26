@@ -1,6 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { membersData } from "@/groups/data";
+import { membersData } from "@/domains/group/mocks";
 import { Checkbox } from "@repo/ui/checkbox";
 import { Label } from "@repo/ui/label";
 import {

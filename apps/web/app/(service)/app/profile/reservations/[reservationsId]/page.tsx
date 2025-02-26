@@ -1,6 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { reservationDetail } from "@/reservations/data";
+import { reservationDetail } from "@/domains/reservation/mocks";
 import {
   TopNavigation,
   TopNavigationLeft,

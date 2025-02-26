@@ -1,6 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { reservationHistory } from "@/reservations/data";
+import { reservationHistory } from "@/domains/reservation/mocks";
 import { DownChevronIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@repo/ui/tabs";

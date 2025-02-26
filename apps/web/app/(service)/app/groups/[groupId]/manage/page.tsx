@@ -1,7 +1,7 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { membersData } from "@/groups/data";
-import { groupItems } from "@/items/data";
+import { membersData } from "@/domains/group/mocks";
+import { groupItems } from "@/domains/item/mocks";
 import { RightChevronIcon } from "@repo/icons";
 import { IconButton } from "@repo/ui/icon-button";
 import {

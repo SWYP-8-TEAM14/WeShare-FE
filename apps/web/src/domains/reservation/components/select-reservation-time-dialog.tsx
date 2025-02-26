@@ -60,9 +60,12 @@ export default function SelectReservationTimeDialog({
                       <label className="flex flex-col items-center gap-0.5">
                         {/* 요일을 한글로 표시 ex.목, 금, 토 */}
                         <span className="text-body-4 text-gray-700">
-                          {new Date(timeSlot.date).toLocaleDateString("ko-KR", {
+                            {new Date(timeSlot.date).toLocaleDateString(
+                              "ko-KR",
+                              {
                             weekday: "short",
-                          })}
+                              }
+                            )}
                         </span>
                         {/* 날짜를 MM/DD 형식으로 표시 */}
                         <span className="text-body-3 text-gray-800">

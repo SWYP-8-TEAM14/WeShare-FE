@@ -43,7 +43,7 @@ export default function ItemReservePage() {
         </div>
       </div>
       <div className="px-4.5 pb-7 bg-white">
-        <div className="p-4 rounded-sm bg-gray-100 grid grid-cols-2 gap-2">
+        <div className="p-4 rounded-sm bg-gray-100 flex flex-col gap-2">
           <div>
             <span className="text-body-6 text-gray-600">픽업 장소</span>
             <p className="text-heading-2 mt-1.5 text-gray-800">

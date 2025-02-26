@@ -5,14 +5,17 @@ export const TopNavigation = React.forwardRef<
   React.ComponentRef<"nav">,
   React.ComponentPropsWithoutRef<"nav">
 >(({ className, ...props }, ref) => (
-  <nav
-    ref={ref}
-    className={cn(
-      "ui:relative ui:flex ui:h-12.5 ui:py-2 ui:px-4.5 ui:shadow-[0_1px_0_var(--ui-color-gray-200)] ui:bg-white ui:items-center",
-      className
-    )}
-    {...props}
-  />
+  <>
+    <nav
+      ref={ref}
+      className={cn(
+        "ui:fixed ui:max-w-sm ui:w-full ui:flex ui:h-12.5 ui:py-2 ui:px-4.5 ui:shadow-[0_1px_0_var(--ui-color-gray-200)] ui:bg-white ui:items-center",
+        className
+      )}
+      {...props}
+    />
+    <div className="ui:h-12.5" />
+  </>
 ));
 
 export const TopNavigationTitle = React.forwardRef<

@@ -8,6 +8,9 @@ export class ItemService {
       name: string;
       description: string;
       quantity: number;
+      pickupLocation: string;
+      returnLocation: string;
+      caution: string;
     }
   ) {
     const response = await ItemRepository.createItem(groupId, data);

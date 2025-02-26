@@ -8,6 +8,9 @@ export class ItemRepository {
       name: string;
       description: string;
       quantity: number;
+      pickupLocation: string;
+      returnLocation: string;
+      caution: string;
     }
   ) {
     const formData = new FormData();
@@ -16,6 +19,10 @@ export class ItemRepository {
     data.images.forEach((image) => {
       formData.append("images", image);
     });
+    formData.append("quantity", data.quantity.toString());
+    formData.append("pickupLocation", data.pickupLocation);
+    formData.append("returnLocation", data.returnLocation);
+    formData.append("caution", data.caution);
 
     const response = await httpClient.post(`groups/${groupId}/items`, {
       json: formData,

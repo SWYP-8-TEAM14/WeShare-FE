@@ -11,6 +11,9 @@ export const useCreateItem = () => {
       name: string;
       description: string;
       quantity: number;
+      pickupLocation: string;
+      returnLocation: string;
+      caution: string;
     }) => ItemService.createItem(data.groupId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({

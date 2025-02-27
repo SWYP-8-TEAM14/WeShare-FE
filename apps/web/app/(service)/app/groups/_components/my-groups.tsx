@@ -1,27 +1,42 @@
-import { DownChevronIcon } from "@repo/icons";
-import { Checkbox } from "@repo/ui/checkbox";
-import { Label } from "@repo/ui/label";
+"use client";
+import BottomNavigation from "@/components/bottom-navigation";
+import { useFetchGroups } from "@/domains/group/hooks/use-fetch-groups";
+import { FixedBottom } from "@repo/ui/fixed-bottom";
+import { FloatingButton } from "@repo/ui/floating-button";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import GroupList from "./group-list";
+import GroupsControls from "./groups-controls";
 
 interface MyGroupsProps {
-  groups: {
-    id: number;
-    name: string;
-    image: string;
-    introduction: string;
-    members: number;
-    user: {
-      isOwner: boolean;
-    };
-  }[];
+  filter: "all" | "own";
+  sort: "default" | "many-members";
 }
 
-export default function MyGroups({ groups }: MyGroupsProps) {
-  return (
-    <div className="flex-1 flex flex-col items-center justify-center">
-      <h1 className="sr-only">내 그룹</h1>
-      {groups.length === 0 ? (
+export default function MyGroups({ filter, sort }: MyGroupsProps) {
+  const { ref, inView } = useInView();
+  const {
+    status,
+    data,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useFetchGroups({ filter, sort });
+  const allGroups = data?.pages.flatMap((page) => page);
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
+  if (allGroups.length === 0) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center">
+        <h1 className="sr-only">내 그룹</h1>
         <div className="flex flex-col items-center">
           <Image
             unoptimized
@@ -42,60 +57,29 @@ export default function MyGroups({ groups }: MyGroupsProps) {
             그룹 생성하기
           </button>
         </div>
-      ) : (
-        <>
-          <div className="h-15 flex items-center justify-between w-full">
-            <Label
-              className="text-gray-700 flex items-center gap-2 ml-4.5"
-              size="sm"
-            >
-              <Checkbox size="sm" />
-              내가 만든 그룹만 보기
-            </Label>
-            <div className="mr-2.5">
-              <label htmlFor="group-sort" className="relative"></label>
-              <div className="relative">
-                <select
-                  name="group-sort"
-                  id="group-sort"
-                  className="appearance-none text-body-6 font-semibold text-gray-700 text-right px-8 py-4"
-                >
-                  <option value="default">기본순</option>
-                  <option value="most_member">멤버 많은 순</option>
-                </select>
-                <DownChevronIcon className="size-4 text-gray-700 absolute top-1/2 right-3 -translate-y-1/2 pointer-events-none" />
-              </div>
-            </div>
+      </div>
+    );
+  } else {
+    return (
+      <>
+        <div className="flex-1 flex flex-col items-center justify-center">
+          <h1 className="sr-only">내 그룹</h1>
+          <GroupsControls filter={filter} sort={sort} />
+          <GroupList groups={allGroups} />
+          <div ref={ref} className="flex justify-center w-full">
+            {isFetchingNextPage && <div>로딩중...</div>}
+            {hasNextPage && !isFetchingNextPage && (
+              <button onClick={() => fetchNextPage()}>더보기</button>
+            )}
           </div>
-          <div className="w-full flex-1 bg-white pt-3">
-            {groups.map((group, index) => (
-              <Link
-                key={group.id}
-                href={`/app/groups/${group.id}`}
-                className="flex gap-2 justify-between px-4.5 py-2"
-              >
-                <Image
-                  unoptimized
-                  src={group.image}
-                  width={74}
-                  height={74}
-                  alt="group"
-                  className="rounded-sm"
-                />
-                <div className="flex-1">
-                  <p className="text-heading-3 line-clamp-1">{group.name}</p>
-                  <p className="text-body-5 text-gray-800 line-clamp-1 mt-1">
-                    {group.introduction}
-                  </p>
-                  <span className="text-detail-2 text-gray-600 mt-1.5">
-                    멤버수 {group.members}
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  );
+        </div>
+        <FixedBottom>
+          <FloatingButton asChild>
+            <Link href={`/app/groups/new`}>그룹 추가하기</Link>
+          </FloatingButton>
+          <BottomNavigation currentTab="groups" />
+        </FixedBottom>
+      </>
+    );
+  }
 }

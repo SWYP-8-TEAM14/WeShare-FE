@@ -73,7 +73,7 @@ const BottomSheetHeader = ({
 }: React.ComponentPropsWithoutRef<"div">) => (
   <div
     className={cn(
-      "ui:grid ui:gap-1.5 ui:px-4.5 ui:pt-4 ui:pb-2.5 ui:text-center",
+      "ui:flex ui:justify-between ui:items-center ui:gap-1.5 ui:px-4.5 ui:pt-4 ui:pb-2.5 ui:text-center",
       className
     )}
     {...props}

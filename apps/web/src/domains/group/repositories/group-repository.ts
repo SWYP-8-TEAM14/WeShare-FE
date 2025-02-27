@@ -15,6 +15,30 @@ export class GroupRepository {
     return response;
   }
 
+  static async updateGroup({
+    groupId,
+    data,
+  }: {
+    groupId: number;
+    data: {
+      image: File;
+      name: string;
+      description: string;
+    };
+  }) {
+    const formData = new FormData();
+    formData.append("image", data.image);
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+
+    const response = await httpClient
+      .patch(`groups/${groupId}`, {
+        body: formData,
+      })
+      .json();
+    return response;
+  }
+
   static async fetchGroups({
     filter,
     sort,

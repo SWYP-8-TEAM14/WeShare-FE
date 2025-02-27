@@ -10,6 +10,21 @@ export class GroupService {
     return response;
   }
 
+  static async updateGroup({
+    groupId,
+    data,
+  }: {
+    groupId: number;
+    data: {
+      image: File;
+      name: string;
+      description: string;
+    };
+  }) {
+    const response = await GroupRepository.updateGroup({ groupId, data });
+    return response;
+  }
+
   static async fetchGroups({
     filter,
     sort,

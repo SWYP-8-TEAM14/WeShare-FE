@@ -39,6 +39,23 @@ export class GroupRepository {
     return response;
   }
 
+  static async deleteMembersFromGroup({
+    groupId,
+    userIds,
+  }: {
+    groupId: number;
+    userIds: number[];
+  }) {
+    const response = await httpClient
+      .delete(`groups/${groupId}/members`, {
+        json: {
+          userIds,
+        },
+      })
+      .json();
+    return response;
+  }
+
   static async fetchGroups({
     filter,
     sort,

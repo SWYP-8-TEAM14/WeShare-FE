@@ -16,3 +16,9 @@ export const groupMembersSchema = z.object({
 });
 
 export type GroupMembersSchema = z.infer<typeof groupMembersSchema>;
+
+export const groupItemsSchema = z.object({
+  itemIds: z.array(z.number()),
+});
+
+export type GroupItemsSchema = z.infer<typeof groupItemsSchema>;

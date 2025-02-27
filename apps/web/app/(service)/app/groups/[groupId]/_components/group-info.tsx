@@ -1,6 +1,7 @@
 import { Button } from "@repo/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import GroupInviteButton from "./group-invite-button";
 
 interface GroupInfoProps {
   group: {
@@ -43,9 +44,7 @@ export default function GroupInfo({
       <p className="text-body-2 text-gray-800">{group.introduction}</p>
       {viewerIsOwner && (
         <div className="mt-5 flex gap-2">
-          <Button variant="tertiary" fullWidth>
-            멤버 초대하기
-          </Button>
+          <GroupInviteButton />
 
           <Button variant="secondary" fullWidth asChild>
             <Link href={`/app/groups/${group.id}/manage`}>그룹 관리</Link>

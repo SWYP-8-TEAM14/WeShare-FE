@@ -1,7 +1,7 @@
 import { GroupService } from "@/domains/group/services/group-service";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const useUpdateGroupMembers = () => {
+export const useBatchUpdateGroupMembers = () => {
   const queryClient = useQueryClient();
 
   return useMutation({

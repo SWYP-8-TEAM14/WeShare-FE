@@ -1,7 +1,7 @@
 "use client";
 import RouterBackButton from "@/components/router-back-button";
+import { useBatchUpdateGroupMembers } from "@/domains/group/hooks/use-batch-update-group-members";
 import { useGroupMembersForm } from "@/domains/group/hooks/use-group-members-form";
-import { useUpdateGroupMembers } from "@/domains/group/hooks/use-update-group-members";
 import { membersData } from "@/domains/group/mocks";
 import { Checkbox } from "@repo/ui/checkbox";
 import { Label } from "@repo/ui/label";
@@ -15,7 +15,7 @@ import Image from "next/image";
 import GroupMembersDeleteButton from "./group-members-delete-button";
 
 export default function GroupMembersForm() {
-  const updateGroupMembers = useUpdateGroupMembers();
+  const updateGroupMembers = useBatchUpdateGroupMembers();
   const groupMembersForm = useGroupMembersForm({
     defaultValues: {
       userIds: [],

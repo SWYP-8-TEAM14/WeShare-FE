@@ -4,7 +4,7 @@ import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import * as React from "react";
 
 import { focusVisibleRing } from "./rings";
-import { cn } from "./utils";
+import { cn, tv } from "./utils";
 
 const AlertDialog = AlertDialogPrimitive.Root;
 
@@ -97,16 +97,18 @@ const AlertDialogDescription = React.forwardRef<
 AlertDialogDescription.displayName =
   AlertDialogPrimitive.Description.displayName;
 
+export const alertDialogActionStyles = tv({
+  extend: focusVisibleRing,
+  base: "ui:text-body-4 ui:text-semantic-warning ui:py-4 ui:cursor-pointer",
+});
+
 const AlertDialogAction = React.forwardRef<
   React.ComponentRef<typeof AlertDialogPrimitive.Action>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>
 >(({ className, ...props }, ref) => (
   <AlertDialogPrimitive.Action
     ref={ref}
-    className={cn(
-      focusVisibleRing({ className }),
-      "ui:text-body-4 ui:text-semantic-warning ui:py-4 ui:cursor-pointer"
-    )}
+    className={cn(alertDialogActionStyles({ className }))}
     {...props}
   />
 ));

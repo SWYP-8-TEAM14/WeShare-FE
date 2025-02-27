@@ -1,3 +1,4 @@
+import { CloseIcon } from "@repo/icons";
 import {
   BottomSheet,
   BottomSheetClose,
@@ -9,6 +10,7 @@ import {
   BottomSheetTitle,
   BottomSheetTrigger,
 } from "@repo/ui/bottom-sheet";
+import { IconButton } from "@repo/ui/icon-button";
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 
@@ -31,7 +33,9 @@ export const Default: Story = {
       <BottomSheetContent>
         <BottomSheetHeader>
           <BottomSheetTitle>제목</BottomSheetTitle>
-          <BottomSheetDescription>설명입니다.</BottomSheetDescription>
+          <BottomSheetDescription className="sr-only">
+            설명입니다.
+          </BottomSheetDescription>
         </BottomSheetHeader>
         <BottomSheetFooter>
           <button>제출하기</button>
@@ -52,7 +56,9 @@ export const WithHandle: Story = {
         <BottomSheetHandle />
         <BottomSheetHeader>
           <BottomSheetTitle>제목</BottomSheetTitle>
-          <BottomSheetDescription>설명입니다.</BottomSheetDescription>
+          <BottomSheetDescription className="sr-only">
+            설명입니다.
+          </BottomSheetDescription>
         </BottomSheetHeader>
         <BottomSheetFooter>
           <button>제출하기</button>
@@ -73,9 +79,10 @@ const NonDismissibleRender = () => {
       <BottomSheet dismissible={false} open={open} onOpenChange={setOpen}>
         <BottomSheetContent>
           <BottomSheetHeader>
-            <button onClick={() => setOpen(false)}>여기를 눌러 닫으세요</button>
             <BottomSheetTitle>제목</BottomSheetTitle>
-            <BottomSheetDescription>설명입니다.</BottomSheetDescription>
+            <IconButton onClick={() => setOpen(false)}>
+              <CloseIcon />
+            </IconButton>
           </BottomSheetHeader>
           <BottomSheetFooter>
             <button>제출하기</button>

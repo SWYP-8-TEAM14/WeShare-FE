@@ -1,4 +1,5 @@
 "use client";
+import ImageInput from "@/components/image-input";
 import { useCreateGroup } from "@/domains/group/hooks/use-create-group";
 import { useGroupForm } from "@/domains/group/hooks/use-group-form";
 import useFilePreview from "@/hooks/use-file-preview";
@@ -7,7 +8,7 @@ import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
 import { TextField } from "@repo/ui/text-field";
 import { Textarea } from "@repo/ui/textarea";
-import React, { forwardRef, useId } from "react";
+import { useId } from "react";
 import { Controller } from "react-hook-form";
 
 export default function CreateGroupForm() {
@@ -57,7 +58,7 @@ export default function CreateGroupForm() {
         <div className="py-6.5 px-4.5 flex flex-col gap-7.5">
           <TextField
             maxLength={20}
-            label="그룹 이름"
+            label="그룹이름"
             placeholder="그룹 이름을 입력해주세요"
             {...groupForm.register("name")}
           />
@@ -85,33 +86,3 @@ export default function CreateGroupForm() {
     </>
   );
 }
-
-type ImageInputProps = Omit<
-  React.ComponentPropsWithoutRef<"input">,
-  "type" | "value" | "onChange"
-> & {
-  onChange: (files: File[]) => void;
-};
-
-const ImageInput = forwardRef<HTMLInputElement, ImageInputProps>(
-  ({ onChange, ...props }, ref) => {
-    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const files = event.target.files;
-      if (files) {
-        onChange(Array.from(files));
-      }
-    };
-
-    return (
-      <input
-        ref={ref}
-        type="file"
-        accept="image/*"
-        className="sr-only"
-        onChange={onChangeInput}
-        {...props}
-        value={undefined} // Prevent controlled input warning
-      />
-    );
-  }
-);

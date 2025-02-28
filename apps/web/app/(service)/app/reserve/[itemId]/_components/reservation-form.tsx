@@ -2,7 +2,9 @@
 import { itemDetail } from "@/domains/item/mocks";
 import SelectReservationTimeDialog from "@/domains/reservation/components/select-reservation-time-dialog";
 import { useReservationForm } from "@/domains/reservation/hooks/use-reservation-form";
+import { useReserveItem } from "@/domains/reservation/hooks/use-reserve-item";
 import { formatReservationDateTime } from "@/domains/reservation/utils/date-utils";
+import useFormId from "@/hooks/use-form-id";
 import { RightChevronIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
@@ -12,7 +14,14 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 export default function ReservationForm() {
+  const formId = useFormId();
+  const reserveItem = useReserveItem();
   const reservationForm = useReservationForm();
+
+  const onSubmit = reservationForm.handleSubmit((data) => {
+    console.log(data);
+    // reserveItem.mutate(data);
+  });
 
   const startTime = reservationForm.watch("startTime");
   const endTime = reservationForm.watch("endTime");
@@ -57,7 +66,11 @@ export default function ReservationForm() {
           </div>
         </div>
       </div>
-      <div className="mt-2 bg-white py-6.5 px-4.5 flex flex-col">
+      <form
+        id={formId}
+        className="mt-2 bg-white py-6.5 px-4.5 flex flex-col"
+        onSubmit={onSubmit}
+      >
         <span className="text-heading-5 text-gray-800">예약 시간</span>
 
         <div className="flex justify-between items-center mt-3">
@@ -131,10 +144,10 @@ export default function ReservationForm() {
             </p>
           </div>
         </div>
-      </div>
+      </form>
       <FixedBottom>
         <FixedBottomActions>
-          <Button size="large" variant="primary" asChild>
+          <Button form={formId} size="large" variant="primary" asChild>
             <Link href={`/app/reserve-complete`}>예약하기</Link>
           </Button>
         </FixedBottomActions>

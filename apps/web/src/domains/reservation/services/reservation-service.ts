@@ -8,4 +8,22 @@ export class ReservationService {
 
     return response;
   }
+
+  static async reserveItem({
+    itemId,
+    startTime,
+    endTime,
+  }: {
+    itemId: string;
+    startTime: string;
+    endTime: string;
+  }) {
+    const response = await ReservationRepository.reserveItem({
+      itemId,
+      startTime,
+      endTime,
+    });
+
+    return response;
+  }
 }

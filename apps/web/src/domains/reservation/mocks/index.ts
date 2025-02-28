@@ -1,3 +1,6 @@
+import { ReservationTimeSlot } from "@/domains/reservation/types/reservation-types";
+import dayjs from "dayjs";
+
 export const reservationData = {
   itemDetail: {
     images: ["https://placehold.co/200"],
@@ -13,73 +16,33 @@ export const reservationData = {
     duration: 2,
   },
 };
+export const availableReservationTimes: ReservationTimeSlot[] = [
+  "2025-02-01T00:00:00Z",
+  "2025-02-02T00:00:00Z",
+  "2025-02-03T00:00:00Z",
+  "2025-02-04T00:00:00Z",
+  "2025-02-05T00:00:00Z",
+]
+  .map((date, index) => {
+    return Array.from({ length: 24 }, (_, i) => {
+      const slotStartDateTime = new Date(
+        new Date(date).setHours(9 + i / 2, i % 2 === 0 ? 0 : 30)
+      );
 
-export const availableReservationTimeSlots = [
-  {
-    date: "2025-02-06",
-    availableTimes: [
-      "08:30",
-      "09:00",
-      "10:00",
-      "10:30",
-      "11:00",
-      "11:30",
-      "12:00",
-      "12:30",
-      "13:00",
-      "13:30",
-      "14:00",
-      "14:30",
-      "15:00",
-      "15:30",
-      "16:00",
-      "16:30",
-      "17:00",
-      "17:30",
-      "18:00",
-      "18:30",
-      "19:00",
-      "19:30",
-      "20:00",
-      "20:30",
-      "21:00",
-    ],
-  },
-  {
-    date: "2025-02-07",
-    availableTimes: ["10:00", "18:00", "18:30", "19:00", "19:30"],
-  },
-  {
-    date: "2025-02-08",
-    availableTimes: [
-      "08:30",
-      "09:00",
-      "10:00",
-      "10:30",
-      "11:30",
-      "12:30",
-      "13:00",
-      "13:30",
-      "14:00",
-      "14:30",
-      "15:00",
-      "15:30",
-      "16:00",
-      "16:30",
-      "17:00",
-      "17:30",
-      "18:00",
-    ],
-  },
-  {
-    date: "2025-02-09",
-    availableTimes: [],
-  },
-  {
-    date: "2025-02-10",
-    availableTimes: [],
-  },
-];
+      const slotEndDateTime = dayjs(slotStartDateTime)
+        .add(30, "minute")
+        .toDate();
+
+      return {
+        slotStartDateTime: slotStartDateTime.toISOString(),
+        slotEndDateTime: slotEndDateTime.toISOString(),
+        duration: 30,
+        slotStock: 2,
+        slotBookingCount: 0,
+      };
+    });
+  })
+  .flat();
 
 export const reservationHistory = [
   {

@@ -49,6 +49,7 @@ export default function ItemDetailPage() {
           </div>
         </div>
       </div>
+
       <div className="p-4.5 bg-white">
         <div>
           <h3 className="text-heading-5 text-gray-800">상세내용</h3>
@@ -71,7 +72,7 @@ export default function ItemDetailPage() {
           </div>
         </div>
       </div>
-      <section className="mt-2 pt-7 bg-white">
+      <section className="mt-2 pt-7 bg-white pb-4.5">
         <ListHeader>
           <ListHeaderTitle>이전 대여 멤버</ListHeaderTitle>
         </ListHeader>

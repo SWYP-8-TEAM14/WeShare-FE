@@ -5,7 +5,9 @@ interface BookableItemsProps {
   items: {
     id: number;
     image: string;
-    groupName: string;
+    group: {
+      name: string;
+    };
     itemStatus: string;
     itemName: string;
     user: {

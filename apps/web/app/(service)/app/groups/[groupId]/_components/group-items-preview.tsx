@@ -11,7 +11,9 @@ interface GroupItemsPreviewProps {
   groupItems: {
     id: number;
     image: string;
-    groupName: string;
+    group: {
+      name: string;
+    };
     itemStatus: string;
     itemName: string;
     user: {

@@ -1,3 +1,4 @@
+"use client";
 import { LikeActiveIcon } from "@repo/icons";
 import { IconButton } from "@repo/ui/icon-button";
 import Image from "next/image";
@@ -7,7 +8,9 @@ type ItemListProps = {
   items: {
     id: number;
     image: string;
-    groupName: string;
+    group: {
+      name: string;
+    };
     itemStatus: string;
     itemName: string;
     user: {
@@ -36,7 +39,7 @@ export default function ItemList({ items }: ItemListProps) {
           <div className="flex-1 mt-3">
             <div className="flex items-center">
               <span className="text-gray-600 text-body-6 line-clamp-1">
-                {item.groupName}
+                {item.group.name}
               </span>
               <span className="w-px h-2 bg-gray-200 mx-1.5" />
               <span className="text-primary text-body-6 font-semibold">

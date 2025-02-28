@@ -1,3 +1,4 @@
+import { groupItems } from "@/domains/item/mocks";
 import httpClient from "@/lib/ky";
 
 export class ItemRepository {
@@ -29,5 +30,34 @@ export class ItemRepository {
     });
 
     return response.json();
+  }
+
+  static async fetchItems({
+    search,
+    group,
+    sort,
+    page,
+    limit,
+  }: {
+    search: string;
+    group: string;
+    sort: "recent";
+    page: number;
+    limit: number;
+  }) {
+    return groupItems
+      .filter((item) => {
+        if (group) {
+          return item.group.id.toString() === group;
+        }
+        return true;
+      })
+      .filter((item) => {
+        if (search) {
+          return item.itemName.includes(search);
+        }
+        return true;
+      })
+      .slice((page - 1) * limit, page * limit);
   }
 }

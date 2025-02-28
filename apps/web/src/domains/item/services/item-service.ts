@@ -16,4 +16,27 @@ export class ItemService {
     const response = await ItemRepository.createItem(groupId, data);
     return response;
   }
+
+  static async fetchItems({
+    search,
+    group,
+    sort,
+    page,
+    limit,
+  }: {
+    search: string;
+    group: string;
+    sort: "recent";
+    page: number;
+    limit: number;
+  }) {
+    const response = await ItemRepository.fetchItems({
+      search,
+      group,
+      sort,
+      page,
+      limit,
+    });
+    return response;
+  }
 }

@@ -38,7 +38,7 @@ export const availableReservationTimes: ReservationTimeSlot[] = [
         slotEndDateTime: slotEndDateTime.toISOString(),
         duration: 30,
         slotStock: 2,
-        slotBookingCount: 0,
+        slotBookingCount: i % 3,
       };
     });
   })

@@ -1,10 +1,4 @@
-import Link from "next/link";
-
+import { redirect, RedirectType } from "next/navigation";
 export default function Page() {
-  return (
-    <main className="flex flex-col items-center justify-between">
-      Home
-      <Link href={"/app"}>App</Link>
-    </main>
-  );
+  redirect("/login", RedirectType.push);
 }

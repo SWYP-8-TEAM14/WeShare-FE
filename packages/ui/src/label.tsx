@@ -4,7 +4,7 @@ import { tv, VariantProps } from "tailwind-variants";
 import { cn } from "./utils";
 
 export const labelStyles = tv({
-  base: "ui:text-heading-5",
+  base: "",
   variants: {
     size: {
       sm: "ui:text-body-6",

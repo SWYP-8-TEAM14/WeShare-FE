@@ -7,6 +7,7 @@ interface SelectReservationTimeProps {
     duration: number;
     slotStock: number;
     slotBookingCount: number;
+    bookable: boolean;
   }[];
   selectedTime: string | null;
   setSelectedTime: (time: string) => void;
@@ -106,7 +107,7 @@ export default function SelectReservationTime({
                 <button
                   key={time.slotDateTime}
                   className={cn(
-                    "flex justify-center items-center gap-2 border rounded-sm py-3 px-2 h-11",
+                    "flex justify-center items-center gap-2 border rounded-sm py-3 px-2 h-11 disabled:bg-gray-200 disabled:text-gray-500",
                     isSelected
                       ? "text-body-3 text-primary-500 border-primary-500 bg-primary-500/10"
                       : "text-body-4 text-gray-800 border-black/10"
@@ -115,6 +116,7 @@ export default function SelectReservationTime({
                     setSelectedTime(time.slotDateTime);
                   }}
                   aria-selected={isSelected}
+                  disabled={!time.bookable}
                 >
                   <span>
                     {new Date(time.slotDateTime).toLocaleTimeString("ko-KR", {
@@ -143,7 +145,7 @@ export default function SelectReservationTime({
                 <button
                   key={time.slotDateTime}
                   className={cn(
-                    "flex justify-center items-center gap-2 border rounded-sm py-3 px-2 h-11",
+                    "flex justify-center items-center gap-2 border rounded-sm py-3 px-2 h-11 disabled:bg-gray-200 disabled:text-gray-500",
                     isSelected
                       ? "text-body-3 text-primary-500 border-primary-500 bg-primary-500/10"
                       : "text-body-4 text-gray-800 border-black/10"
@@ -152,6 +154,7 @@ export default function SelectReservationTime({
                     setSelectedTime(time.slotDateTime);
                   }}
                   aria-selected={isSelected}
+                  disabled={!time.bookable}
                 >
                   <span>
                     {new Date(time.slotDateTime).toLocaleTimeString("ko-KR", {

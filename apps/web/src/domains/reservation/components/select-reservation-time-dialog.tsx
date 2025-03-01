@@ -27,6 +27,7 @@ import React, { useState } from "react";
 dayjs.locale("ko");
 
 interface SelectReservationTimeDialogProps {
+  defaultTab: "start-time" | "end-time";
   itemId: string;
   children: React.ReactNode;
   defaultStartTime?: string;
@@ -52,16 +53,22 @@ function findAvailableEndTimes(
     return [];
   }
 
-  const endIndex = times.findIndex(
-    (time, index) =>
-      index >= startIndex && time.slotStock === time.slotBookingCount
+  const availableTimes = times.slice(startIndex).map((time) => ({
+    ...time,
+    bookable: false,
+  }));
+
+  const bookableEndIndex = availableTimes.findIndex(
+    (time) => time.slotBookingCount >= time.slotStock
   );
 
-  if (endIndex === -1) {
-    return times.slice(startIndex);
-  }
+  availableTimes.map((time, index) => {
+    if (index < bookableEndIndex) {
+      time.bookable = true;
+    }
+  });
 
-  return times.slice(startIndex, endIndex);
+  return availableTimes;
 }
 
 export default function SelectReservationTimeDialog({
@@ -70,11 +77,12 @@ export default function SelectReservationTimeDialog({
   onConfirm,
   defaultStartTime,
   defaultEndTime,
+  defaultTab,
 }: SelectReservationTimeDialogProps) {
   const [open, setOpen] = useState(false);
   const [startTime, setStartTime] = useState(defaultStartTime);
   const [endTime, setEndTime] = useState(defaultEndTime);
-  const { data: availableStartTimes } = useFetchReservationTimes({
+  const { data: reservationTimes } = useFetchReservationTimes({
     itemId,
   });
   const [selectedStartDate, setSelectedStartDate] = useState<string | null>(
@@ -82,8 +90,13 @@ export default function SelectReservationTimeDialog({
   );
   const [selectedEndDate, setSelectedEndDate] = useState<string | null>(null);
 
+  const availableStartTimes = reservationTimes.map((time) => ({
+    ...time,
+    bookable: time.slotBookingCount < time.slotStock,
+  }));
+
   const availableEndTimes = startTime
-    ? findAvailableEndTimes(availableStartTimes, startTime)
+    ? findAvailableEndTimes(reservationTimes, startTime)
     : [];
 
   const handleConfirm = () => {
@@ -98,6 +111,8 @@ export default function SelectReservationTimeDialog({
     setStartTime(time);
     setEndTime(undefined);
   };
+
+  const reservationHours = dayjs(endTime).diff(startTime, "hour", true);
 
   return (
     <FullScreenDialog open={open} onOpenChange={setOpen}>
@@ -116,7 +131,7 @@ export default function SelectReservationTimeDialog({
             </FullScreenDialogClose>
           </TopNavigationRight>
         </TopNavigation>
-        <Tabs defaultValue="start-time" className="flex-1 flex flex-col">
+        <Tabs defaultValue={defaultTab} className="flex-1 flex flex-col">
           <TabsList>
             <TabsTrigger value="start-time">대여</TabsTrigger>
             <TabsTrigger value="end-time">반납</TabsTrigger>
@@ -171,10 +186,19 @@ export default function SelectReservationTimeDialog({
                 </p>
               </div>
             </div>
-            <div className="text-heading-2 text-gray-800">2 시간</div>
+            <div className="text-heading-2 text-gray-800">
+              {reservationHours} 시간
+            </div>
           </div>
           <FixedBottomActions columns="2" className="border-none">
-            <Button variant="tertiary" size="large">
+            <Button
+              variant="tertiary"
+              size="large"
+              onClick={() => {
+                setStartTime(undefined);
+                setEndTime(undefined);
+              }}
+            >
               초기화
             </Button>
             <Button

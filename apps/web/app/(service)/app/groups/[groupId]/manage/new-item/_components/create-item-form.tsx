@@ -1,15 +1,12 @@
 "use client";
+import MultipleImageUploader from "@/components/multiple-image-uploader";
 import { useCreateItem } from "@/domains/item/hooks/use-create-item";
 import { useItemForm } from "@/domains/item/hooks/use-item-form";
-import useFilePreviews from "@/hooks/use-file-previews";
-import { AddPhotoslotIcon, DeletePhotoslotIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
 import { TextField } from "@repo/ui/text-field";
 import { Textarea } from "@repo/ui/textarea";
-import Image from "next/image";
 import { useId } from "react";
-import { Controller } from "react-hook-form";
 
 export default function CreateItemForm() {
   const id = useId();
@@ -19,10 +16,6 @@ export default function CreateItemForm() {
       images: [],
     },
   });
-  const imagesPreview = useFilePreviews({
-    files: itemForm.watch("images"),
-  });
-
   const onSubmit = itemForm.handleSubmit((data) => {
     console.log(`onSubmit: ${JSON.stringify(data)}`);
   });
@@ -38,65 +31,14 @@ export default function CreateItemForm() {
               공용물품 사진을 최대 4개 등록해 주세요.
             </p>
           </div>
-          <div className="mt-4 flex gap-2">
-            {itemForm.getValues("images").length < 4 && (
-              <label className="pt-2.5 w-20 h-20 flex flex-col items-center border border-black/10 rounded-sm">
-                <AddPhotoslotIcon className="size-4.5 text-gray-500" />
-                <span className="text-body-6 mt-1.5">사진 업로드</span>
-                <span className="text-detail-3 text-gray-700 mt-0.5">
-                  ({imagesPreview.length} / 4)
-                </span>
-                <Controller
-                  name="images"
-                  control={itemForm.control}
-                  render={({ field: { onChange, value, ...fields } }) => (
-                    <input
-                      type="file"
-                      multiple
-                      accept="image/*"
-                      className="hidden"
-                      onChange={(e) => {
-                        // 최대 4개까지만 업로드 가능 4개 미만일 때는 선택한 파일을 기존의 파일 뒤에 추가
-                        const files = e.target.files;
-                        if (!files?.length) return;
-                        const prevImages = value;
-                        const newImages = Array.from(files).slice(
-                          0,
-                          4 - prevImages.length
-                        );
-                        onChange([...prevImages, ...newImages]);
-                      }}
-                      {...fields}
-                    />
-                  )}
-                />
-              </label>
-            )}
-            {/* 업로드된 사진 미리보기 */}
-            {imagesPreview?.map((preview, index) => (
-              <div key={preview} className="w-20 h-20 relative">
-                <Image
-                  src={preview}
-                  alt="사진 미리보기"
-                  width={80}
-                  height={80}
-                  className="rounded-sm aspect-square object-cover"
-                />
-                <button
-                  type="button"
-                  className="absolute -top-1 -right-1 w-4.5 h-4.5 rounded-full flex items-center justify-center bg-white"
-                  onClick={() => {
-                    const newImages = itemForm
-                      .getValues("images")
-                      .filter((_, i) => i !== index);
-                    itemForm.setValue("images", newImages);
-                  }}
-                >
-                  <span className="sr-only">사진 삭제</span>
-                  <DeletePhotoslotIcon className="size-4.5 text-gray-600" />
-                </button>
-              </div>
-            ))}
+          <div className="mt-4">
+            <MultipleImageUploader
+              maxImages={10}
+              onImageChange={(files) => {
+                itemForm.setValue("images", files);
+              }}
+              images={itemForm.watch("images")}
+            />
           </div>
         </div>
 

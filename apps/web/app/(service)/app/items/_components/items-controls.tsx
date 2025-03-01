@@ -39,7 +39,7 @@ export default function ItemsControls({
             }}
           />
         </div>
-        <div className="pt-1 gap-3.5 flex pb-4 overflow-x-scroll">
+        <div className="pt-1 gap-3.5 flex pb-4 overflow-x-auto">
           <span className="sr-only">공유 물품 그룹 필터</span>
           <Chip
             variant={groupFilter ? "tertiary" : "secondary"}

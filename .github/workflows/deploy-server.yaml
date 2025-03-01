@@ -47,7 +47,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/weshare-frontend:latest
-            docker stop weshare-frontend || true
-            docker rm weshare-frontend || true
-            docker run -d -p 3000:3000 --name weshare-frontend ${{ secrets.DOCKERHUB_USERNAME }}/weshare-frontend:latest
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/weshare-frontend:latest
+            sudo docker stop weshare-frontend || true
+            sudo docker rm weshare-frontend || true
+            sudo docker run -d -p 3000:3000 --name weshare-frontend ${{ secrets.DOCKERHUB_USERNAME }}/weshare-frontend:latest

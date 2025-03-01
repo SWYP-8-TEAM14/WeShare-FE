@@ -5,12 +5,21 @@ import { useReservationForm } from "@/domains/reservation/hooks/use-reservation-
 import { useReserveItem } from "@/domains/reservation/hooks/use-reserve-item";
 import { formatReservationDateTime } from "@/domains/reservation/utils/date-utils";
 import useFormId from "@/hooks/use-form-id";
-import { RightChevronIcon } from "@repo/icons";
+import { CloseIcon, RightChevronIcon } from "@repo/icons";
+import {
+  BottomSheet,
+  BottomSheetClose,
+  BottomSheetContent,
+  BottomSheetDescription,
+  BottomSheetHeader,
+  BottomSheetTitle,
+  BottomSheetTrigger,
+} from "@repo/ui/bottom-sheet";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
+import { IconButton } from "@repo/ui/icon-button";
 import dayjs from "dayjs";
 import Image from "next/image";
-import Link from "next/link";
 import { Suspense } from "react";
 
 export default function ReservationForm() {
@@ -27,6 +36,8 @@ export default function ReservationForm() {
   const endTime = reservationForm.watch("endTime");
 
   const reservationHours = dayjs(endTime).diff(startTime, "hour", true);
+
+  const submitButtonDisabled = !startTime || !endTime;
 
   return (
     <>
@@ -77,6 +88,7 @@ export default function ReservationForm() {
           <span className="text-body-1 text-gray-800">대여시각</span>
           <Suspense fallback={<div>로딩중...</div>}>
             <SelectReservationTimeDialog
+              defaultTab="start-time"
               defaultStartTime={startTime}
               defaultEndTime={endTime}
               itemId={itemDetail.id.toString()}
@@ -105,6 +117,7 @@ export default function ReservationForm() {
           <span className="text-body-1 text-gray-800">반납시각</span>
           <Suspense fallback={<div>로딩중...</div>}>
             <SelectReservationTimeDialog
+              defaultTab="end-time"
               defaultStartTime={startTime}
               defaultEndTime={endTime}
               itemId={itemDetail.id.toString()}
@@ -147,9 +160,77 @@ export default function ReservationForm() {
       </form>
       <FixedBottom>
         <FixedBottomActions>
-          <Button form={formId} size="large" variant="primary" asChild>
-            <Link href={`/app/reserve-complete`}>예약하기</Link>
-          </Button>
+          <BottomSheet>
+            <BottomSheetTrigger asChild>
+              <Button
+                form={formId}
+                size="large"
+                variant="primary"
+                disabled={submitButtonDisabled}
+              >
+                예약하기
+              </Button>
+            </BottomSheetTrigger>
+            <BottomSheetContent>
+              <BottomSheetHeader>
+                <BottomSheetTitle>최종 예약 일시</BottomSheetTitle>
+                <BottomSheetDescription className="sr-only">
+                  최종 예약 일시를 확인하세요.
+                </BottomSheetDescription>
+                <BottomSheetClose asChild>
+                  <IconButton>
+                    <CloseIcon />
+                  </IconButton>
+                </BottomSheetClose>
+              </BottomSheetHeader>
+              <div className="px-4.5 pt-3.5 pb-10 flex flex-col gap-6.5">
+                <div className="bg-white flex items-center gap-3">
+                  <Image
+                    unoptimized
+                    src={itemDetail.images[0]!}
+                    alt={itemDetail.itemName}
+                    width={74}
+                    height={74}
+                    className="rounded-sm"
+                  />
+
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-body-6 text-gray-600">
+                      {itemDetail.group.name}
+                    </span>
+                    <p className="text-body-1">{itemDetail.itemName}</p>
+                    <span className="text-body-4 text-gray-700">
+                      {itemDetail.quantity}개
+                    </span>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-body-6 text-gray-600">대여시각</span>
+                    <p className="text-heading-2 text-gray-800">
+                      {formatReservationDateTime(startTime)}
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-body-6 text-gray-600">반납시각</span>
+                    <p className="text-heading-2 text-gray-800">
+                      {formatReservationDateTime(endTime)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <FixedBottomActions>
+                <Button
+                  form={formId}
+                  size="large"
+                  variant="secondary"
+                  type="submit"
+                >
+                  최종 예약하기
+                </Button>
+              </FixedBottomActions>
+            </BottomSheetContent>
+          </BottomSheet>
         </FixedBottomActions>
       </FixedBottom>
     </>

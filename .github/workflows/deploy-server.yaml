@@ -29,7 +29,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ./apps/web
+          context: .
+          file: ./apps/web/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/weshare-frontend:latest
 

@@ -31,7 +31,7 @@ export default function MainBanners({
         </div>
       </Link>
       <Link
-        href="/app/profile/reservations?status=upcoming"
+        href="/app/profile/reservations?tab=reserved"
         className="shadow-main-banner bg-white flex rounded-md"
       >
         <div className="mt-4 ml-4">
@@ -54,7 +54,7 @@ export default function MainBanners({
         />
       </Link>
       <Link
-        href="/app/profile/reservations?status=return"
+        href="/app/profile/reservations?tab=rented"
         className="shadow-main-banner bg-white flex rounded-md"
       >
         <div className="mt-4 ml-4">

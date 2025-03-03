@@ -1,6 +1,8 @@
 import Page from "@/components/page";
+import { AuthService } from "@/domains/auth/services/auth-service";
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const { authUrl: kakaoLoginUrl } = await AuthService.fetchKakaoLoginUrl();
   return (
     <Page className="bg-white flex flex-col items-center gap-5 p-5">
       <div className="flex-1 flex flex-col items-center justify-center gap-5">
@@ -44,7 +46,10 @@ export default function LoginPage() {
       </div>
 
       <div className="flex flex-col gap-3 w-full mb-10">
-        <button className="bg-[#ffe812] text-body-1 text-black py-3.5 px-4.5 flex items-center justify-center gap-1 rounded-sm">
+        <a
+          className="bg-[#ffe812] text-body-1 text-black py-3.5 px-4.5 flex items-center justify-center gap-1 rounded-sm"
+          href={kakaoLoginUrl}
+        >
           <svg
             width="30"
             height="30"
@@ -59,8 +64,8 @@ export default function LoginPage() {
           </svg>
 
           <span>카카오로 시작하기</span>
-        </button>
-        <button className="bg-[#03c95b] text-body-1 text-white py-3.5 px-4.5 flex items-center justify-center gap-1 rounded-sm">
+        </a>
+        {/* <button className="bg-[#03c95b] text-body-1 text-white py-3.5 px-4.5 flex items-center justify-center gap-1 rounded-sm">
           <svg
             width="30"
             height="30"
@@ -77,7 +82,7 @@ export default function LoginPage() {
           </svg>
 
           <span>네이버로 시작하기</span>
-        </button>
+        </button> */}
       </div>
     </Page>
   );

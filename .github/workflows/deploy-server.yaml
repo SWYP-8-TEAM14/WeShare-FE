@@ -33,6 +33,8 @@ jobs:
           file: ./apps/web/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/weshare-frontend:latest
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
 
   deploy:
     name: Deploy to Server

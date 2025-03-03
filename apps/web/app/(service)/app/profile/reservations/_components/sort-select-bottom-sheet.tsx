@@ -21,8 +21,8 @@ export default function SortSelectBottomSheet({
   setSort,
 }: {
   children: React.ReactNode;
-  defaultSort: "recent" | "returned";
-  setSort: React.Dispatch<React.SetStateAction<"recent" | "returned">>;
+  defaultSort: "recent" | "old";
+  setSort: React.Dispatch<React.SetStateAction<"recent" | "old">>;
 }) {
   const [open, setOpen] = useState(false);
   const [sort, setLocalSort] = useState(defaultSort);
@@ -45,9 +45,7 @@ export default function SortSelectBottomSheet({
         <form className="px-4.5 pt-3.5 pb-10 gap-2 flex flex-col">
           <RadioGroup
             defaultValue={defaultSort}
-            onValueChange={(value) =>
-              setLocalSort(value as "recent" | "returned")
-            }
+            onValueChange={(value) => setLocalSort(value as "recent" | "old")}
           >
             <div className="flex items-center space-x-2 py-1.5">
               <RadioGroupItem value="recent" id="sort-recent" />

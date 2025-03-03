@@ -24,7 +24,7 @@ interface ReservationHistoryProps {
 
 export default function ReservationHistory({ tab }: ReservationHistoryProps) {
   const [groupFilter, setGroupFilter] = useState<number[]>([]);
-  const [sort, setSort] = useState<"recent" | "returned">("recent");
+  const [sort, setSort] = useState<"recent" | "old">("recent");
   const { setQueryString } = useQueryString();
   const [images, setImages] = useState<File[]>([]);
   const onChangeTab = (value: string) => {

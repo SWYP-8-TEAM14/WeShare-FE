@@ -6,8 +6,8 @@ import SortSelectBottomSheet from "./sort-select-bottom-sheet";
 interface ReservationHistoryControlsProps {
   groupFilter: number[];
   setGroupFilter: React.Dispatch<React.SetStateAction<number[]>>;
-  sort: "recent" | "returned";
-  setSort: React.Dispatch<React.SetStateAction<"recent" | "returned">>;
+  sort: "recent" | "old";
+  setSort: React.Dispatch<React.SetStateAction<"recent" | "old">>;
 }
 
 export default function ReservationHistoryControls({

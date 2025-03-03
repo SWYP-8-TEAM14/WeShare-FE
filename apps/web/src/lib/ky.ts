@@ -1,7 +1,8 @@
+import { clientEnv } from "@/lib/client-env";
 import ky from "ky";
 
 const httpClient = ky.create({
-  prefixUrl: process.env.NEXT_PUBLIC_API_URL,
+  prefixUrl: clientEnv.NEXT_PUBLIC_API_URL,
 });
 
 export default httpClient;

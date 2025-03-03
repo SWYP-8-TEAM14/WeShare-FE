@@ -41,7 +41,7 @@ export class ItemRepository {
   }: {
     search: string;
     group: string;
-    sort: "recent";
+    sort: "recent" | "old";
     page: number;
     limit: number;
   }) {

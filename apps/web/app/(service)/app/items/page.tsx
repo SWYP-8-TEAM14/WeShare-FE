@@ -10,7 +10,7 @@ import MyItems from "./_components/my-items";
 const ParamsSchema = z.object({
   search: z.string().optional().default(""),
   group: z.string().optional().default(""),
-  sort: z.enum(["recent"]).catch("recent"),
+  sort: z.enum(["recent", "old"]).catch("recent"),
 });
 
 export default async function ItemsPage({

@@ -9,7 +9,7 @@ import { useDebouncedCallback } from "use-debounce";
 interface ItemsControlsProps {
   search: string;
   groupFilter: string;
-  sort: "recent";
+  sort: "recent" | "old";
 }
 
 export default function ItemsControls({
@@ -89,6 +89,7 @@ export default function ItemsControls({
               }}
             >
               <option value="recent">최근 등록순</option>
+              <option value="old">오래된 순</option>
             </select>
             <DownChevronIcon className="size-4 text-gray-700 absolute top-1/2 right-3 -translate-y-1/2 pointer-events-none" />
           </div>

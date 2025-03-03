@@ -10,7 +10,7 @@ import { useInView } from "react-intersection-observer";
 type MyItemsProps = {
   search: string;
   groupFilter: string;
-  sort: "recent";
+  sort: "recent" | "old";
 };
 
 export default function MyItems({ search, groupFilter, sort }: MyItemsProps) {

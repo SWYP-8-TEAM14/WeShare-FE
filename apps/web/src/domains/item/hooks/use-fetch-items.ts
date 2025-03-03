@@ -7,7 +7,7 @@ import {
 interface UseFetchItemsOptions {
   search: string;
   group: string;
-  sort: "recent";
+  sort: "recent" | "old";
 }
 
 export const fetchItemsOptions = ({

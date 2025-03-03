@@ -26,7 +26,7 @@ export class ItemService {
   }: {
     search: string;
     group: string;
-    sort: "recent";
+    sort: "recent" | "old";
     page: number;
     limit: number;
   }) {

@@ -24,13 +24,10 @@ export const Search = React.forwardRef<
 
   React.useImperativeHandle(ref, () => innerRef.current!);
   React.useEffect(() => {
-    console.log("value", innerRef.current?.value);
     if (innerRef.current?.value.length) {
       setShowClear(true);
     }
   });
-
-  console.log(showClear, !!onClear);
 
   return (
     <div className="ui:relative">

@@ -21,21 +21,15 @@ export class ItemService {
     search,
     group,
     sort,
-    page,
-    limit,
   }: {
     search: string;
     group: string;
     sort: "recent" | "old";
-    page: number;
-    limit: number;
   }) {
     const response = await ItemRepository.fetchItems({
       search,
       group,
       sort,
-      page,
-      limit,
     });
     return response;
   }

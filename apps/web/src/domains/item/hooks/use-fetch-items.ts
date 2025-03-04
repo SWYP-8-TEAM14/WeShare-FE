@@ -1,8 +1,5 @@
 import { ItemService } from "@/domains/item/services/item-service";
-import {
-  infiniteQueryOptions,
-  useSuspenseInfiniteQuery,
-} from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 
 interface UseFetchItemsOptions {
   search: string;
@@ -15,25 +12,15 @@ export const fetchItemsOptions = ({
   group,
   sort,
 }: UseFetchItemsOptions) =>
-  infiniteQueryOptions({
+  queryOptions({
     queryKey: ["items", { search, group, sort }],
-    queryFn: async ({ pageParam = 1 }) => {
-      const items = await ItemService.fetchItems({
+    queryFn: async () => {
+      return ItemService.fetchItems({
         search,
         group,
         sort,
-        page: pageParam,
-        limit: 10,
       });
-      return items;
     },
-    getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length < 10) {
-        return undefined;
-      }
-      return allPages.length + 1;
-    },
-    initialPageParam: 1,
   });
 
 export const useFetchItems = ({
@@ -41,5 +28,5 @@ export const useFetchItems = ({
   group,
   sort,
 }: UseFetchItemsOptions) => {
-  return useSuspenseInfiniteQuery(fetchItemsOptions({ search, group, sort }));
+  return useSuspenseQuery(fetchItemsOptions({ search, group, sort }));
 };

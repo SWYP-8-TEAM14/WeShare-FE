@@ -1,6 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { itemDetail } from "@/domains/item/mocks";
+import { ItemService } from "@/domains/item/services/item-service";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
 import {
@@ -15,10 +15,15 @@ import {
   TopNavigationLeft,
   TopNavigationTitle,
 } from "@repo/ui/top-navigation";
-import Image from "next/image";
 import Link from "next/link";
 
-export default function ItemDetailPage() {
+export default async function ItemDetailPage({
+  params,
+}: {
+  params: Promise<{ itemId: string }>;
+}) {
+  const { itemId } = await params;
+  const itemDetail = await ItemService.fetchItem(itemId);
   return (
     <Page>
       <TopNavigation>
@@ -29,7 +34,7 @@ export default function ItemDetailPage() {
       </TopNavigation>
       <ImageCarousel className=" aspect-square">
         <ImageCarouselContent>
-          {itemDetail.images.map((image, index) => (
+          {itemDetail.imageUrls.map((image, index) => (
             <ImageCarouselSlide key={index}>
               <img src={image} width={600} height={600} />
             </ImageCarouselSlide>
@@ -40,7 +45,7 @@ export default function ItemDetailPage() {
       <div className="bg-white">
         <div className="py-4.5 mx-4.5 flex items-center justify-between border-b border-gray-200">
           <div>
-            <p className="text-body-6 text-gray-600">{itemDetail.group.name}</p>
+            <p className="text-body-6 text-gray-600">{itemDetail.groupName}</p>
             <p className="text-heading-2 mt-1.5">{itemDetail.itemName}</p>
           </div>
           <div className="flex flex-col justify-center items-center bg-gray-100 px-5 rounded-sm h-17.5">
@@ -53,7 +58,9 @@ export default function ItemDetailPage() {
       <div className="p-4.5 bg-white">
         <div>
           <h3 className="text-heading-5 text-gray-800">상세내용</h3>
-          <p className="text-body-2 text-gray-700 mt-2">{itemDetail.details}</p>
+          <p className="text-body-2 text-gray-700 mt-2">
+            {itemDetail.itemDescription}
+          </p>
         </div>
         <div className="mt-6">
           <h3 className="text-heading-5 text-gray-800">대여시 주의사항</h3>
@@ -64,11 +71,11 @@ export default function ItemDetailPage() {
         <div className="p-4 rounded-sm bg-gray-100 flex flex-col gap-2">
           <div>
             <span className="text-body-6 text-gray-600">픽업 장소</span>
-            <p className="text-heading-2 mt-1.5">{itemDetail.pickupLocation}</p>
+            <p className="text-heading-2 mt-1.5">{itemDetail.pickupPlace}</p>
           </div>
           <div>
             <span className="text-body-6 text-gray-600">반납 장소</span>
-            <p className="text-heading-2 mt-1.5">{itemDetail.returnLocation}</p>
+            <p className="text-heading-2 mt-1.5">{itemDetail.returnPlace}</p>
           </div>
         </div>
       </div>
@@ -78,7 +85,7 @@ export default function ItemDetailPage() {
         </ListHeader>
 
         <div className="mt-3">
-          {itemDetail.previousRenters.map((renter) => (
+          {/* {itemDetail.previousRenters.map((renter) => (
             <div
               key={renter.id}
               className="flex items-center gap-2 h-15 py-2 px-4.5"
@@ -98,13 +105,13 @@ export default function ItemDetailPage() {
                 </p>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
       </section>
       <FixedBottom>
         <FixedBottomActions>
           <Button size="large" asChild>
-            <Link href={`/app/reserve/${itemDetail.id}`}>예약하기</Link>
+            <Link href={`/app/reserve/${itemDetail.itemId}`}>예약하기</Link>
           </Button>
         </FixedBottomActions>
       </FixedBottom>

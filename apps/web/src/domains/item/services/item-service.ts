@@ -33,4 +33,9 @@ export class ItemService {
     });
     return response;
   }
+
+  static async fetchItem(itemId: string) {
+    const response = await ItemRepository.fetchItem({ itemId });
+    return response;
+  }
 }

@@ -24,6 +24,23 @@ const fetchItemsSchema = z.array(
   })
 );
 
+const fetchItemSchema = z.object({
+  user_id: z.number(),
+  username: z.string(),
+  group_id: z.number(),
+  group_name: z.string(),
+  item_id: z.number(),
+  item_name: z.string(),
+  pickup_place: z.string(),
+  return_place: z.string(),
+  item_description: z.string(),
+  image_urls: z.array(z.string()),
+  status: z.number(),
+  quantity: z.number(),
+  caution: z.string(),
+  created_at: z.string(),
+});
+
 export class ItemRepository {
   static async createItem(
     groupId: string,
@@ -92,5 +109,35 @@ export class ItemRepository {
       reservationUserId: item.reservation_user_id,
       reservationUserName: item.reservation_user_name,
     }));
+  }
+
+  static async fetchItem({ itemId }: { itemId: string }) {
+    const json = await httpClient
+      .post<ResourceResponse<string>>("shared/items/detail/", {
+        json: {
+          item_id: parseInt(itemId),
+          user_id: profile.id,
+        },
+      })
+      .json();
+
+    const data = JSON.parse(json.data);
+    const parsedData = fetchItemSchema.parse(data);
+    return {
+      userId: parsedData.user_id,
+      username: parsedData.username,
+      groupId: parsedData.group_id,
+      groupName: parsedData.group_name,
+      itemId: parsedData.item_id,
+      itemName: parsedData.item_name,
+      pickupPlace: parsedData.pickup_place,
+      returnPlace: parsedData.return_place,
+      itemDescription: parsedData.item_description,
+      imageUrls: parsedData.image_urls,
+      status: parsedData.status,
+      quantity: parsedData.quantity,
+      caution: parsedData.caution,
+      createdAt: parsedData.created_at,
+    };
   }
 }

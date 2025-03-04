@@ -1,5 +1,28 @@
-import { groupItems } from "@/domains/item/mocks";
+import { profile } from "@/domains/user/mocks";
 import httpClient from "@/lib/ky";
+import { ResourceResponse } from "@/types/api";
+import { z } from "zod";
+
+const fetchItemsSortMap = {
+  recent: 1,
+  old: 2,
+};
+
+const fetchItemsSchema = z.array(
+  z.object({
+    group_id: z.number(),
+    group_name: z.string(),
+    item_id: z.number(),
+    item_name: z.string(),
+    image_urls: z.array(z.string()),
+    quantity: z.number(),
+    created_at: z.string(),
+    is_wishlist: z.number(),
+    status: z.number(),
+    reservation_user_id: z.number(),
+    reservation_user_name: z.string(),
+  })
+);
 
 export class ItemRepository {
   static async createItem(
@@ -36,28 +59,35 @@ export class ItemRepository {
     search,
     group,
     sort,
-    page,
-    limit,
   }: {
     search: string;
     group: string;
     sort: "recent" | "old";
-    page: number;
-    limit: number;
   }) {
-    return groupItems
-      .filter((item) => {
-        if (group) {
-          return item.group.id.toString() === group;
-        }
-        return true;
+    const json = await httpClient
+      .post<ResourceResponse<string>>("shared/items/", {
+        json: {
+          user_id: profile.id,
+          group_id: group ? parseInt(group) : 0,
+          sort: fetchItemsSortMap[sort],
+        },
       })
-      .filter((item) => {
-        if (search) {
-          return item.itemName.includes(search);
-        }
-        return true;
-      })
-      .slice((page - 1) * limit, page * limit);
+      .json();
+
+    const data = JSON.parse(json.data);
+    const parsedData = fetchItemsSchema.parse(data);
+    return parsedData.map((item) => ({
+      groupId: item.group_id,
+      groupName: item.group_name,
+      itemId: item.item_id,
+      itemName: item.item_name,
+      imageUrls: item.image_urls,
+      quantity: item.quantity,
+      createdAt: item.created_at,
+      isWishlist: item.is_wishlist,
+      status: item.status,
+      reservationUserId: item.reservation_user_id,
+      reservationUserName: item.reservation_user_name,
+    }));
   }
 }

@@ -55,6 +55,8 @@ export default function CreateItemForm({ groupId }: CreateItemFormProps) {
     );
   });
 
+  console.log("itemForm", itemForm.formState.errors);
+
   return (
     <>
       <form
@@ -72,12 +74,19 @@ export default function CreateItemForm({ groupId }: CreateItemFormProps) {
             </p>
           </div>
           <div className="mt-4">
-            <MultipleImageUploader
-              maxImages={10}
-              onImageChange={(files) => {
-                itemForm.setValue("images", files);
-              }}
-              images={itemForm.watch("images")}
+            <Controller
+              name="images"
+              control={itemForm.control}
+              render={({ field: { value, onChange, ...fields } }) => (
+                <MultipleImageUploader
+                  maxImages={4}
+                  onImageChange={(files) => {
+                    onChange(files);
+                  }}
+                  images={value}
+                  {...fields}
+                />
+              )}
             />
           </div>
         </div>

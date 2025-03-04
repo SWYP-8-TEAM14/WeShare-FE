@@ -1,6 +1,7 @@
 import QueryProvider from "@/components/query-provider";
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        </QueryProvider>
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 export const profile = {
-  id: 1,
+  id: 6,
   nickname: "Jiyeon1234",
   fullName: "김지연",
   profileImage: "https://placehold.co/200",

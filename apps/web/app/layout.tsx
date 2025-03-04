@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <QueryProvider>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div />}>
             {children}
             <Toaster />
           </Suspense>

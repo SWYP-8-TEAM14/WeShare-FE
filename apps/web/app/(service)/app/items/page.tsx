@@ -25,7 +25,7 @@ export default async function ItemsPage({
       <TopNavigation>
         <TopNavigationTitle>공유물품</TopNavigationTitle>
       </TopNavigation>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div />}>
         <ItemsControls
           search={params.search}
           groupFilter={params.group}
@@ -33,7 +33,7 @@ export default async function ItemsPage({
         />
       </Suspense>
       <section className="bg-white flex-1 pt-3.5">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div />}>
           <MyItems
             search={params.search}
             groupFilter={params.group}

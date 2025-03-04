@@ -1,5 +1,6 @@
 "use client";
 import { useFetchItems } from "@/domains/item/hooks/use-fetch-items";
+import { getItemStatusText } from "@/domains/item/utils/format";
 import { LikeActiveIcon } from "@repo/icons";
 import { IconButton } from "@repo/ui/icon-button";
 import Image from "next/image";
@@ -24,11 +25,17 @@ export default function MyItems({ search, groupFilter, sort }: MyItemsProps) {
         >
           <Image
             unoptimized
-            src={item.imageUrls[0]!}
+            src={
+              item.imageUrls[0] || "https://placehold.co/100x100/white/white"
+            }
             width={74}
             height={74}
             alt="item"
             className="rounded-sm"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src =
+                "https://placehold.co/100x100/white/white";
+            }}
           />
           <div className="flex-1 mt-3">
             <div className="flex items-center">
@@ -37,21 +44,21 @@ export default function MyItems({ search, groupFilter, sort }: MyItemsProps) {
               </span>
               <span className="w-px h-2 bg-gray-200 mx-1.5" />
               <span className="text-primary text-body-6 font-semibold">
-                {item.status}
+                {getItemStatusText(item.status)}
               </span>
             </div>
             <p className="text-body-1 mt-1.5 line-clamp-2">{item.itemName}</p>
           </div>
           <div className="flex items-center">
             {item.isWishlist === 1 ? (
-              <IconButton className="text-gray-300">
-                <LikeActiveIcon />
-                <span className="sr-only">좋아요 취소</span>
-              </IconButton>
-            ) : (
               <IconButton className="text-primary-400">
                 <LikeActiveIcon />
                 <span className="sr-only">좋아요</span>
+              </IconButton>
+            ) : (
+              <IconButton className="text-gray-300">
+                <LikeActiveIcon />
+                <span className="sr-only">좋아요 취소</span>
               </IconButton>
             )}
           </div>

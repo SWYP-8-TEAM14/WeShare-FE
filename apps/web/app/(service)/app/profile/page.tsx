@@ -1,6 +1,6 @@
 import BottomNavigation from "@/components/bottom-navigation";
 import Page from "@/components/page";
-import { profile } from "@/domains/user/data";
+import { profile } from "@/domains/user/mocks";
 import { RightChevronIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom } from "@repo/ui/fixed-bottom";

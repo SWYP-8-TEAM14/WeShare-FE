@@ -1,5 +1,6 @@
 import QueryProvider from "@/components/query-provider";
 import "@repo/ui/styles.css";
+import { Toaster } from "@repo/ui/toaster";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import "./globals.css";
@@ -21,7 +22,10 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <QueryProvider>
-          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
+            {children}
+            <Toaster />
+          </Suspense>
         </QueryProvider>
       </body>
     </html>

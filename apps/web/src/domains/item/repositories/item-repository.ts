@@ -38,18 +38,21 @@ export class ItemRepository {
     }
   ) {
     const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("description", data.description);
+    formData.append("user_id", profile.id.toString());
+    formData.append("group_id", groupId);
+    formData.append("item_name", data.name);
+    formData.append("item_description", data.description);
+    formData.append("quantity", data.quantity.toString());
+    formData.append("pickup_place", data.pickupLocation);
+    formData.append("return_place", data.returnLocation);
+    formData.append("caution", data.caution);
     data.images.forEach((image) => {
       formData.append("images", image);
     });
-    formData.append("quantity", data.quantity.toString());
-    formData.append("pickupLocation", data.pickupLocation);
-    formData.append("returnLocation", data.returnLocation);
-    formData.append("caution", data.caution);
+    formData.append("status", "0");
 
-    const response = await httpClient.post(`groups/${groupId}/items`, {
-      json: formData,
+    const response = await httpClient.post<void>(`shared/items/add`, {
+      body: formData,
     });
 
     return response.json();

@@ -1,5 +1,5 @@
 "use client";
-import { groupsData } from "@/domains/group/mocks";
+import { useFetchItems } from "@/domains/item/hooks/use-fetch-items";
 import useQueryString from "@/hooks/use-query-string";
 import { DownChevronIcon } from "@repo/icons";
 import { Chip } from "@repo/ui/chip";
@@ -17,11 +17,23 @@ export default function ItemsControls({
   groupFilter,
   sort,
 }: ItemsControlsProps) {
+  const { data: items } = useFetchItems({ search, group: groupFilter, sort });
   const { setQueryString } = useQueryString();
 
   const handleSearch = useDebouncedCallback((value: string) => {
     setQueryString("search", value);
   }, 300);
+
+  const uniqueGroups = items
+    .map((item) => ({
+      id: item.groupId,
+      groupName: item.groupName,
+    }))
+    .filter(
+      (group, index, self) => self.findIndex((g) => g.id === group.id) === index
+    );
+
+  const totalItems = items.length;
 
   return (
     <div>
@@ -54,7 +66,7 @@ export default function ItemsControls({
               전체
             </button>
           </Chip>
-          {groupsData.map((group) => (
+          {uniqueGroups.map((group) => (
             <Chip
               key={group.id}
               variant={
@@ -75,7 +87,9 @@ export default function ItemsControls({
         </div>
       </div>
       <div className="flex justify-between items-center  border-b border-gray-200 mt-2 bg-white">
-        <span className="text-body-3 text-gray-700 ml-4.5">전체 99개</span>
+        <span className="text-body-3 text-gray-700 ml-4.5">
+          전체 {totalItems}개
+        </span>
         <div className="mr-2.5 my-[5px]">
           <label htmlFor="group-sort" className="relative"></label>
           <div className="relative">

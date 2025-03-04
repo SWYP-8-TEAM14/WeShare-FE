@@ -7,7 +7,12 @@ import {
 } from "@repo/ui/top-navigation";
 import CreateItemForm from "./_components/create-item-form";
 
-export default function GroupNewItemPage() {
+export default async function GroupNewItemPage({
+  params,
+}: {
+  params: Promise<{ groupId: string }>;
+}) {
+  const { groupId } = await params;
   return (
     <Page>
       <TopNavigation>
@@ -16,7 +21,7 @@ export default function GroupNewItemPage() {
         </TopNavigationLeft>
         <TopNavigationTitle>물품 추가</TopNavigationTitle>
       </TopNavigation>
-      <CreateItemForm />
+      <CreateItemForm groupId={groupId} />
     </Page>
   );
 }

@@ -6,23 +6,63 @@ import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
 import { TextField } from "@repo/ui/text-field";
 import { Textarea } from "@repo/ui/textarea";
+import { useToast } from "@repo/ui/use-toast";
+import { useRouter } from "next/navigation";
 import { useId } from "react";
+import { Controller } from "react-hook-form";
 
-export default function CreateItemForm() {
+interface CreateItemFormProps {
+  groupId: string;
+}
+
+export default function CreateItemForm({ groupId }: CreateItemFormProps) {
+  const router = useRouter();
+  const toast = useToast();
   const id = useId();
   const createItem = useCreateItem();
   const itemForm = useItemForm({
     defaultValues: {
       images: [],
+      quantity: 1,
     },
   });
   const onSubmit = itemForm.handleSubmit((data) => {
-    console.log(`onSubmit: ${JSON.stringify(data)}`);
+    createItem.mutate(
+      {
+        groupId: groupId,
+        images: data.images,
+        name: data.name,
+        description: data.description,
+        quantity: data.quantity,
+        pickupLocation: data.pickupLocation,
+        returnLocation: data.returnLocation,
+        caution: data.caution,
+      },
+      {
+        onSuccess: () => {
+          toast.toast({
+            title: "물품이 등록되었습니다.",
+          });
+          itemForm.reset();
+          router.push(`/app/groups/${groupId}/manage/items`);
+        },
+        onError: () => {
+          toast.toast({
+            title: "물품 등록에 실패했습니다.",
+          });
+        },
+      }
+    );
   });
 
   return (
     <>
-      <form className="flex-1 bg-white" id={`form-${id}`} onSubmit={onSubmit}>
+      <form
+        acceptCharset="UTF-8"
+        className="flex-1 bg-white"
+        id={`form-${id}`}
+        onSubmit={onSubmit}
+      >
         {/* 사진 업로드 */}
         <div className="pt-6.5 pb-2 px-4.5 flex flex-col">
           <div>
@@ -48,22 +88,41 @@ export default function CreateItemForm() {
             label="물품 이름"
             placeholder="물품 이름을 작성해 주세요."
             {...itemForm.register("name")}
+            errorMessage={itemForm.formState.errors.name?.message}
           />
-          <TextField
-            className="text-right"
-            type="number"
-            label="물품 수량"
-            placeholder="0"
-            min={1}
-            max={999}
-            step={1}
-            endContent={<span className="text-body-2 text-gray-700">개</span>}
-            {...itemForm.register("quantity")}
+          <Controller
+            name="quantity"
+            control={itemForm.control}
+            render={({ field: { value, onChange, ...fields } }) => (
+              <TextField
+                className="text-right"
+                type="number"
+                label="물품 수량"
+                placeholder="0"
+                min={1}
+                max={999}
+                step={1}
+                endContent={
+                  <span className="text-body-2 text-gray-700">개</span>
+                }
+                value={value}
+                onChange={(e) => {
+                  const number = parseInt(e.target.value, 10);
+                  if (isNaN(number)) {
+                    return;
+                  }
+                  onChange(number);
+                }}
+                errorMessage={itemForm.formState.errors.quantity?.message}
+                {...fields}
+              />
+            )}
           />
           <Textarea
             label="상세 내용"
             maxLength={100}
             placeholder="물품에 대한 설명을 작성해 주세요."
+            errorMessage={itemForm.formState.errors.description?.message}
             {...itemForm.register("description")}
           />
         </div>
@@ -73,11 +132,13 @@ export default function CreateItemForm() {
           <TextField
             label="픽업 장소"
             placeholder="픽업 장소를 작성해 주세요."
+            errorMessage={itemForm.formState.errors.pickupLocation?.message}
             {...itemForm.register("pickupLocation")}
           />
           <TextField
             label="반납 장소"
             placeholder="반납 장소를 작성해 주세요."
+            errorMessage={itemForm.formState.errors.returnLocation?.message}
             {...itemForm.register("returnLocation")}
           />
         </div>
@@ -87,6 +148,7 @@ export default function CreateItemForm() {
             label="대여시 주의사항"
             maxLength={100}
             placeholder="대여시 주의사항을 작성해 주세요."
+            errorMessage={itemForm.formState.errors.caution?.message}
             {...itemForm.register("caution")}
           />
         </div>
@@ -94,6 +156,7 @@ export default function CreateItemForm() {
       <FixedBottom>
         <FixedBottomActions>
           <Button
+            disabled={!itemForm.formState.isValid}
             type="submit"
             variant="secondary"
             size="large"

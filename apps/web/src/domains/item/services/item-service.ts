@@ -30,6 +30,7 @@ export class ItemService {
       search,
       group,
       sort,
+      isAll: true,
     });
     return response;
   }
@@ -37,5 +38,14 @@ export class ItemService {
   static async fetchItem(itemId: string) {
     const response = await ItemRepository.fetchItem({ itemId });
     return response;
+  }
+
+  static async fetchBookableItems() {
+    return ItemRepository.fetchItems({
+      group: "",
+      sort: "recent",
+      search: "",
+      isAll: false,
+    });
   }
 }

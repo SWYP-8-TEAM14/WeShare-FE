@@ -5,6 +5,8 @@ import BookableItems from "./_components/bookable-items";
 import Header from "./_components/header";
 import MainBanners from "./_components/main-banners";
 
+export const dynamic = "force-dynamic";
+
 export default async function AppPage() {
   const bookableItems = await ItemService.fetchBookableItems();
   return (

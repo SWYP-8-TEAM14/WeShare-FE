@@ -1,7 +1,7 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
 import { membersData } from "@/domains/group/mocks";
-import { groupItems } from "@/domains/item/mocks";
+import { ItemService } from "@/domains/item/services/item-service";
 import { RightChevronIcon } from "@repo/icons";
 import { IconButton } from "@repo/ui/icon-button";
 import {
@@ -32,7 +32,8 @@ const groupManageData = {
   },
 };
 
-export default function GroupManagePage() {
+export default async function GroupManagePage() {
+  const items = await ItemService.fetchBookableItems();
   return (
     <Page>
       <TopNavigation>
@@ -73,7 +74,21 @@ export default function GroupManagePage() {
             </ListHeaderAction>
           </ListHeader>
         </Link>
-        <GroupItemsPreview groupItems={groupItems} />
+        <GroupItemsPreview
+          groupItems={items.map((item) => ({
+            id: item.itemId,
+            image:
+              item.imageUrls[0] || "https://placehold.co/100x100/white/white",
+            group: {
+              name: item.groupName,
+            },
+            itemStatus: item.status,
+            itemName: item.itemName,
+            user: {
+              isLiked: item.isWishlist === 1,
+            },
+          }))}
+        />
       </section>
     </Page>
   );

@@ -14,7 +14,7 @@ interface GroupItemsPreviewProps {
     group: {
       name: string;
     };
-    itemStatus: string;
+    itemStatus: number;
     itemName: string;
     user: {
       isLiked: boolean;

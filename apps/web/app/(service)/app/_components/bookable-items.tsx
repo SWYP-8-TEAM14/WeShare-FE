@@ -8,7 +8,7 @@ interface BookableItemsProps {
     group: {
       name: string;
     };
-    itemStatus: string;
+    itemStatus: number;
     itemName: string;
     user: {
       isLiked: boolean;

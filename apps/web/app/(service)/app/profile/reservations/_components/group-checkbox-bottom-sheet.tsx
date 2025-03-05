@@ -28,7 +28,6 @@ export default function GroupCheckboxBottomSheet({
   const [open, setOpen] = useState(false);
   const [groupFilter, setLocalGroupFilter] = useState(defaultGroupFilter);
 
-  console.log("open", open);
   return (
     <BottomSheet open={open} onOpenChange={setOpen}>
       <BottomSheetTrigger asChild>{children}</BottomSheetTrigger>

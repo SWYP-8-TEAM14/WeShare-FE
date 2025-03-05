@@ -16,84 +16,76 @@ import {
   TopNavigationTitle,
 } from "@repo/ui/top-navigation";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 
 export default async function ItemDetailPage({
   params,
 }: {
   params: Promise<{ itemId: string }>;
 }) {
-  try {
-    const { itemId } = await params;
-    const itemDetail = await ItemService.fetchItem(itemId);
-    return (
-      <Page>
-        <TopNavigation>
-          <TopNavigationLeft>
-            <RouterBackButton />
-          </TopNavigationLeft>
-          <TopNavigationTitle>뽀로로 코딩 컴퓨터</TopNavigationTitle>
-        </TopNavigation>
-        <ImageCarousel className=" aspect-square">
-          <ImageCarouselContent>
-            {itemDetail.imageUrls.map((image, index) => (
-              <ImageCarouselSlide key={index}>
-                <img src={image} width={600} height={600} />
-              </ImageCarouselSlide>
-            ))}
-          </ImageCarouselContent>
-          <ImageCarouselDots className="absolute bottom-4 left-1/2 transform -translate-x-1/2" />
-        </ImageCarousel>
-        <div className="bg-white">
-          <div className="py-4.5 mx-4.5 flex items-center justify-between border-b border-gray-200">
-            <div>
-              <p className="text-body-6 text-gray-600">
-                {itemDetail.groupName}
-              </p>
-              <p className="text-heading-2 mt-1.5">{itemDetail.itemName}</p>
-            </div>
-            <div className="flex flex-col justify-center items-center bg-gray-100 px-5 rounded-sm h-17.5">
-              <span className="text-detail-2 text-gray-700">수량</span>
-              <span className="text-body-1 mt-1.5">
-                {itemDetail.quantity}개
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="p-4.5 bg-white">
+  const { itemId } = await params;
+  const itemDetail = await ItemService.fetchItem(itemId);
+  return (
+    <Page>
+      <TopNavigation>
+        <TopNavigationLeft>
+          <RouterBackButton />
+        </TopNavigationLeft>
+        <TopNavigationTitle>뽀로로 코딩 컴퓨터</TopNavigationTitle>
+      </TopNavigation>
+      <ImageCarousel className=" aspect-square">
+        <ImageCarouselContent>
+          {itemDetail.imageUrls.map((image, index) => (
+            <ImageCarouselSlide key={index}>
+              <img src={image} width={600} height={600} />
+            </ImageCarouselSlide>
+          ))}
+        </ImageCarouselContent>
+        <ImageCarouselDots className="absolute bottom-4 left-1/2 transform -translate-x-1/2" />
+      </ImageCarousel>
+      <div className="bg-white">
+        <div className="py-4.5 mx-4.5 flex items-center justify-between border-b border-gray-200">
           <div>
-            <h3 className="text-heading-5 text-gray-800">상세내용</h3>
-            <p className="text-body-2 text-gray-700 mt-2">
-              {itemDetail.itemDescription}
-            </p>
+            <p className="text-body-6 text-gray-600">{itemDetail.groupName}</p>
+            <p className="text-heading-2 mt-1.5">{itemDetail.itemName}</p>
           </div>
-          <div className="mt-6">
-            <h3 className="text-heading-5 text-gray-800">대여시 주의사항</h3>
-            <p className="text-body-2 text-gray-700 mt-2">
-              {itemDetail.caution}
-            </p>
+          <div className="flex flex-col justify-center items-center bg-gray-100 px-5 rounded-sm h-17.5">
+            <span className="text-detail-2 text-gray-700">수량</span>
+            <span className="text-body-1 mt-1.5">{itemDetail.quantity}개</span>
           </div>
         </div>
-        <div className="px-4.5 pb-7 bg-white">
-          <div className="p-4 rounded-sm bg-gray-100 flex flex-col gap-2">
-            <div>
-              <span className="text-body-6 text-gray-600">픽업 장소</span>
-              <p className="text-heading-2 mt-1.5">{itemDetail.pickupPlace}</p>
-            </div>
-            <div>
-              <span className="text-body-6 text-gray-600">반납 장소</span>
-              <p className="text-heading-2 mt-1.5">{itemDetail.returnPlace}</p>
-            </div>
-          </div>
-        </div>
-        <section className="mt-2 pt-7 bg-white pb-4.5">
-          <ListHeader>
-            <ListHeaderTitle>이전 대여 멤버</ListHeaderTitle>
-          </ListHeader>
+      </div>
 
-          <div className="mt-3">
-            {/* {itemDetail.previousRenters.map((renter) => (
+      <div className="p-4.5 bg-white">
+        <div>
+          <h3 className="text-heading-5 text-gray-800">상세내용</h3>
+          <p className="text-body-2 text-gray-700 mt-2">
+            {itemDetail.itemDescription}
+          </p>
+        </div>
+        <div className="mt-6">
+          <h3 className="text-heading-5 text-gray-800">대여시 주의사항</h3>
+          <p className="text-body-2 text-gray-700 mt-2">{itemDetail.caution}</p>
+        </div>
+      </div>
+      <div className="px-4.5 pb-7 bg-white">
+        <div className="p-4 rounded-sm bg-gray-100 flex flex-col gap-2">
+          <div>
+            <span className="text-body-6 text-gray-600">픽업 장소</span>
+            <p className="text-heading-2 mt-1.5">{itemDetail.pickupPlace}</p>
+          </div>
+          <div>
+            <span className="text-body-6 text-gray-600">반납 장소</span>
+            <p className="text-heading-2 mt-1.5">{itemDetail.returnPlace}</p>
+          </div>
+        </div>
+      </div>
+      <section className="mt-2 pt-7 bg-white pb-4.5">
+        <ListHeader>
+          <ListHeaderTitle>이전 대여 멤버</ListHeaderTitle>
+        </ListHeader>
+
+        <div className="mt-3">
+          {/* {itemDetail.previousRenters.map((renter) => (
             <div
               key={renter.id}
               className="flex items-center gap-2 h-15 py-2 px-4.5"
@@ -114,18 +106,15 @@ export default async function ItemDetailPage({
               </div>
             </div>
           ))} */}
-          </div>
-        </section>
-        <FixedBottom>
-          <FixedBottomActions>
-            <Button size="large" asChild>
-              <Link href={`/app/reserve/${itemDetail.itemId}`}>예약하기</Link>
-            </Button>
-          </FixedBottomActions>
-        </FixedBottom>
-      </Page>
-    );
-  } catch (error) {
-    notFound();
-  }
+        </div>
+      </section>
+      <FixedBottom>
+        <FixedBottomActions>
+          <Button size="large" asChild>
+            <Link href={`/app/reserve/${itemDetail.itemId}`}>예약하기</Link>
+          </Button>
+        </FixedBottomActions>
+      </FixedBottom>
+    </Page>
+  );
 }

@@ -5,7 +5,7 @@ export const useCreateGroup = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: { image: string; name: string; description: string }) =>
+    mutationFn: (data: { image: File; name: string; description: string }) =>
       GroupService.createGroup(data),
     onSuccess: () => {
       queryClient.invalidateQueries({

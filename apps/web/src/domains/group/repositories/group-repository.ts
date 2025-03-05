@@ -4,13 +4,18 @@ import httpClient from "@/lib/ky";
 
 export class GroupRepository {
   static async createGroup(data: {
-    image: string;
+    image: File;
     name: string;
     description: string;
   }) {
+    const formData = new FormData();
+    formData.append("group_image", data.image);
+    formData.append("group_name", data.name);
+    formData.append("group_description", data.description);
+
     const response = await httpClient
-      .post("groups", {
-        json: data,
+      .post("groups/groups/create", {
+        body: formData,
       })
       .json();
     return response;

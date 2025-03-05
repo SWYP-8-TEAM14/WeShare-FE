@@ -8,10 +8,14 @@ import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
 import { TextField } from "@repo/ui/text-field";
 import { Textarea } from "@repo/ui/textarea";
+import { useToast } from "@repo/ui/use-toast";
+import { useRouter } from "next/navigation";
 import { useId } from "react";
 import { Controller } from "react-hook-form";
 
 export default function CreateGroupForm() {
+  const { toast } = useToast();
+  const router = useRouter();
   const id = useId();
   const createGroup = useCreateGroup();
   const groupForm = useGroupForm({
@@ -23,11 +27,24 @@ export default function CreateGroupForm() {
   const imagePreview = useFilePreview(groupForm.watch("image")?.[0]);
   const onSubmit = groupForm.handleSubmit((data) => {
     console.log(`onSubmit: ${JSON.stringify(data)}`);
-    // createGroup.mutate(data, {
-    //   onSuccess: () => {
-    //     router.push("/app/groups");
-    //   },
-    // });
+    const file = data.image[0];
+    if (!file) {
+      return;
+    }
+    createGroup.mutate(
+      {
+        image: file,
+        name: data.name,
+        description: data.description,
+      },
+      {
+        onSuccess: () => {
+          groupForm.reset();
+          toast({ title: "그룹이 생성되었습니다." });
+          router.push("/app/groups");
+        },
+      }
+    );
   });
 
   return (

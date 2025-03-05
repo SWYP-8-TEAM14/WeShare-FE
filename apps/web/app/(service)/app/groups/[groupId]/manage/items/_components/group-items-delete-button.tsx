@@ -1,4 +1,5 @@
 "use client";
+import { useDeleteItems } from "@/domains/group/hooks/use-delete-items";
 import {
   AlertDialog,
   alertDialogActionStyles,
@@ -11,15 +12,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@repo/ui/alert-dialog";
+import { useToast } from "@repo/ui/use-toast";
 import React from "react";
 
 interface GroupItemsDeleteButtonProps {
   itemIds: number[];
+  onDeleted?: () => void;
 }
 
 export default function GroupItemsDeleteButton({
+  onDeleted,
   itemIds,
 }: GroupItemsDeleteButtonProps) {
+  const { toast } = useToast();
+  const deleteItems = useDeleteItems();
   const [openAlert, setOpenAlert] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   return (
@@ -59,14 +65,26 @@ export default function GroupItemsDeleteButton({
           <button
             className={alertDialogActionStyles()}
             onClick={() => {
-              return new Promise<void>((resolve) => {
-                setIsLoading(true);
-                setTimeout(() => {
-                  resolve();
-                  setIsLoading(false);
-                  setOpenAlert(false);
-                }, 1000);
-              });
+              setIsLoading(true);
+              deleteItems.mutate(
+                { itemIds },
+                {
+                  onSuccess: () => {
+                    setIsLoading(false);
+                    setOpenAlert(false);
+                    toast({
+                      title: "삭제되었습니다.",
+                    });
+                    onDeleted?.();
+                  },
+                  onError: () => {
+                    setIsLoading(false);
+                    toast({
+                      title: "삭제에 실패했습니다.",
+                    });
+                  },
+                }
+              );
             }}
           >
             {isLoading ? "삭제 중..." : "삭제"}

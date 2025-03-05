@@ -1,8 +1,9 @@
 "use client";
 import RouterBackButton from "@/components/router-back-button";
-import { useBatchUpdateGroupItems } from "@/domains/group/hooks/use-batch-update-group-items";
+import { useDeleteItems } from "@/domains/group/hooks/use-delete-items";
 import { useGroupItemsForm } from "@/domains/group/hooks/use-group-items-form";
-import { itemsOfGroup } from "@/domains/item/mocks";
+import { useFetchItems } from "@/domains/item/hooks/use-fetch-items";
+import { getItemStatusText } from "@/domains/item/utils/format";
 import { Checkbox } from "@repo/ui/checkbox";
 import { Label } from "@repo/ui/label";
 import {
@@ -15,7 +16,12 @@ import Image from "next/image";
 import GroupItemsDeleteButton from "./group-items-delete-button";
 
 export default function GroupItemsForm() {
-  const batchDeleteItems = useBatchUpdateGroupItems();
+  const deleteItems = useDeleteItems();
+  const { data: items } = useFetchItems({
+    search: "",
+    group: "",
+    sort: "recent",
+  });
   const groupItemsForm = useGroupItemsForm({
     defaultValues: {
       itemIds: [],
@@ -33,7 +39,12 @@ export default function GroupItemsForm() {
         <TopNavigationTitle>그룹물품 관리</TopNavigationTitle>
         <TopNavigationRight>
           {selectedItemIds.length > 0 && (
-            <GroupItemsDeleteButton itemIds={selectedItemIds} />
+            <GroupItemsDeleteButton
+              itemIds={selectedItemIds}
+              onDeleted={() => {
+                groupItemsForm.reset();
+              }}
+            />
           )}
         </TopNavigationRight>
       </TopNavigation>
@@ -58,7 +69,7 @@ export default function GroupItemsForm() {
                 onClick={() => {
                   groupItemsForm.setValue(
                     "itemIds",
-                    itemsOfGroup.map((item) => item.id)
+                    items.map((item) => item.itemId)
                   );
                 }}
               >
@@ -68,23 +79,33 @@ export default function GroupItemsForm() {
           </div>
         </div>
         <div className="mt-3">
-          {itemsOfGroup.map((item) => (
-            <div key={item.id} className="flex items-center gap-3 py-2 px-4.5">
+          {items.map((item) => (
+            <div
+              key={item.itemId}
+              className="flex items-center gap-3 py-2 px-4.5"
+            >
               <Image
                 unoptimized
                 width={74}
                 height={74}
-                src={item.image}
+                src={
+                  item.imageUrls[0] ||
+                  "https://placehold.co/100x100/white/white"
+                }
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = "https://placehold.co/100x100/white/white";
+                }}
                 alt={item.itemName}
                 className="rounded-sm"
               />
               <div className="flex-1 mt-3">
                 <div className="flex">
                   <span className="text-gray-600 text-body-6 line-clamp-1">
-                    {item.groupName}
+                    {item.itemName}
                   </span>
                   <span className="text-primary text-body-6 ml-1.5 font-semibold">
-                    {item.itemStatus}
+                    {getItemStatusText(item.status)}
                   </span>
                 </div>
                 <p className="text-body-1 mt-1.5 line-clamp-2">
@@ -92,23 +113,23 @@ export default function GroupItemsForm() {
                 </p>
               </div>
               <div className="flex items-center">
-                <Label htmlFor={`item-${item.id}`} className="sr-only">
+                <Label htmlFor={`item-${item.itemId}`} className="sr-only">
                   {item.itemName} 선택
                 </Label>
                 <Checkbox
-                  id={`item-${item.id}`}
-                  name={`item-${item.id}`}
-                  value={item.id}
-                  checked={selectedItemIds.includes(item.id)}
+                  id={`item-${item.itemId}`}
+                  name={`item-${item.itemId}`}
+                  value={item.itemId}
+                  checked={selectedItemIds.includes(item.itemId)}
                   onCheckedChange={(checked) => {
                     return checked
                       ? groupItemsForm.setValue("itemIds", [
                           ...selectedItemIds,
-                          item.id,
+                          item.itemId,
                         ])
                       : groupItemsForm.setValue(
                           "itemIds",
-                          selectedItemIds.filter((id) => id !== item.id)
+                          selectedItemIds.filter((id) => id !== item.itemId)
                         );
                   }}
                 />

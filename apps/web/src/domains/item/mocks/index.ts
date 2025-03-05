@@ -3,7 +3,7 @@ export const bookableItems = [
     id: 1,
     image: "https://placehold.co/200",
     group: "도보마포",
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "빅토리아니키 125",
     user: {
       isLiked: true,
@@ -13,7 +13,7 @@ export const bookableItems = [
     id: 2,
     image: "https://placehold.co/200",
     group: "도보마포",
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "빅토리아니키 125",
     user: {
       isLiked: false,
@@ -39,7 +39,7 @@ export const groupItems = [
       id: 2,
       name: "도보마포",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "빅토리아니키 125",
     user: {
       isLiked: true,
@@ -52,7 +52,7 @@ export const groupItems = [
       id: 2,
       name: "도보마포",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "빅토리아니키 125",
     user: {
       isLiked: false,
@@ -91,7 +91,7 @@ export const groupItems = [
       id: 2,
       name: "도보마포",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "산책용 자전거",
     user: {
       isLiked: false,
@@ -117,7 +117,7 @@ export const groupItems = [
       id: 1,
       name: "🎾테린이들의 테니스 모임🎾",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "테니스 라켓",
     user: {
       isLiked: true,
@@ -143,7 +143,7 @@ export const groupItems = [
       id: 3,
       name: "마포 스크린골프 동호회 (모집중)",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "골프볼 세트",
     user: {
       isLiked: true,
@@ -169,7 +169,7 @@ export const groupItems = [
       id: 1,
       name: "🎾테린이들의 테니스 모임🎾",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "테니스 공 세트",
     user: {
       isLiked: true,
@@ -195,7 +195,7 @@ export const groupItems = [
       id: 3,
       name: "마포 스크린골프 동호회 (모집중)",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "골프 장갑",
     user: {
       isLiked: true,
@@ -221,7 +221,7 @@ export const groupItems = [
       id: 2,
       name: "도보마포",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "산책용 모자",
     user: {
       isLiked: true,
@@ -247,7 +247,7 @@ export const groupItems = [
       id: 1,
       name: "🎾테린이들의 테니스 모임🎾",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "테니스 신발",
     user: {
       isLiked: true,
@@ -273,7 +273,7 @@ export const groupItems = [
       id: 3,
       name: "마포 스크린골프 동호회 (모집중)",
     },
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "골프 연습 매트",
     user: {
       isLiked: true,
@@ -299,14 +299,14 @@ export const itemsOfGroup = [
     id: 1,
     image: "https://placehold.co/200",
     group: "도보마포",
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "빅토리아니키 125",
   },
   {
     id: 2,
     image: "https://placehold.co/200",
     group: "도보마포",
-    itemStatus: "예약 가능",
+    itemStatus: 0,
     itemName: "빅토리아니키 125",
   },
   {

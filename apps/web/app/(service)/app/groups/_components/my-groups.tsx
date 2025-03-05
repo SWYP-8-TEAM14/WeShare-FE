@@ -5,8 +5,6 @@ import { FixedBottom } from "@repo/ui/fixed-bottom";
 import { FloatingButton } from "@repo/ui/floating-button";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
 import GroupList from "./group-list";
 import GroupsControls from "./groups-controls";
 
@@ -16,24 +14,9 @@ interface MyGroupsProps {
 }
 
 export default function MyGroups({ filter, sort }: MyGroupsProps) {
-  const { ref, inView } = useInView();
-  const {
-    status,
-    data,
-    isFetching,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  } = useFetchGroups({ filter, sort });
-  const allGroups = data?.pages.flatMap((page) => page);
+  const { data: groups } = useFetchGroups({ filter, sort });
 
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, inView]);
-
-  if (allGroups.length === 0) {
+  if (groups.length === 0) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center">
         <h1 className="sr-only">내 그룹</h1>
@@ -53,9 +36,12 @@ export default function MyGroups({ filter, sort }: MyGroupsProps) {
               그룹을 만들어 멤버들과 함께 공용 물품을 관리해보세요!
             </p>
           </div>
-          <button className="mt-8 rounded-full px-2.5 py-[13px] border border-black/10 bg-white w-[130px] text-body-3 text-gray-700">
+          <Link
+            href={`/app/groups/new`}
+            className="mt-8 flex items-center justify-center rounded-full px-2.5 py-[13px] border border-black/10 bg-white w-[130px] text-body-3 text-gray-700"
+          >
             그룹 생성하기
-          </button>
+          </Link>
         </div>
       </div>
     );
@@ -65,13 +51,15 @@ export default function MyGroups({ filter, sort }: MyGroupsProps) {
         <div className="flex-1 flex flex-col items-center justify-center">
           <h1 className="sr-only">내 그룹</h1>
           <GroupsControls filter={filter} sort={sort} />
-          <GroupList groups={allGroups} />
-          <div ref={ref} className="flex justify-center w-full">
-            {isFetchingNextPage && <div>로딩중...</div>}
-            {hasNextPage && !isFetchingNextPage && (
-              <button onClick={() => fetchNextPage()}>더보기</button>
-            )}
-          </div>
+          <GroupList
+            groups={groups.map((group) => ({
+              id: group.id,
+              name: group.name,
+              image: group.image,
+              introduction: group.description,
+              members: group.memberCount,
+            }))}
+          />
         </div>
         <FixedBottom>
           <FloatingButton asChild>

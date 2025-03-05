@@ -1,4 +1,5 @@
 "use client";
+import { getItemStatusText } from "@/domains/item/utils/format";
 import { LikeActiveIcon } from "@repo/icons";
 import { IconButton } from "@repo/ui/icon-button";
 import Image from "next/image";
@@ -11,7 +12,7 @@ type ItemListProps = {
     group: {
       name: string;
     };
-    itemStatus: string;
+    itemStatus: number;
     itemName: string;
     user: {
       isLiked: boolean;
@@ -35,6 +36,10 @@ export default function ItemList({ items }: ItemListProps) {
             height={74}
             alt="item"
             className="rounded-sm"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = "https://placehold.co/100x100/white/white";
+            }}
           />
           <div className="flex-1 mt-3">
             <div className="flex items-center">
@@ -43,7 +48,7 @@ export default function ItemList({ items }: ItemListProps) {
               </span>
               <span className="w-px h-2 bg-gray-200 mx-1.5" />
               <span className="text-primary text-body-6 font-semibold">
-                {item.itemStatus}
+                {getItemStatusText(item.itemStatus)}
               </span>
             </div>
             <p className="text-body-1 mt-1.5 line-clamp-2">{item.itemName}</p>

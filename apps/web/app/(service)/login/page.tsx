@@ -1,6 +1,8 @@
 import Page from "@/components/page";
 import { AuthService } from "@/domains/auth/services/auth-service";
 
+export const dynamic = "force-dynamic";
+
 export default async function LoginPage() {
   const { authUrl: kakaoLoginUrl } = await AuthService.fetchKakaoLoginUrl();
   return (

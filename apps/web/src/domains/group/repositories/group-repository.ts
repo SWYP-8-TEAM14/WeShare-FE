@@ -1,6 +1,22 @@
-import { MockGroups } from "@/domains/group/mocks";
 import { profile } from "@/domains/user/mocks";
 import httpClient from "@/lib/ky";
+import { z } from "zod";
+
+const fetchGroupsSchema = z.array(
+  z.object({
+    group_id: z.number(),
+    group_name: z.string(),
+    group_image: z.string(),
+    group_description: z.string(),
+    member_count: z.number(),
+  })
+);
+
+const fetchGroupSchema = z.object({
+  group_name: z.string(),
+  group_image: z.string(),
+  group_description: z.string(),
+});
 
 export class GroupRepository {
   static async createGroup(data: {
@@ -77,49 +93,38 @@ export class GroupRepository {
   static async fetchGroups({
     filter,
     sort,
-    page,
-    limit,
   }: {
     filter: "all" | "own";
     sort: "default" | "many-members";
-    page: number;
-    limit: number;
   }) {
-    return MockGroups.groups
-      .filter((group) => {
-        if (filter === "all") {
-          return true;
-        }
-        return group.user.isOwner;
+    const response = await httpClient
+      .get("groups/groups/", {
+        searchParams: {
+          created_by_me: filter === "own",
+        },
       })
-      .sort((a, b) => {
-        if (sort === "default") {
-          return 0;
-        }
-        return b.members - a.members;
-      })
-      .slice((page - 1) * limit, page * limit);
-    // const response = (await httpClient
-    //   .get("groups", {
-    //     searchParams: {
-    //       filter,
-    //       sort,
-    //       page,
-    //       limit,
-    //     },
-    //   })
-    //   .json()) as {
-    //   id: number;
-    //   name: string;
-    //   image: string;
-    //   introduction: string;
-    //   members: number;
-    //   created_at: string;
-    //   updated_at: string;
-    //   user: {
-    //     isOwner: boolean;
-    //   };
-    // }[];
-    // return response;
+      .json();
+
+    const parsedData = fetchGroupsSchema.parse(response);
+
+    return parsedData.map((group) => ({
+      id: group.group_id,
+      name: group.group_name,
+      image: group.group_image,
+      description: group.group_description,
+      memberCount: group.member_count,
+    }));
+  }
+
+  static async fetchGroup(groupId: number) {
+    const response = await httpClient.get(`groups/groups/${groupId}/`).json();
+
+    const parsedData = fetchGroupSchema.parse(response);
+
+    return {
+      name: parsedData.group_name,
+      image: parsedData.group_image,
+      description: parsedData.group_description,
+    };
   }
 }

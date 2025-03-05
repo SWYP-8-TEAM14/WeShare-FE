@@ -79,10 +79,12 @@ export class ItemRepository {
     search,
     group,
     sort,
+    isAll,
   }: {
     search: string;
     group: string;
     sort: "recent" | "old";
+    isAll: boolean;
   }) {
     const json = await httpClient
       .post<ResourceResponse<string>>("shared/items/", {
@@ -90,6 +92,7 @@ export class ItemRepository {
           user_id: profile.id,
           group_id: group ? parseInt(group) : 0,
           sort: fetchItemsSortMap[sort],
+          is_all: isAll ? true : false,
         },
       })
       .json();

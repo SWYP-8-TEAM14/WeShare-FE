@@ -23,7 +23,7 @@ export const bookableItems = [
     id: 3,
     image: "https://placehold.co/200",
     group: "🎾테린이들의 테니스 모임🎾",
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "원형 사이드 테이블",
     user: {
       isLiked: true,
@@ -65,7 +65,7 @@ export const groupItems = [
       id: 1,
       name: "🎾테린이들의 테니스 모임🎾",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "원형 사이드 테이블",
     user: {
       isLiked: true,
@@ -78,7 +78,7 @@ export const groupItems = [
       id: 3,
       name: "마포 스크린골프 동호회 (모집중)",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "골프채 세트",
     user: {
       isLiked: false,
@@ -104,7 +104,7 @@ export const groupItems = [
       id: 2,
       name: "도보마포",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "도시락",
     user: {
       isLiked: true,
@@ -130,7 +130,7 @@ export const groupItems = [
       id: 1,
       name: "🎾테린이들의 테니스 모임🎾",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "스포츠 백",
     user: {
       isLiked: false,
@@ -156,7 +156,7 @@ export const groupItems = [
       id: 3,
       name: "마포 스크린골프 동호회 (모집중)",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "클럽 헤드 커버",
     user: {
       isLiked: false,
@@ -182,7 +182,7 @@ export const groupItems = [
       id: 2,
       name: "도보마포",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "등산 스틱",
     user: {
       isLiked: false,
@@ -208,7 +208,7 @@ export const groupItems = [
       id: 1,
       name: "🎾테린이들의 테니스 모임🎾",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "테니스 네트",
     user: {
       isLiked: false,
@@ -234,7 +234,7 @@ export const groupItems = [
       id: 3,
       name: "마포 스크린골프 동호회 (모집중)",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "골프 거리 측정기",
     user: {
       isLiked: false,
@@ -260,7 +260,7 @@ export const groupItems = [
       id: 2,
       name: "도보마포",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "물병",
     user: {
       isLiked: false,
@@ -286,7 +286,7 @@ export const groupItems = [
       id: 1,
       name: "🎾테린이들의 테니스 모임🎾",
     },
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "테니스 가방",
     user: {
       isLiked: false,
@@ -313,7 +313,7 @@ export const itemsOfGroup = [
     id: 3,
     image: "https://placehold.co/200",
     group: "🎾테린이들의 테니스 모임🎾",
-    itemStatus: "예약 중",
+    itemStatus: 0,
     itemName: "원형 사이드 테이블",
   },
 ];

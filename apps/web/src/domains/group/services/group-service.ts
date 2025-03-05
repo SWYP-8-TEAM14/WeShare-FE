@@ -39,15 +39,8 @@ export class GroupService {
     return response;
   }
 
-  static async deleteItemsFromGroup({
-    groupId,
-    itemIds,
-  }: {
-    groupId: number;
-    itemIds: number[];
-  }) {
+  static async deleteItemsFromGroup({ itemIds }: { itemIds: number[] }) {
     const response = await GroupRepository.deleteItemsFromGroup({
-      groupId,
       itemIds,
     });
     return response;

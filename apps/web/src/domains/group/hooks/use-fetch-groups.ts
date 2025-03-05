@@ -1,8 +1,5 @@
 import { GroupService } from "@/domains/group/services/group-service";
-import {
-  infiniteQueryOptions,
-  useSuspenseInfiniteQuery,
-} from "@tanstack/react-query";
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 
 interface UseFetchGroupsOptions {
   filter: "all" | "own";
@@ -10,26 +7,16 @@ interface UseFetchGroupsOptions {
 }
 
 export const fetchGroupsOptions = ({ filter, sort }: UseFetchGroupsOptions) =>
-  infiniteQueryOptions({
+  queryOptions({
     queryKey: ["groups", { filter, sort }],
-    queryFn: async ({ pageParam = 1 }) => {
-      const groups = await GroupService.fetchGroups({
+    queryFn: async () => {
+      return GroupService.fetchGroups({
         filter,
         sort,
-        page: pageParam,
-        limit: 20,
       });
-      return groups;
     },
-    getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length < 20) {
-        return undefined;
-      }
-      return allPages.length + 1;
-    },
-    initialPageParam: 1,
   });
 
 export const useFetchGroups = ({ filter, sort }: UseFetchGroupsOptions) => {
-  return useSuspenseInfiniteQuery(fetchGroupsOptions({ filter, sort }));
+  return useSuspenseQuery(fetchGroupsOptions({ filter, sort }));
 };

@@ -2,7 +2,6 @@ import { profile } from "@/domains/user/mocks";
 import httpClient from "@/lib/ky";
 import { ResourceResponse } from "@/types/api";
 import { z } from "zod";
-
 const fetchItemsSortMap = {
   recent: 1,
   old: 2,
@@ -19,8 +18,8 @@ const fetchItemsSchema = z.array(
     created_at: z.string(),
     is_wishlist: z.number(),
     status: z.number(),
-    reservation_user_id: z.number(),
-    reservation_user_name: z.string(),
+    reservation_user_id: z.number().nullable(),
+    reservation_user_name: z.string().nullable(),
   })
 );
 
@@ -115,14 +114,17 @@ export class ItemRepository {
   }
 
   static async fetchItem({ itemId }: { itemId: string }) {
-    const json = await httpClient
-      .post<ResourceResponse<string>>("shared/items/detail/", {
+    const response = await httpClient.post<ResourceResponse<string>>(
+      `shared/items/detail/`,
+      {
         json: {
           item_id: parseInt(itemId),
           user_id: profile.id,
         },
-      })
-      .json();
+      }
+    );
+
+    const json = await response.json();
 
     const data = JSON.parse(json.data);
     const parsedData = fetchItemSchema.parse(data);

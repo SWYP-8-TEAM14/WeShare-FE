@@ -1,4 +1,5 @@
 import { MockGroups } from "@/domains/group/mocks";
+import { profile } from "@/domains/user/mocks";
 import httpClient from "@/lib/ky";
 
 export class GroupRepository {
@@ -56,17 +57,12 @@ export class GroupRepository {
     return response;
   }
 
-  static async deleteItemsFromGroup({
-    groupId,
-    itemIds,
-  }: {
-    groupId: number;
-    itemIds: number[];
-  }) {
+  static async deleteItemsFromGroup({ itemIds }: { itemIds: number[] }) {
     const response = await httpClient
-      .delete(`groups/${groupId}/items`, {
+      .post(`shared/items/delete`, {
         json: {
-          itemIds,
+          user_id: profile.id,
+          item_id: itemIds,
         },
       })
       .json();

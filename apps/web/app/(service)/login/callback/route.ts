@@ -7,6 +7,8 @@ export async function GET(request: NextRequest) {
   const accessToken = searchParams.get("access_token");
   const refreshToken = searchParams.get("refresh_token");
 
+  console.log("accessToken", accessToken, "refreshToken", refreshToken);
+
   //redirect to home page
   if (!accessToken || !refreshToken) {
     return new Response(null, {
@@ -17,18 +19,18 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  // Store the tokens in cookies option: {httpOnly: true, secure: true,sameSite: "lax"}
+  // Store the tokens in cookies option: {httpOnly: true, secure: false, sameSite: "lax"}
   // accessToken: 1 hour, refreshToken: 1 day
   cookieStore.set("accessToken", accessToken, {
     maxAge: 3600,
     httpOnly: false,
-    secure: true,
+    secure: false,
     sameSite: "strict",
   });
   cookieStore.set("refreshToken", refreshToken, {
     maxAge: 86400,
     httpOnly: true,
-    secure: true,
+    secure: false,
     sameSite: "strict",
   });
 

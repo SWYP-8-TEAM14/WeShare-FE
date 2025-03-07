@@ -6,6 +6,7 @@ import useFilePreview from "@/hooks/use-file-preview";
 import { EditIcon } from "@repo/icons";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
+import { ErrorMessage } from "@repo/ui/form";
 import { TextField } from "@repo/ui/text-field";
 import { Textarea } from "@repo/ui/textarea";
 import { useToast } from "@repo/ui/use-toast";
@@ -24,10 +25,9 @@ export default function CreateGroupForm() {
       description: "",
     },
   });
-  const imagePreview = useFilePreview(groupForm.watch("image")?.[0]);
+  const imagePreview = useFilePreview(groupForm.watch("image"));
   const onSubmit = groupForm.handleSubmit((data) => {
-    console.log(`onSubmit: ${JSON.stringify(data)}`);
-    const file = data.image[0];
+    const file = data.image;
     if (!file) {
       return;
     }
@@ -51,7 +51,7 @@ export default function CreateGroupForm() {
     <>
       <form className="flex-1 bg-white" id={`form-${id}`} onSubmit={onSubmit}>
         {/* 그룹 이미지 입력 */}
-        <div className="py-6.5 flex justify-center">
+        <div className="py-6.5 flex justify-center flex-col items-center gap-4">
           <label className="relative inline-flex">
             <span className="sr-only">그룹 이미지</span>
             <img
@@ -70,6 +70,9 @@ export default function CreateGroupForm() {
               )}
             />
           </label>
+          <ErrorMessage>
+            {groupForm.formState.errors.image?.message}
+          </ErrorMessage>
         </div>
         {/* 그룹 정보 입력 */}
         <div className="py-6.5 px-4.5 flex flex-col gap-7.5">
@@ -78,12 +81,14 @@ export default function CreateGroupForm() {
             label="그룹이름"
             placeholder="그룹 이름을 입력해주세요"
             {...groupForm.register("name")}
+            errorMessage={groupForm.formState.errors.name?.message}
           />
           <Textarea
             label="그룹 소개"
             placeholder="그룹 소개를 입력해주세요"
             maxLength={100}
             {...groupForm.register("description")}
+            errorMessage={groupForm.formState.errors.description?.message}
           />
         </div>
       </form>

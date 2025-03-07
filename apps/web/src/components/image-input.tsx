@@ -4,15 +4,15 @@ type ImageInputProps = Omit<
   React.ComponentPropsWithoutRef<"input">,
   "type" | "value" | "onChange"
 > & {
-  onChange: (files: File[]) => void;
+  onChange: (files: File) => void;
 };
 
 const ImageInput = forwardRef<HTMLInputElement, ImageInputProps>(
   ({ onChange, ...props }, ref) => {
     const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const files = event.target.files;
+      const files = event.target.files?.[0];
       if (files) {
-        onChange(Array.from(files));
+        onChange(files);
       }
     };
 

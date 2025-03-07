@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 export const groupFormSchema = z.object({
-  image: z.preprocess(
-    (value) => (Array.isArray(value) ? value : [value]),
-    z.array(z.instanceof(File)).max(1)
-  ),
-  name: z.string(),
+  image: z.instanceof(File, { message: "이미지 파일을 선택해주세요." }),
+  name: z
+    .string()
+    .min(1, "그룹 이름을 입력해주세요.")
+    .max(100, "그룹 이름은 100자 이하로 입력해주세요."),
   description: z.string(),
 });
 

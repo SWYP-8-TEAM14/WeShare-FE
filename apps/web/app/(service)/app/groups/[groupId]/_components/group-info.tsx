@@ -29,7 +29,7 @@ export default function GroupInfo({
           height={60}
           src={group.image}
           alt={group.name}
-          className="rounded-sm"
+          className="rounded-sm w-15 h-15 object-cover"
         />
         <div>
           <p className="text-heading-3 line-clamp-2">{group.name}</p>

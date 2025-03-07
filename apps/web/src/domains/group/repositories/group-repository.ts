@@ -13,9 +13,13 @@ const fetchGroupsSchema = z.array(
 );
 
 const fetchGroupSchema = z.object({
+  group_id: z.number(),
   group_name: z.string(),
   group_image: z.string(),
   group_description: z.string(),
+  member_count: z.number(),
+  is_member: z.boolean(),
+  is_admin: z.boolean(),
 });
 
 export class GroupRepository {
@@ -122,9 +126,13 @@ export class GroupRepository {
     const parsedData = fetchGroupSchema.parse(response);
 
     return {
+      id: parsedData.group_id,
       name: parsedData.group_name,
       image: parsedData.group_image,
       description: parsedData.group_description,
+      memberCount: parsedData.member_count,
+      isMember: parsedData.is_member,
+      isAdmin: parsedData.is_admin,
     };
   }
 }

@@ -59,4 +59,9 @@ export class GroupService {
     });
     return response;
   }
+
+  static async fetchGroup({ groupId }: { groupId: number }) {
+    const response = await GroupRepository.fetchGroup(groupId);
+    return response;
+  }
 }

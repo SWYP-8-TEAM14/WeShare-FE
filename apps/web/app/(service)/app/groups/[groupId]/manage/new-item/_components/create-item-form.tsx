@@ -4,6 +4,7 @@ import { useCreateItem } from "@/domains/item/hooks/use-create-item";
 import { useItemForm } from "@/domains/item/hooks/use-item-form";
 import { Button } from "@repo/ui/button";
 import { FixedBottom, FixedBottomActions } from "@repo/ui/fixed-bottom";
+import { ErrorMessage } from "@repo/ui/form";
 import { TextField } from "@repo/ui/text-field";
 import { Textarea } from "@repo/ui/textarea";
 import { useToast } from "@repo/ui/use-toast";
@@ -64,6 +65,11 @@ export default function CreateItemForm({ groupId }: CreateItemFormProps) {
         className="flex-1 bg-white"
         id={`form-${id}`}
         onSubmit={onSubmit}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
       >
         {/* 사진 업로드 */}
         <div className="pt-6.5 pb-2 px-4.5 flex flex-col">
@@ -88,6 +94,9 @@ export default function CreateItemForm({ groupId }: CreateItemFormProps) {
                 />
               )}
             />
+            <ErrorMessage>
+              {itemForm.formState.errors.images?.message}
+            </ErrorMessage>
           </div>
         </div>
 
@@ -165,7 +174,6 @@ export default function CreateItemForm({ groupId }: CreateItemFormProps) {
       <FixedBottom>
         <FixedBottomActions>
           <Button
-            disabled={!itemForm.formState.isValid}
             type="submit"
             variant="secondary"
             size="large"

@@ -1,6 +1,6 @@
 import Page from "@/components/page";
 import RouterBackButton from "@/components/router-back-button";
-import { groupData } from "@/domains/group/mocks";
+import { GroupService } from "@/domains/group/services/group-service";
 import { ItemService } from "@/domains/item/services/item-service";
 import {
   TopNavigation,
@@ -12,10 +12,18 @@ import GroupInfo from "./_components/group-info";
 import GroupItemsPreview from "./_components/group-items-preview";
 import NavigationRightMenu from "./_components/navigation-right-menu";
 
-export default async function GroupDetailPage() {
+export default async function GroupDetailPage({
+  params,
+}: {
+  params: Promise<{ groupId: string }>;
+}) {
+  const { groupId } = await params;
+  const groupInfo = await GroupService.fetchGroup({
+    groupId: parseInt(groupId, 10),
+  });
   const items = await ItemService.fetchBookableItems();
   // 만약 관리자일 경우
-  const viewRole: "admin" | "user" = Math.random() > 0.5 ? "admin" : "user";
+  const viewRole = groupInfo.isAdmin ? "admin" : "user";
   if (viewRole === "admin") {
     return (
       <Page>
@@ -25,7 +33,16 @@ export default async function GroupDetailPage() {
           </TopNavigationLeft>
           <TopNavigationTitle>그룹 상세</TopNavigationTitle>
         </TopNavigation>
-        <GroupInfo group={groupData} viewerIsOwner />
+        <GroupInfo
+          group={{
+            id: groupInfo.id,
+            name: groupInfo.name,
+            image: groupInfo.image,
+            introduction: groupInfo.description,
+            members: groupInfo.memberCount,
+          }}
+          viewerIsOwner
+        />
         <GroupItemsPreview
           groupItems={items.map((item) => ({
             id: item.itemId,
@@ -55,7 +72,16 @@ export default async function GroupDetailPage() {
             <NavigationRightMenu />
           </TopNavigationRight>
         </TopNavigation>
-        <GroupInfo group={groupData} viewerIsOwner={false} />
+        <GroupInfo
+          group={{
+            id: groupInfo.id,
+            name: groupInfo.name,
+            image: groupInfo.image,
+            introduction: groupInfo.description,
+            members: groupInfo.memberCount,
+          }}
+          viewerIsOwner={false}
+        />
         <GroupItemsPreview
           groupItems={items.map((item) => ({
             id: item.itemId,

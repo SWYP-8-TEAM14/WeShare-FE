@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
   });
   cookieStore.set("refreshToken", refreshToken, {
     maxAge: 86400,
-    httpOnly: true,
+    httpOnly: false,
     secure: false,
     sameSite: "strict",
   });

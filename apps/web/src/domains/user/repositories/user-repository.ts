@@ -1,24 +1,21 @@
-import httpClient from "@/lib/ky";
-import { z } from "zod";
-
-const fetchProfileSchema = z.object({
-  id: z.number(),
-  username: z.string(),
-  email: z.string(),
-  profile_image: z.string().nullable(),
-  created_at: z.string(),
-});
+import { fetchClient } from "@/lib/fetch-client";
+import { components } from "@/types/api-schema";
 
 export class UserRepository {
   static async fetchProfile() {
-    const response = await httpClient.get("users/me/").json();
-    const data = fetchProfileSchema.parse(response);
-    return {
-      id: data.id,
-      username: data.username,
-      email: data.email,
-      profileImage: data.profile_image,
-      createdAt: data.created_at,
-    };
+    const { data } = await fetchClient.GET("/users/me");
+    if (!data) {
+      throw new Error("Failed to fetch profile");
+    }
+    return data.data;
+  }
+  static async updateProfile(
+    body: components["schemas"]["ProfileUpdateJsonSchema"]
+  ) {
+    const { data } = await fetchClient.PATCH("/users/me", body);
+    if (!data) {
+      throw new Error("Failed to update profile");
+    }
+    return data.data;
   }
 }

@@ -1,138 +1,166 @@
-import { profile } from "@/domains/user/mocks";
-import httpClient from "@/lib/ky";
-import { z } from "zod";
-
-const fetchGroupsSchema = z.array(
-  z.object({
-    group_id: z.number(),
-    group_name: z.string(),
-    group_image: z.string(),
-    group_description: z.string(),
-    member_count: z.number(),
-  })
-);
-
-const fetchGroupSchema = z.object({
-  group_id: z.number(),
-  group_name: z.string(),
-  group_image: z.string(),
-  group_description: z.string(),
-  member_count: z.number(),
-  is_member: z.boolean(),
-  is_admin: z.boolean(),
-});
+import { fetchClient } from "@/lib/fetch-client";
+import { components } from "@/types/api-schema";
 
 export class GroupRepository {
-  static async createGroup(data: {
-    image: File;
-    name: string;
-    description: string;
-  }) {
-    const formData = new FormData();
-    formData.append("group_image", data.image);
-    formData.append("group_name", data.name);
-    formData.append("group_description", data.description);
-
-    const response = await httpClient
-      .post("groups/groups/create", {
-        body: formData,
-      })
-      .json();
-    return response;
+  static async fetchGroups() {
+    const { data } = await fetchClient.GET("/groups");
+    if (!data) {
+      throw new Error("Failed to fetch groups");
+    }
+    return data.data;
   }
 
-  static async updateGroup({
-    groupId,
-    data,
-  }: {
-    groupId: number;
-    data: {
-      image: File;
-      name: string;
-      description: string;
-    };
-  }) {
-    const formData = new FormData();
-    formData.append("image", data.image);
-    formData.append("name", data.name);
-    formData.append("description", data.description);
-
-    const response = await httpClient
-      .patch(`groups/${groupId}`, {
-        body: formData,
-      })
-      .json();
-    return response;
+  static async createGroup(
+    body: components["schemas"]["GroupCreateJsonSchema"]
+  ) {
+    const { data } = await fetchClient.POST("/groups", {
+      body,
+    });
+    if (!data) {
+      throw new Error("Failed to create group");
+    }
+    return data.data;
   }
 
-  static async deleteMembersFromGroup({
-    groupId,
-    userIds,
-  }: {
-    groupId: number;
-    userIds: number[];
-  }) {
-    const response = await httpClient
-      .delete(`groups/${groupId}/members`, {
-        json: {
-          userIds,
+  static async fetchGroupById(id: string) {
+    const { data } = await fetchClient.GET("/groups/{id}", {
+      params: {
+        path: {
+          id,
         },
-      })
-      .json();
-    return response;
+      },
+    });
+    if (!data) {
+      throw new Error("Failed to fetch group");
+    }
+    return data.data;
   }
 
-  static async deleteItemsFromGroup({ itemIds }: { itemIds: number[] }) {
-    const response = await httpClient
-      .post(`shared/items/delete`, {
-        json: {
-          user_id: profile.id,
-          item_id: itemIds,
+  static async updateGroup(
+    id: string,
+    body: components["schemas"]["GroupCreateJsonSchema"]
+  ) {
+    const { data } = await fetchClient.PATCH("/groups/{id}", {
+      params: {
+        path: {
+          id,
         },
-      })
-      .json();
-    return response;
+      },
+      body,
+    });
+    if (!data) {
+      throw new Error("Failed to update group");
+    }
+    return data.data;
   }
 
-  static async fetchGroups({
-    filter,
-    sort,
-  }: {
-    filter: "all" | "own";
-    sort: "default" | "many-members";
-  }) {
-    const response = await httpClient
-      .get("groups/groups/", {
-        searchParams: {
-          created_by_me: filter === "own",
+  static async removeGroup(id: string) {
+    await fetchClient.DELETE("/groups/{id}", {
+      params: {
+        path: {
+          id,
         },
-      })
-      .json();
-
-    const parsedData = fetchGroupsSchema.parse(response);
-
-    return parsedData.map((group) => ({
-      id: group.group_id,
-      name: group.group_name,
-      image: group.group_image,
-      description: group.group_description,
-      memberCount: group.member_count,
-    }));
+      },
+    });
   }
 
-  static async fetchGroup(groupId: number) {
-    const response = await httpClient.get(`groups/groups/${groupId}/`).json();
+  static async fetchGroupInvites(id: string) {
+    const { data } = await fetchClient.GET("/groups/{id}/invites", {
+      params: {
+        path: {
+          id,
+        },
+      },
+    });
+    if (!data) {
+      throw new Error("Failed to fetch group invites");
+    }
+    return data.data;
+  }
 
-    const parsedData = fetchGroupSchema.parse(response);
+  static async createGroupInvite(id: string) {
+    const { data } = await fetchClient.POST("/groups/{id}/invites", {
+      params: {
+        path: {
+          id,
+        },
+      },
+    });
+    if (!data) {
+      throw new Error("Failed to create group invite");
+    }
+    return data.data;
+  }
 
-    return {
-      id: parsedData.group_id,
-      name: parsedData.group_name,
-      image: parsedData.group_image,
-      description: parsedData.group_description,
-      memberCount: parsedData.member_count,
-      isMember: parsedData.is_member,
-      isAdmin: parsedData.is_admin,
-    };
+  static async fetchGroupItems(id: string) {
+    const { data } = await fetchClient.GET("/groups/{id}/items", {
+      params: {
+        path: {
+          id,
+        },
+      },
+    });
+
+    if (!data) {
+      throw new Error("Failed to fetch group items");
+    }
+    return data.data;
+  }
+
+  static async createGroupItem(
+    id: string,
+    body: components["schemas"]["GroupItemCreateJsonSchema"]
+  ) {
+    const { data } = await fetchClient.POST("/groups/{id}/items", {
+      params: {
+        path: {
+          id,
+        },
+      },
+      body,
+    });
+    if (!data) {
+      throw new Error("Failed to create group item");
+    }
+
+    return data.data;
+  }
+
+  static async fetchGroupMembers(id: string) {
+    const { data } = await fetchClient.GET("/groups/{id}/members", {
+      params: {
+        path: {
+          id,
+        },
+      },
+    });
+    if (!data) {
+      throw new Error("Failed to fetch group members");
+    }
+    return data.data;
+  }
+
+  static async removeGroupMembers(
+    id: string,
+    body: components["schemas"]["GroupMembersDeleteJsonSchema"]
+  ) {
+    await fetchClient.DELETE("/groups/{id}/members", {
+      params: {
+        path: {
+          id,
+        },
+      },
+      body,
+    });
+  }
+
+  static async leaveGroup(id: string) {
+    await fetchClient.DELETE("/groups/{id}/members/me", {
+      params: {
+        path: {
+          id,
+        },
+      },
+    });
   }
 }

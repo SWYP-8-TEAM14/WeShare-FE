@@ -4,7 +4,7 @@ import { AuthService } from "@/domains/auth/services/auth-service";
 export const dynamic = "force-dynamic";
 
 export default async function LoginPage() {
-  const { authUrl: kakaoLoginUrl } = await AuthService.fetchKakaoLoginUrl();
+  const kakaoLoginUrl = await AuthService.fetchKakaoLoginUrl();
   return (
     <Page className="bg-white flex flex-col items-center gap-5 p-5">
       <div className="flex-1 flex flex-col items-center justify-center gap-5">

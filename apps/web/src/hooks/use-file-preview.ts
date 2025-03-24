@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 
-export default function useFilePreview(file?: File | null) {
+export default function useFilePreview(file: File) {
   const [preview, setPreview] = React.useState<string | null>(null);
 
   React.useEffect(() => {
